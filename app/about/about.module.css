@@ -1,0 +1,9 @@
+.about {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  height: 100%;
+}
+
+.boxmain {
+  background-color: aquamarine;
+}
