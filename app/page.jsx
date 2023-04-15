@@ -51,6 +51,10 @@ function HeaderImage() {
         alt="pillow"
         style={{ objectFit: 'cover' }}
       />
+      <div className={styles.headtext}>
+        &quot;Try to be a rainbow in someone's cloud.&quot;
+        <span>Maya Angelou</span>
+      </div>
     </div>
   )
 }

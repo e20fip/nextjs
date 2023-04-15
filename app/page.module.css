@@ -3,7 +3,7 @@
 }
 
 .content ul {
-  padding: 2em;
+  padding: 2em 2em;
 }
 
 .content li {
@@ -17,9 +17,28 @@
 
 .headimages {
   width: 100%;
-  height: auto;
+  max-height: 800px;
   aspect-ratio: 16/9;
   position: relative;
+  display: block;
+}
+
+.headtext {
+  font-size: clamp(1.1rem, 5vw, 4rem);
+  position: absolute;
+  color: white;
+  inset: 0;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.headtext span {
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
+  width: 100%;
 }
 
 .title {
@@ -33,6 +52,6 @@
   }
 
   .content ul {
-    padding: 1em;
+    padding: 2em 1em;
   }
 }

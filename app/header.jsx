@@ -1,18 +1,30 @@
+'use client'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-export default function Header() {
+const links = [
+  { name: 'home', path: '/' },
+  { name: 'about', path: '/about' }
+]
+
+const active = (name) => {
+  const path = usePathname()
+  return path == name ? { backgroundColor: '#154026' } : {}
+}
+
+const Header = () => {
   return (
     <header>
       <nav>
         <ul>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
+          {links.map((link) => (
+            <li key={link.name} style={active(link.path)}>
+              <Link href={link.path}>{link.name}</Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
   )
 }
+export default Header
