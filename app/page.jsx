@@ -52,7 +52,7 @@ function HeaderImage() {
         style={{ objectFit: 'cover' }}
       />
       <div className={styles.headtext}>
-        Try to be a rainbow in someone's cloud.
+        &quot;Try to be a rainbow in someone&apos;s cloud.&quot;
         <span>Maya Angelou</span>
       </div>
     </div>
