@@ -1,4 +1,6 @@
 .ad {
   display: block;
-  background-color: antiquewhite;
+  background-color: rgb(59, 95, 148);
+  padding: 2em;
+  color: antiquewhite;
 }

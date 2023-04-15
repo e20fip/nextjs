@@ -1,9 +1,16 @@
 .about {
   display: grid;
-  grid-template-columns: 5fr 1fr;
+  grid-template-columns: 80% auto;
   height: 100%;
+  width: 100%;
 }
 
 .boxmain {
-  background-color: aquamarine;
+  padding: 2em;
+}
+
+@media screen and (max-width: 800px) {
+  .about {
+    grid-template-columns: 1fr;
+  }
 }
