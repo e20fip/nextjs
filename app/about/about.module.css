@@ -6,11 +6,28 @@
 }
 
 .boxmain {
-  padding: 2em;
+  padding: 4em 4em;
+}
+
+.headText {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding-block: 0;
+}
+
+.bodyText {
+  margin-top: 1em;
+}
+
+.content {
+  padding: 0;
 }
 
 @media screen and (max-width: 800px) {
   .about {
     grid-template-columns: 1fr;
+  }
+  .boxmain {
+    padding: 1em 2em;
   }
 }

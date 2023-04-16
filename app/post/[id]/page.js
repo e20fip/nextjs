@@ -9,6 +9,7 @@ async function getData(id) {
     const client = await clientPromise
     const db = await client.db('mongoTest')
     const note = await db.collection('notes').findOne({ _id: new ObjectId(id) })
+
     return note
   } catch (e) {
     //
@@ -19,10 +20,6 @@ export default async function Post({ params }) {
   const id = params.id
   const data = await getData(id)
 
-  if (data === undefined) {
-    return <h1>NOT FOUND</h1>
-  }
-
   return (
     <>
       <div className={styles.content}>
@@ -32,7 +29,6 @@ export default async function Post({ params }) {
             <Date dateString={data.createdAt.toISOString()} />
           </li>
           <li>
-            {' '}
             <div
               dangerouslySetInnerHTML={{
                 __html: data.content
@@ -40,9 +36,9 @@ export default async function Post({ params }) {
             />
           </li>
         </ul>
-        <botton>
+        <button>
           <Link href="/">HOME</Link>
-        </botton>
+        </button>
       </div>
     </>
   )

@@ -34,6 +34,17 @@ header {
   z-index: 2;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1em 0 1em;
+}
+
 footer {
   background-color: rgb(255, 255, 255);
   color: var(--medium-color);
@@ -66,9 +77,23 @@ time {
   font-size: 0.8rem;
 }
 
-botton {
+button {
   margin: 2em;
   padding: 0.5em 1.5em;
   border-radius: 50vw;
   background-color: var(--light-color);
+  border: none;
+}
+
+p {
+  padding-block: 1em;
+}
+
+@media screen and (max-width: 800px) {
+  button {
+    margin: 1em;
+  }
+  footer {
+    padding: 1em 0;
+  }
 }

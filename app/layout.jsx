@@ -4,8 +4,8 @@ import Footer from './footer'
 import './globals.css'
 
 export const metadata = {
-  title: 'myapp',
-  description: 'learn nextjs'
+  title: 'E20FIP',
+  description: 'Web Development'
 }
 
 const sarabun = Sarabun({
