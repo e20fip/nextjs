@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const links = [
-  { name: 'home', path: '/' },
-  { name: 'about', path: '/about' }
+  { name: 'HOME', path: '/' },
+  { name: 'ABOUT', path: '/about' }
 ]
 
 const active = (name) => {
   const path = usePathname()
-  return path == name ? { backgroundColor: '#154026' } : {}
+  return path == name ? { backgroundColor: '#f1f1f1' } : {}
 }
 
 const Header = () => {

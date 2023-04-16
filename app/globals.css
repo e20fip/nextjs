@@ -1,3 +1,7 @@
+:root {
+  --medium-color: #727272;
+  --light-color: #eee;
+}
 * {
   padding: 0;
   margin: 0;
@@ -8,10 +12,11 @@ html,
 body {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
-  background-color: rgb(141, 155, 167);
+  background-color: rgb(255, 255, 255);
   height: 100%;
   width: 100%;
   line-height: 1.7;
+  color: var(--medium-color);
 }
 
 main {
@@ -21,8 +26,8 @@ main {
 }
 
 header {
-  background-color: black;
-  color: aliceblue;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   padding-inline: 1em;
   position: sticky;
   top: 0;
@@ -30,13 +35,20 @@ header {
 }
 
 footer {
-  background-color: black;
-  color: aliceblue;
+  background-color: rgb(255, 255, 255);
+  color: var(--medium-color);
   padding: 1em;
+  margin: 1em 2em;
+  border-top: 1px solid var(--light-color);
 }
 
 .container {
   padding: 0;
+}
+
+nav {
+  margin: 1em;
+  border-bottom: 1px solid var(--light-color);
 }
 
 nav li {
@@ -46,6 +58,17 @@ nav li {
 
 a,
 a:visited {
-  color: aliceblue;
+  color: rgb(2, 81, 150);
   text-decoration: none;
+}
+
+time {
+  font-size: 0.8rem;
+}
+
+botton {
+  margin: 2em;
+  padding: 0.5em 1.5em;
+  border-radius: 50vw;
+  background-color: var(--light-color);
 }
