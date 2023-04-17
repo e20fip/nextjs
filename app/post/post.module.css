@@ -1,0 +1,52 @@
+.container {
+  display: grid;
+  grid-template-columns: 350px auto;
+  container-type: inline-size;
+}
+
+.sidemenu {
+  padding: 4em 2em;
+  border-right: 1px solid var(--light-color);
+  color: black;
+}
+
+.listmenu li {
+  list-style-type: none;
+  padding: 1em;
+}
+
+.link {
+  display: block;
+}
+
+.showhide {
+  display: none;
+  color: black;
+}
+
+.showhide span {
+  display: block;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+@container (width < 800px) {
+  .container {
+    display: block;
+  }
+  .sidemenu {
+    transform: translateX(-350px);
+    position: absolute;
+    background-color: var(--light-color);
+    overflow: scroll;
+    height: 80vh;
+    padding: 2em;
+  }
+  .showhide {
+    display: block;
+    position: absolute;
+    left: 1em;
+  }
+}

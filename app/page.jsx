@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Date from '@/lib/date'
 import LimitText from '@/lib/texttrim'
 import Link from 'next/link'
+import headImg from '@/public/images/web-pillow.jpg'
 
 /* export const dynamic = 'force-dynmic' */
 export const revalidate = 3600
@@ -65,7 +66,8 @@ function HeaderImage() {
       <Image
         priority
         fill
-        src="/images/web-pillow.jpg"
+        src={headImg}
+        placeholder="blur"
         alt="pillow"
         style={{ objectFit: 'cover' }}
       />
