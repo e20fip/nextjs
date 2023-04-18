@@ -1,18 +1,23 @@
-.container {
+.post_container {
   display: grid;
   grid-template-columns: 350px auto;
   container-type: inline-size;
+  padding: 0;
 }
 
 .sidemenu {
-  padding: 4em 2em;
+  padding: 2em;
   border-right: 1px solid var(--light-color);
   color: black;
 }
 
+.listmenu {
+  padding: 2em;
+}
+
 .listmenu li {
   list-style-type: none;
-  padding: 1em;
+  padding: 1em 0;
 }
 
 .link {
@@ -33,7 +38,7 @@
 }
 
 @container (width < 800px) {
-  .container {
+  .post_container {
     display: block;
   }
   .sidemenu {

@@ -3,10 +3,11 @@
   grid-template-columns: auto 350px;
   height: 100%;
   width: 100%;
+  padding: 2em;
 }
 
 .boxmain {
-  padding: 4em 4em;
+  padding: 2em;
 }
 
 .headText {
@@ -19,7 +20,7 @@
   margin-top: 1em;
 }
 
-.content {
+.about_content {
   padding: 0;
 }
 

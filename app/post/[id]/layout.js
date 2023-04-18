@@ -4,7 +4,7 @@ import postStyles from '@/app/post/post.module.css'
 
 export default function PostLayout({ children }) {
   return (
-    <div className={postStyles.container}>
+    <div className={postStyles.post_container}>
       <Sidemenu />
       <Showhide />
       {children}

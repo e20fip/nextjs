@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Date from '@/lib/date'
 import LimitText from '@/lib/texttrim'
 import Link from 'next/link'
-import headImg from '@/public/images/web-pillow.jpg'
+import Home from './home/home'
 
 /* export const dynamic = 'force-dynmic' */
 /* export const revalidate = 3600 */
@@ -56,6 +56,7 @@ export default async function Page() {
             </li>
           </ul>
         ))}
+        <Home />
       </div>
     </>
   )
@@ -67,8 +68,7 @@ function HeaderImage() {
       <Image
         priority
         fill
-        src={headImg}
-        placeholder="blur"
+        src="/images/web-pillow.jpg"
         alt="pillow"
         style={{ objectFit: 'cover' }}
       />

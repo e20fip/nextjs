@@ -1,0 +1,36 @@
+.card_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2em;
+  padding: 2em;
+}
+
+.card {
+  display: block;
+  width: auto;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  position: relative;
+  display: block;
+}
+
+.head_text {
+  margin-top: 2em;
+  text-align: center;
+}
+.title {
+  font-size: 1.1rem;
+  padding-block: 1em;
+  color: rgb(64, 73, 60);
+  font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+  .card_container {
+    padding-inline: 1em;
+  }
+}
