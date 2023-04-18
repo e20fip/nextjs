@@ -24,7 +24,7 @@
 }
 
 .headtext {
-  font-size: clamp(1.1rem, 5vw, 4rem);
+  font-size: clamp(1rem, 2vw + 1rem, 4rem);
   position: absolute;
   color: white;
   inset: 0;

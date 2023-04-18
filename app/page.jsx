@@ -7,7 +7,7 @@ import Link from 'next/link'
 import headImg from '@/public/images/web-pillow.jpg'
 
 /* export const dynamic = 'force-dynmic' */
-export const revalidate = 3600
+/* export const revalidate = 3600 */
 
 async function getData() {
   try {
@@ -42,7 +42,9 @@ export default async function Page() {
           <ul key={data._id}>
             <li>
               <div className={styles.title}>
-                <Link href={`/post/${data._id}`}>{data.title}</Link>
+                <Link href={`/post/${data._id}`} prefetch={false}>
+                  {data.title}
+                </Link>
               </div>
               <Date dateString={data.createdAt} />
             </li>

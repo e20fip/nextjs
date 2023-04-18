@@ -8,21 +8,16 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
   background-color: rgb(255, 255, 255);
-  height: 100%;
-  width: 100%;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--medium-color);
 }
 
 main {
   container-type: inline-size;
-  display: grid;
-  grid-template-rows: auto 8fr auto;
   position: relative;
 }
 
@@ -52,6 +47,7 @@ footer {
   padding: 1em;
   margin: 1em 2em;
   border-top: 1px solid var(--light-color);
+  display: block;
 }
 
 .container {
@@ -76,6 +72,7 @@ a:visited {
 
 time {
   font-size: 0.8rem;
+  display: block;
 }
 
 button {
