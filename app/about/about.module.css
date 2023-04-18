@@ -1,6 +1,6 @@
 .about {
   display: grid;
-  grid-template-columns: 80% auto;
+  grid-template-columns: auto 350px;
   height: 100%;
   width: 100%;
 }

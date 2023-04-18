@@ -4,6 +4,20 @@ import styles from '@/app/page.module.css'
 import Link from 'next/link'
 import Date from '@/lib/date'
 
+export async function generateStaticParams() {
+  const client = await clientPromise
+  const db = await client.db('mongoTest')
+  const notes = await db
+    .collection('notes')
+    .find({})
+    .map((note) => ({ note: note._id.toString }))
+    .toArray()
+
+  return notes.map((note) => ({
+    id: note._id
+  }))
+}
+
 async function getData(id) {
   try {
     const client = await clientPromise
@@ -17,7 +31,7 @@ async function getData(id) {
 }
 
 export default async function Post({ params }) {
-  const id = params.id
+  const { id } = params
   const data = await getData(id)
 
   return (

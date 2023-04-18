@@ -3,7 +3,7 @@ import clientPromise from '@/lib/mongodb'
 import Link from 'next/link'
 import Date from '@/lib/date'
 
-export const revalidate = 3600
+/* export const revalidate = 3600 */
 
 async function getData() {
   const client = await clientPromise
