@@ -12,12 +12,17 @@
 }
 
 .listmenu {
-  padding: 2em;
+  padding: 2em 1em;
 }
 
 .listmenu li {
   list-style-type: none;
-  padding: 1em 0;
+  padding: 1em;
+  transition: background-color 0.5s ease-in;
+}
+
+.listmenu li:hover {
+  background-color: #fefae0;
 }
 
 .link {

@@ -1,16 +1,12 @@
-import postStyles from '@/app/post/post.module.css'
 import clientPromise from '@/lib/mongodb'
-import Link from 'next/link'
-import Date from '@/lib/date'
-
 import Showhide from '../showhide'
 
 /* export const revalidate = 3600 */
 
-async function getData() {
+export default async function Sidemenu() {
   const client = await clientPromise
   const db = await client.db('mongoTest')
-  const datas = await db
+  const notes = await db
     .collection('notes')
     .find({})
     .sort({ createdAt: -1 })
@@ -21,24 +17,5 @@ async function getData() {
     }))
     .toArray()
 
-  return datas
-}
-
-export default async function Sidemenu() {
-  const notes = await getData()
-
-  return (
-    <Showhide>
-      <ul className={postStyles.listmenu}>
-        {notes?.map((note) => (
-          <li key={note._id}>
-            <Link href={`post/${note._id}`} className={postStyles.link}>
-              {note.title.substring(0, 30)}
-            </Link>
-            <Date dateString={note.createdAt} />
-          </li>
-        ))}
-      </ul>
-    </Showhide>
-  )
+  return <Showhide notes={notes} />
 }

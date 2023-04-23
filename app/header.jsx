@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import pathName from '@/lib/getPathname'
 
 const links = [
   { name: 'HOME', path: '/' },
@@ -8,7 +8,7 @@ const links = [
 ]
 
 const active = (name) => {
-  const path = usePathname()
+  const path = pathName()
   return path == name ? { backgroundColor: '#f1f1f1' } : {}
 }
 
