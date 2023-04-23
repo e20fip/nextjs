@@ -25,7 +25,11 @@ const Showhide = ({ notes }) => {
         <ul className={postStyles.listmenu}>
           {notes?.map((note) => (
             <li key={note._id} style={activeUrl(note._id)}>
-              <Link href={`post/${note._id}`} className={postStyles.link}>
+              <Link
+                href={`post/${note._id}`}
+                className={postStyles.link}
+                prefetch={false}
+              >
                 {note.title.substring(0, 30)}
               </Link>
               <Date dateString={note.createdAt} />
