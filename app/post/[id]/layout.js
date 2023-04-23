@@ -1,13 +1,13 @@
-import Showhide from './showhide'
-import Sidemenu from './sidemenu.js/page'
-import postStyles from '@/app/post/post.module.css'
+import Sidemenu from './sidemenu/page'
+import styles from '@/app/post/post.module.css'
 
 export default function PostLayout({ children }) {
   return (
-    <div className={postStyles.post_container}>
-      <Sidemenu />
-      <Showhide />
-      {children}
-    </div>
+    <>
+      <div className={styles.post_container}>
+        <Sidemenu />
+        {children}
+      </div>
+    </>
   )
 }

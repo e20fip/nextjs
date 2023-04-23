@@ -3,6 +3,8 @@ import clientPromise from '@/lib/mongodb'
 import Link from 'next/link'
 import Date from '@/lib/date'
 
+import Showhide from '../showhide'
+
 /* export const revalidate = 3600 */
 
 async function getData() {
@@ -26,7 +28,7 @@ export default async function Sidemenu() {
   const notes = await getData()
 
   return (
-    <div id="sidemenu" className={postStyles.sidemenu}>
+    <Showhide>
       <ul className={postStyles.listmenu}>
         {notes?.map((note) => (
           <li key={note._id}>
@@ -37,6 +39,6 @@ export default async function Sidemenu() {
           </li>
         ))}
       </ul>
-    </div>
+    </Showhide>
   )
 }

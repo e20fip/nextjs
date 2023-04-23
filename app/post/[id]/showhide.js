@@ -2,28 +2,43 @@
 import postStyles from '@/app/post/post.module.css'
 import { useState } from 'react'
 
-const Showhide = () => {
+const Showhide = ({ children }) => {
   const [isShow, setIsShow] = useState(null)
 
   return (
-    <div
-      className={postStyles.showhide}
-      onClick={() => setIsShow((prev) => !prev)}
-    >
-      <Menu isShow={isShow} />
-    </div>
+    <>
+      <div
+        className={postStyles.showhide}
+        onClick={() => setIsShow((prev) => !prev)}
+      >
+        <Menu isShow={isShow} />
+      </div>
+      <div
+        id="sidemenu"
+        className={postStyles.sidemenu}
+        style={activeStyle(isShow)}
+      >
+        {children}
+      </div>
+    </>
   )
 }
 
-const Menu = ({ isShow }) => {
-  if (isShow === true) {
-    document.getElementById('sidemenu').style.cssText =
-      'transform: translateX(0);transition: transform 1s ease-in-out;'
-  } else if (isShow === false) {
-    document.getElementById('sidemenu').style.cssText =
-      'transform: translateX(-350px);transition: transform 1s ease-in-out;'
-  }
+const activeStyle = (isShow) => {
+  return isShow === null
+    ? {}
+    : isShow === true
+    ? {
+        transform: 'translateX(0)',
+        transition: 'transform 1s ease-in-out'
+      }
+    : {
+        transform: 'translateX(-350px)',
+        transition: 'transform 1s ease-in-out'
+      }
+}
 
+const Menu = ({ isShow }) => {
   return (
     <>
       {!isShow && <span>&#10140;</span>}
