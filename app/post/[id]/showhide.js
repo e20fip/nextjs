@@ -1,7 +1,7 @@
 'use client'
 import postStyles from '@/app/post/post.module.css'
 import Link from 'next/link'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import Date from '@/lib/date'
 import pathName from '@/lib/getPathname'
 
@@ -9,7 +9,7 @@ const Showhide = ({ notes }) => {
   const [isShow, setIsShow] = useState(null)
 
   return (
-    <>
+    <Suspense fallback={<h1>Loading...</h1>}>
       <div
         className={postStyles.showhide}
         onClick={() => setIsShow((prev) => !prev)}
@@ -32,7 +32,7 @@ const Showhide = ({ notes }) => {
           ))}
         </ul>
       </div>
-    </>
+    </Suspense>
   )
 }
 
