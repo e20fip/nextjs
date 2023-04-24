@@ -1,6 +1,8 @@
+import postStyles from '@/app/post/post.module.css'
 import clientPromise from '@/lib/mongodb'
 import Showhide from '../showhide'
-
+import Link from 'next/link'
+import Date from '@/lib/date'
 /* export const revalidate = 3600 */
 
 export default async function Sidemenu() {
@@ -17,5 +19,18 @@ export default async function Sidemenu() {
     }))
     .toArray()
 
-  return <Showhide notes={notes} />
+  return (
+    <Showhide>
+      <ul className={postStyles.listmenu}>
+        {notes?.map((note) => (
+          <li key={note._id}>
+            <Link href={`post/${note._id}`} className={postStyles.link}>
+              {note.title.substring(0, 30)}
+            </Link>
+            <Date dateString={note.createdAt} />
+          </li>
+        ))}
+      </ul>
+    </Showhide>
+  )
 }
