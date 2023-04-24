@@ -1,6 +1,6 @@
 'use client'
 import postStyles from '@/app/post/post.module.css'
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 
 const Showhide = ({ children }) => {
   const [isShow, setIsShow] = useState(null)
@@ -13,12 +13,8 @@ const Showhide = ({ children }) => {
       >
         <Menu isShow={isShow} />
       </div>
-      <div
-        id="sidemenu"
-        className={postStyles.sidemenu}
-        style={activeStyle(isShow)}
-      >
-        <Suspense fallback={<h1>Loading...</h1>}>y{children}</Suspense>
+      <div className={postStyles.sidemenu} style={activeStyle(isShow)}>
+        {children}
       </div>
     </>
   )
