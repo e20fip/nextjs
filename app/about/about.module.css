@@ -3,9 +3,13 @@
   grid-template-columns: auto 350px;
   height: 100%;
   width: 100%;
-  padding: 4em 5em;
+  padding: 4em 5em 2em;
   gap: 3em;
   container-type: inline-size;
+}
+
+.about p:last-child {
+  padding-bottom: 0;
 }
 
 .boxmain {
