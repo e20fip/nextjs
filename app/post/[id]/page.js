@@ -1,6 +1,6 @@
 import clientPromise from '@/lib/mongodb'
 import { ObjectId } from 'mongodb'
-import styles from '@/app/page.module.css'
+import styles from '@/app/post/post.module.css'
 import Link from 'next/link'
 import Date from '@/lib/date'
 
@@ -37,19 +37,15 @@ export default async function Post({ params }) {
   return (
     <>
       <div className={styles.content}>
-        <ul>
-          <li>
-            <h1 className={styles.title}>{data.title}</h1>
-            <Date dateString={data.createdAt.toISOString()} />
-          </li>
-          <li>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data.content
-              }}
-            />
-          </li>
-        </ul>
+        <h1 className={styles.title}>{data.title}</h1>
+        <Date dateString={data.createdAt.toISOString()} />
+
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data.content
+          }}
+        />
+
         <button>
           <Link href="/">HOME</Link>
         </button>

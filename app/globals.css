@@ -81,7 +81,7 @@ time {
 }
 
 button {
-  margin: 2em;
+  margin: 2em 0;
   padding: 0.5em 1.5em;
   border-radius: 50vw;
   border: 1px;
@@ -98,7 +98,7 @@ p {
 
 @container (width < 800px) {
   button {
-    margin: 1em;
+    margin: 1em 0;
   }
   footer {
     padding: 1em 0;

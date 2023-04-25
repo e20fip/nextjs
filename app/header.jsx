@@ -1,16 +1,9 @@
-'use client'
 import Link from 'next/link'
-import pathName from '@/lib/getPathname'
 
 const links = [
   { name: 'HOME', path: '/' },
   { name: 'ABOUT', path: '/about' }
 ]
-
-const active = (name) => {
-  const path = pathName()
-  return path == name ? { backgroundColor: '#f1f1f1' } : {}
-}
 
 const Header = () => {
   return (
@@ -18,7 +11,7 @@ const Header = () => {
       <nav>
         <ul>
           {links.map((link) => (
-            <li key={link.name} style={active(link.path)}>
+            <li key={link.name}>
               <Link href={link.path}>{link.name}</Link>
             </li>
           ))}
