@@ -47,7 +47,16 @@ footer {
   padding: 1em;
   margin: 1em 2em;
   border-top: 1px solid var(--light-color);
-  display: block;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer div {
+  border-right: 1px solid var(--light-color);
+}
+
+footer div:last-child {
+  border-right: none;
 }
 
 .container {

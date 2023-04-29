@@ -39,13 +39,12 @@ export default async function Post({ params }) {
       <div className={styles.content}>
         <h1 className={styles.title}>{data.title}</h1>
         <Date dateString={data.createdAt.toISOString()} />
-
         <div
+          className={styles.body}
           dangerouslySetInnerHTML={{
             __html: data.content
           }}
         />
-
         <button>
           <Link href="/">HOME</Link>
         </button>

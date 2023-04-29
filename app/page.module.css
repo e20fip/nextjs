@@ -3,16 +3,16 @@
 }
 
 .content ul {
-  padding: 2em 0;
+  padding: 1em 0;
+}
+
+.content ul li {
+  margin: 1em 0;
 }
 
 .content li {
   list-style-type: none;
   padding-bottom: 2em 0;
-}
-
-.content li:last-child {
-  padding-bottom: 0;
 }
 
 .headimages {
