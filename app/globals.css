@@ -41,6 +41,15 @@ h6 {
   padding: 1em 0 1em;
 }
 
+.text-bottom {
+  padding-right: 0.5em;
+}
+
+.link-bottom {
+  display: flex;
+  gap: 0.5em;
+}
+
 footer {
   background-color: rgb(255, 255, 255);
   color: var(--medium-color);
@@ -49,14 +58,6 @@ footer {
   border-top: 1px solid var(--light-color);
   display: flex;
   justify-content: space-between;
-}
-
-footer div {
-  border-right: 1px solid var(--light-color);
-}
-
-footer div:last-child {
-  border-right: none;
 }
 
 .container {
@@ -111,5 +112,11 @@ p {
   }
   footer {
     padding: 1em 0;
+  }
+  .text-bottom {
+    border-right: 1px solid var(--light-color);
+  }
+  .link-bottom {
+    flex-direction: column;
   }
 }
