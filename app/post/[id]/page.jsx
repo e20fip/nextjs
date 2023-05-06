@@ -4,20 +4,6 @@ import styles from '@/app/post/post.module.css'
 import Link from 'next/link'
 import Date from '@/lib/date'
 
-export async function generateStaticParams() {
-  const client = await clientPromise
-  const db = await client.db('mongoTest')
-  const notes = await db
-    .collection('notes')
-    .find({})
-    .map((note) => ({ note: note._id.toString }))
-    .toArray()
-
-  return notes.map((note) => ({
-    id: note._id
-  }))
-}
-
 async function getData(id) {
   try {
     const client = await clientPromise
@@ -27,6 +13,14 @@ async function getData(id) {
     return note
   } catch (e) {
     //
+  }
+}
+
+export async function generateMetadata({ params }) {
+  const post = await getData(params.id)
+  return {
+    title: post.title,
+    description: post.content.substring(0, 80)
   }
 }
 
