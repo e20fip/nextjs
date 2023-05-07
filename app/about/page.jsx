@@ -3,11 +3,6 @@
 import { useSession } from 'next-auth/react'
 import styles from './about.module.css'
 
-export const metadata = {
-  title: 'About',
-  description: 'not finished yet'
-}
-
 const About = () => {
   const { data: session } = useSession()
   return (
