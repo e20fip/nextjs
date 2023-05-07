@@ -2,6 +2,7 @@ import { Sarabun } from 'next/font/google'
 import Header from './header'
 import Footer from './footer'
 import './globals.css'
+import Provider from '@/app/components/Provider'
 
 export const metadata = {
   title: 'E20FIP',
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
     <html lang="th">
       <body style={sarabun.style}>
         <main>
-          <Header />
-          <div className="container">{children}</div>
-          <Footer />
+          <Provider>
+            <Header />
+            <div className="container">{children}</div>
+            <Footer />{' '}
+          </Provider>
         </main>
       </body>
     </html>

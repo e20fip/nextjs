@@ -43,7 +43,9 @@ export default async function Page() {
           <ul key={data._id}>
             <li>
               <div className={styles.title}>
-                <Link href={`/post/${data._id}`}>{data.title}</Link>
+                <Link href={`/post/${data._id}`} prefetch={false}>
+                  {data.title}
+                </Link>
               </div>
               <Date dateString={data.createdAt} />
             </li>

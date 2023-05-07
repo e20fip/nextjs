@@ -67,6 +67,8 @@ footer {
 nav {
   margin: 1em;
   border-bottom: 1px solid var(--light-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 nav li {
@@ -106,6 +108,17 @@ p {
   padding-block: 1em;
 }
 
+.link {
+  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  gap: 0.5em;
+}
+.profile_img {
+  border-radius: 50%;
+}
 @container (width < 800px) {
   button {
     margin: 1em 0;

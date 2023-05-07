@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import pathName from '@/lib/getPathname'
+import SignIn from '@/app/components/SignIn'
 
 const links = [
   { name: 'HOME', path: '/' },
@@ -17,6 +18,11 @@ const Header = () => {
               <Link href={link.path}>{link.name}</Link>
             </li>
           ))}
+        </ul>
+        <ul>
+          <li>
+            <SignIn />
+          </li>
         </ul>
       </nav>
     </header>
