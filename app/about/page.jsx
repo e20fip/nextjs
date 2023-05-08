@@ -1,10 +1,8 @@
-'use client'
-
-import { useSession } from 'next-auth/react'
 import styles from './about.module.css'
+import { getServerSession } from 'next-auth'
 
-const About = () => {
-  const { data: session } = useSession()
+const About = async () => {
+  const session = await getServerSession()
   return (
     <>
       <div className={styles.about_content}>

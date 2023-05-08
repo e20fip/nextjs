@@ -116,9 +116,37 @@ p {
   display: flex;
   gap: 0.5em;
 }
+
 .profile_img {
   border-radius: 50%;
 }
+
+.profile_block {
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  padding: 1em;
+  width: max-content;
+  right: 0.25em;
+  top: 5em;
+  border: 1px solid #eee;
+  border-radius: 15px 0;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.small_btn {
+  margin-block: 1em 0;
+}
+
 @container (width < 800px) {
   button {
     margin: 1em 0;
