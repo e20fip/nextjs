@@ -7,8 +7,8 @@ const About = async () => {
   return (
     <>
       <div className={styles.about_content}>
-        {!session?.user.name && <h1>Please Sign In</h1>}
-        {session?.user.name && (
+        {!session?.user?.name && <h1>Please Sign In</h1>}
+        {session?.user?.name && (
           <>
             <h1 className={styles.headText}>About page</h1>
             <div className={styles.bodyText}>
