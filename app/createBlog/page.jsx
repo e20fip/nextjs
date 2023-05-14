@@ -10,8 +10,8 @@ async function CreateBlog() {
   async function handlerSubmit(title, text) {
     'use server'
 
-    if (session?.user.role !== 'admin') return
-    if (title === '' || text === '') return
+    /*     if (session?.user.role !== 'admin') return
+    if (title === '' || text === '') return */
 
     try {
       await connectTodb()
