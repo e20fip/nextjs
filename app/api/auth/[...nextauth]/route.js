@@ -21,6 +21,7 @@ export const authOptions = {
         email: session.user.email
       })
       session.user.id = sessionUser._id.toString()
+      session.user.role = sessionUser.role
       return session
     },
     async signIn({ profile }) {
@@ -33,7 +34,8 @@ export const authOptions = {
         if (!userExists) {
           await User.create({
             email: profile.email,
-            username: profile.name.replace(' ', '').toLowerCase(),
+            username: profile.name.toLowerCase(),
+            role: 'user',
             image: profile.picture
           })
         }

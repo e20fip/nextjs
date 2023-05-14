@@ -1,6 +1,7 @@
 'use client'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 
 const SignIn = () => {
@@ -44,6 +45,12 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
       {session?.user.name}
       <br />
       {session?.user.email}
+      <br />
+      {session?.user.role === 'admin' ? (
+        <Link href={'/createBlog'}>Create Blog</Link>
+      ) : (
+        ''
+      )}
       <br />
       <button
         className="small_btn"

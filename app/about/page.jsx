@@ -1,13 +1,14 @@
 import styles from './about.module.css'
 import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 const About = async () => {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   return (
     <>
       <div className={styles.about_content}>
-        {!session && <h1>Please Sign In</h1>}
-        {session && (
+        {!session?.user.name && <h1>Please Sign In</h1>}
+        {session?.user.name && (
           <>
             <h1 className={styles.headText}>About page</h1>
             <div className={styles.bodyText}>

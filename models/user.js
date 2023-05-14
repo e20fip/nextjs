@@ -10,6 +10,10 @@ const UserSchema = new Schema({
     type: String,
     required: [true, 'Username is required!']
   },
+  role: {
+    type: String,
+    require: [true, 'Role is required!']
+  },
   image: {
     type: String
   }

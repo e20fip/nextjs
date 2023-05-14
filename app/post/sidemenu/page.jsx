@@ -1,33 +1,37 @@
+import { connectTodb } from '@/lib/database'
+import Blog from '@/models/blog'
 import postStyles from '@/app/post/post.module.css'
-import clientPromise from '@/lib/mongodb'
 import Showhide from '../showhide'
 import Link from 'next/link'
 import Date from '@/lib/date'
 /* export const revalidate = 3600 */
 
-export default async function Sidemenu() {
-  const client = await clientPromise
-  const db = await client.db('mongoTest')
-  const notes = await db
-    .collection('notes')
-    .find({})
-    .sort({ createdAt: -1 })
-    .map((note) => ({
-      _id: note._id.toString(),
-      title: note.title,
-      createdAt: note.createdAt.toISOString()
-    }))
-    .toArray()
+async function getData() {
+  try {
+    await connectTodb()
+    const blogs = await Blog.find({})
+      .select('_id title createdAt')
+      .sort({ createdAt: -1 })
+    return blogs
+  } catch (error) {
+    //
+  }
+}
 
+export default async function Sidemenu() {
+  const datas = await getData()
   return (
     <Showhide>
       <ul className={postStyles.listmenu}>
-        {notes?.map((note) => (
-          <li key={note._id}>
-            <Link href={`post/${note._id}`} className={postStyles.link}>
-              {note.title.substring(0, 30)}
+        {datas?.map((data) => (
+          <li key={data._id.toString()}>
+            <Link
+              href={`post/${data._id.toString()}`}
+              className={postStyles.link}
+            >
+              {data.title.substring(0, 30)}
             </Link>
-            <Date dateString={note.createdAt} />
+            <Date dateString={data.createdAt.toISOString()} />
           </li>
         ))}
       </ul>

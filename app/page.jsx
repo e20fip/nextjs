@@ -1,4 +1,5 @@
-import clientPromise from '@/lib/mongodb'
+import { connectTodb } from '@/lib/database'
+import Blog from '@/models/blog'
 import styles from './page.module.css'
 import Image from 'next/image'
 import Date from '@/lib/date'
@@ -7,26 +8,17 @@ import Link from 'next/link'
 import Home from './home/home'
 
 /* export const dynamic = 'force-dynmic' */
-/* export const revalidate = 3600 */
+export const revalidate = 3600
 
 async function getData() {
   try {
-    const client = await clientPromise
-    const db = await client.db('mongoTest')
-    const notes = await db
-      .collection('notes')
-      .find({})
-      .map((notes) => ({
-        _id: notes._id.toString(),
-        title: notes.title,
-        content: notes.content,
-        createdAt: notes.createdAt.toISOString()
-      }))
+    await connectTodb()
+    const blogs = await Blog.find({})
       .sort({ createdAt: -1 })
+      .select('_id title content createdAt')
       .limit(2)
-      .toArray()
 
-    return notes
+    return blogs
   } catch (e) {
     //
   }
@@ -40,12 +32,12 @@ export default async function Page() {
       <HeaderImage />
       <div className={styles.content}>
         {datas?.map((data) => (
-          <ul key={data._id}>
+          <ul key={data._id.toString()}>
             <li>
               <div className={styles.title}>
                 <Link href={`/post/${data._id}`}>{data.title}</Link>
               </div>
-              <Date dateString={data.createdAt} />
+              <Date dateString={data.createdAt.toISOString()} />
             </li>
             <li>
               <div

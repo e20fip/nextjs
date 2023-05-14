@@ -1,17 +1,16 @@
-import clientPromise from '@/lib/mongodb'
-import { ObjectId } from 'mongodb'
+import { connectTodb } from '@/lib/database'
+import Blog from '@/models/blog'
 import styles from '@/app/post/post.module.css'
 import Link from 'next/link'
 import Date from '@/lib/date'
 
 export const dynamicParams = true
+
 async function getData(id) {
   try {
-    const client = await clientPromise
-    const db = await client.db('mongoTest')
-    const note = await db.collection('notes').findOne({ _id: new ObjectId(id) })
-
-    return note
+    await connectTodb()
+    const blogs = await Blog.findById(id)
+    return blogs
   } catch (e) {
     //
   }
