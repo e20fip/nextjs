@@ -2,8 +2,8 @@ import styles from './home.module.css'
 import Image from 'next/image'
 import datas from '@/lib/datas.json'
 
-export default function Home() {
-  const resp = datas
+export default async function Home() {
+  const resp = await datas
 
   return (
     <>

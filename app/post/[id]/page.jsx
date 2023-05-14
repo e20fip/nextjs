@@ -4,7 +4,7 @@ import styles from '@/app/post/post.module.css'
 import Link from 'next/link'
 import Date from '@/lib/date'
 
-export const dynamicParams = true
+//export const dynamicParams = true
 
 async function getData(id) {
   try {

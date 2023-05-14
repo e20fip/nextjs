@@ -2,8 +2,9 @@ import styles from './about.module.css'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-const About = async () => {
+async function About() {
   const session = await getServerSession(authOptions)
+
   return (
     <>
       <div className={styles.about_content}>
@@ -74,7 +75,7 @@ const About = async () => {
                 nam corrupti perspiciatis blanditiis esse consectetur ad, enim
                 ab eius possimus, omnis voluptas reiciendis, rem minima veniam
                 error quasi? Veritatis velit libero quis molestiae sunt
-                doloremque. Necessitatibus esse eaque fugiat ut at cupiditate{' '}
+                doloremque. Necessitatibus esse eaque fugiat ut at cupiditate
               </p>
               <p>
                 vitae corrupti dicta molestiae ipsum magni neque consequatur,

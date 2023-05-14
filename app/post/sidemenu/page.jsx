@@ -20,6 +20,7 @@ async function getData() {
 
 export default async function Sidemenu() {
   const datas = await getData()
+
   return (
     <Showhide>
       <ul className={postStyles.listmenu}>

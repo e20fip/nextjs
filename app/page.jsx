@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Home from './home/home'
 
 /* export const dynamic = 'force-dynmic' */
-export const revalidate = 3600
+//export const revalidate = 3600
 
 async function getData() {
   try {

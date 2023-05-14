@@ -1,13 +1,12 @@
 'use client'
-import { useRef, useTransition } from 'react'
+import { useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
 import styles from '@/app/utilsStyles/utilsStyles.module.css'
 
 const Form = ({ handlerSubmit }) => {
-  const [pending, startTransition] = useTransition()
-  const refTitle = useRef(null)
-  const refText = useRef(null)
+  const refTitle = useRef()
+  const refText = useRef()
   const router = useRouter()
 
   return (
@@ -24,12 +23,9 @@ const Form = ({ handlerSubmit }) => {
           <textarea placeholder="body" ref={refText} required />
           <button
             onClick={async () => {
-              startTransition(async () => {
-                handlerSubmit(refTitle.current.value, refText.current.value)
-                router.push('/')
-              })
+              handlerSubmit(refTitle.current.value, refText.current.value)
+              router.push('/')
             }}
-            disabled={pending}
           >
             submit
           </button>

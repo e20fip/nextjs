@@ -4,10 +4,10 @@ import { authOptions } from '../api/auth/[...nextauth]/route'
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
 
-const CreateBlog = async () => {
+async function CreateBlog() {
   const session = await getServerSession(authOptions)
 
-  const handlerSubmit = async (title, text) => {
+  async function handlerSubmit(title, text) {
     'use server'
 
     if (session?.user.role !== 'admin') return
