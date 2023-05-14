@@ -15,7 +15,9 @@ const Header = () => {
         <ul>
           {links.map((link) => (
             <li key={link.name} style={active(link.path)}>
-              <Link href={link.path}>{link.name}</Link>
+              <Link href={link.path} prefetch={false}>
+                {link.name}
+              </Link>
             </li>
           ))}
         </ul>

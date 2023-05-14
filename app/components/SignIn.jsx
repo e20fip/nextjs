@@ -47,7 +47,9 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
       {session?.user.email}
       <br />
       {session?.user.role === 'admin' ? (
-        <Link href={'/createBlog'}>Create Blog</Link>
+        <Link href={'/createBlog'} prefetch={false}>
+          Create Blog
+        </Link>
       ) : (
         ''
       )}

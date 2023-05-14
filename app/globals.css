@@ -154,10 +154,4 @@ p {
   footer {
     padding: 1em 0;
   }
-  .text-bottom {
-    border-right: 1px solid var(--light-color);
-  }
-  .link-bottom {
-    flex-direction: column;
-  }
 }
