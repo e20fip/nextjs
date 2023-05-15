@@ -1,5 +1,4 @@
 'use client'
-import postStyles from '@/app/post/post.module.css'
 import { useState } from 'react'
 
 const Showhide = ({ children }) => {
@@ -7,13 +6,10 @@ const Showhide = ({ children }) => {
 
   return (
     <>
-      <div
-        className={postStyles.showhide}
-        onClick={() => setIsShow((prev) => !prev)}
-      >
+      <div className="post_showhide" onClick={() => setIsShow((prev) => !prev)}>
         <Menu isShow={isShow} />
       </div>
-      <div className={postStyles.sidemenu} style={activeStyle(isShow)}>
+      <div className="post_sidemenu" style={activeStyle(isShow)}>
         {children}
       </div>
     </>
@@ -38,7 +34,7 @@ const Menu = ({ isShow }) => {
   return (
     <>
       {!isShow && <span>&#10140;</span>}
-      {isShow && <span className={postStyles.rotate}>&#10140;</span>}
+      {isShow && <span className="post_rotate">&#10140;</span>}
     </>
   )
 }

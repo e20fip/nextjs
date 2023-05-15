@@ -1,6 +1,5 @@
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
-import styles from './page.module.css'
 import Image from 'next/image'
 import Date from '@/lib/date'
 import LimitText from '@/lib/texttrim'
@@ -30,11 +29,11 @@ export default async function Page() {
   return (
     <>
       <HeaderImage />
-      <div className={styles.content}>
+      <div className="content">
         {datas?.map((data) => (
           <ul key={data._id.toString()}>
             <li>
-              <div className={styles.title}>
+              <div className="title">
                 <Link href={`/post/${data._id}`} prefetch={false}>
                   {data.title}
                 </Link>
@@ -58,7 +57,7 @@ export default async function Page() {
 
 function HeaderImage() {
   return (
-    <div className={styles.headimages}>
+    <div className="headimages">
       <Image
         priority
         fill
@@ -66,7 +65,7 @@ function HeaderImage() {
         alt="pillow"
         style={{ objectFit: 'cover' }}
       />
-      <div className={styles.headtext}>
+      <div className="headtext">
         &quot;Try to be a rainbow in someone&apos;s cloud.&quot;
         <span>Maya Angelou</span>
       </div>

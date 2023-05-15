@@ -15,11 +15,11 @@ async function CreateBlog() {
   async function handlerSubmit(title, text) {
     'use server'
 
-    if (title === '' || text === '') {
+    if (title !== '' || text !== '') {
       try {
         await connectTodb()
         const newBlog = new Blog({
-          creator: session?.user.id,
+          creator: session?.user?.id,
           title: title,
           content: text
         })

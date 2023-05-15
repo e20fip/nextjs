@@ -64,6 +64,72 @@ footer {
   padding: 0;
 }
 
+.content {
+  padding: 2em 5em;
+}
+
+.content ul {
+  padding: 1em 0;
+}
+
+.content ul li {
+  margin: 1em 0;
+}
+
+.content li {
+  list-style-type: none;
+  padding-bottom: 2em 0;
+}
+
+.headimages {
+  width: 100%;
+  max-height: 800px;
+  aspect-ratio: 16/9;
+  position: relative;
+  display: block;
+}
+
+.about_headtext {
+  font-size: clamp(1rem, 2vw + 1rem, 4rem);
+  position: absolute;
+  color: white;
+  inset: 0;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.about_headtext span {
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
+  width: 100%;
+}
+
+.about_title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0;
+}
+
+.pagemessage {
+  width: 100%;
+  height: 80vh;
+  display: grid;
+  place-content: center;
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    padding: 1em 2em;
+  }
+
+  .content ul {
+    padding: 1em 0;
+  }
+}
+
 nav {
   margin: 1em;
   border-bottom: 1px solid var(--light-color);
@@ -153,5 +219,204 @@ p {
   }
   footer {
     padding: 1em 0;
+  }
+}
+
+.post_container {
+  display: grid;
+  grid-template-columns: 350px auto;
+  container-type: inline-size;
+  padding: 2em 3em;
+  gap: 3em;
+}
+
+.post_content {
+  padding: 0 2em;
+}
+
+.post_title {
+  font-weight: bold;
+  padding: 1em 0 0;
+}
+
+.post_body {
+  margin-top: 1em;
+}
+
+.post_sidemenu {
+  padding: 1em 0;
+  border-right: 1px solid var(--light-color);
+  color: black;
+}
+
+.post_listmenu {
+  padding: 0;
+}
+
+.post_listmenu li {
+  list-style-type: none;
+  padding: 1em 2em;
+  transition: background-color 0.5s ease-in;
+}
+
+.post_listmenu li:hover {
+  background-color: #fefae0;
+}
+
+.post_link {
+  display: block;
+}
+
+.post_showhide {
+  display: none;
+  color: black;
+}
+
+.post_showhide span {
+  display: block;
+}
+
+.post_rotate {
+  transform: rotate(180deg);
+}
+
+@container (width < 800px) {
+  .post_container {
+    display: block;
+    padding: 0;
+  }
+  .post_sidemenu {
+    transform: translateX(-350px);
+    position: absolute;
+    background-color: var(--light-color);
+    overflow: scroll;
+    height: 80vh;
+    padding: 2em;
+  }
+  .post_showhide {
+    display: block;
+    position: absolute;
+    left: 1em;
+    z-index: 2;
+  }
+  .post_title {
+    padding-top: 2em;
+  }
+}
+
+.card_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2em;
+  padding: 2em 0 0;
+  container-type: inline-size;
+}
+
+.card {
+  display: block;
+  width: auto;
+}
+
+.home_image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  position: relative;
+  display: block;
+}
+
+.home_head_text {
+  margin-top: 1em;
+  text-align: center;
+}
+.home_title {
+  font-size: 1.1rem;
+  padding-block: 1em;
+  color: rgb(64, 73, 60);
+  font-weight: bold;
+}
+
+@container (width < 800px) {
+  .card_container {
+    padding-inline: 0;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input,
+.form textarea {
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border: 1px solid #eee;
+}
+
+.form textarea {
+  height: 250px;
+}
+
+.form label {
+  font-weight: bold;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: auto 350px;
+  height: 100%;
+  width: 100%;
+  padding: 4em 5em 2em;
+  gap: 3em;
+  container-type: inline-size;
+}
+
+.about p:last-child {
+  padding-bottom: 0;
+}
+
+.boxmain {
+  padding: 0;
+}
+
+.about_headText {
+  font-weight: bold;
+  padding-block: 0;
+}
+
+.about_bodyText {
+  margin-top: 1em;
+}
+
+.about_content {
+  padding: 0;
+}
+
+.ad {
+  display: block;
+  background-color: rgb(255 255 255);
+  padding: 2em;
+  color: var(--medium-color);
+  border-left: 1px solid var(--light-color);
+}
+
+@container (width < 800px) {
+  .about {
+    grid-template-columns: 1fr;
+    padding: 0 2em;
+  }
+  .boxmain {
+    padding: 0;
+  }
+  .ad {
+    padding: 2em 0;
+    margin-inline: 0;
+    border-left: none;
+    border-top: 1px solid var(--light-color);
+  }
+  .about_headText {
+    font-weight: bold;
+    padding-top: 2em;
   }
 }

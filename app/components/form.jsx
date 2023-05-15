@@ -1,18 +1,27 @@
 'use client'
 import { useRef } from 'react'
-import { useRouter } from 'next/navigation'
-
-import styles from '@/app/utilsStyles/utilsStyles.module.css'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Form = ({ handlerSubmit }) => {
   const refTitle = useRef()
   const refText = useRef()
-  const router = useRouter()
+
+  const submitDatas = async (title, text) => {
+    if (title === '' || text === '') return
+    await handlerSubmit(title, text)
+    toast.success('Content Submit', {
+      autoClose: 3000,
+      theme: 'dark'
+    })
+    refTitle.current.value = ''
+    refText.current.value = ''
+  }
 
   return (
     <>
-      <div className={styles.content}>
-        <div className={styles.form}>
+      <div className="content">
+        <div className="form">
           <label>
             <span>Title</span>
           </label>
@@ -22,15 +31,15 @@ const Form = ({ handlerSubmit }) => {
           </label>
           <textarea placeholder="body" ref={refText} required />
           <button
-            onClick={async () => {
-              handlerSubmit(refTitle.current.value, refText.current.value)
-              router.push('/')
-            }}
+            onClick={() =>
+              submitDatas(refTitle.current.value, refText.current.value)
+            }
           >
             submit
           </button>
         </div>
       </div>
+      <ToastContainer />
     </>
   )
 }

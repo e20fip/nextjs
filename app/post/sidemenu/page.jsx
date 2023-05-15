@@ -1,6 +1,5 @@
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
-import postStyles from '@/app/post/post.module.css'
 import Showhide from '../showhide'
 import Link from 'next/link'
 import Date from '@/lib/date'
@@ -23,12 +22,12 @@ export default async function Sidemenu() {
 
   return (
     <Showhide>
-      <ul className={postStyles.listmenu}>
+      <ul className="post_listmenu">
         {datas?.map((data) => (
           <li key={data._id.toString()}>
             <Link
               href={`post/${data._id.toString()}`}
-              className={postStyles.link}
+              className="post_link"
               prefetch={false}
             >
               {data.title.substring(0, 30)}

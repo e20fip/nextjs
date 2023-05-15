@@ -1,8 +1,6 @@
-import styles from '@/app/about/about.module.css'
-
 export default function Ad() {
   return (
-    <div className={styles.ad}>
+    <div className="ad">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, quo? Unde
       exercitationem blanditiis id, nobis adipisci repellendus sunt nam ipsa,
       quae possimus quidem ratione amet quibusdam harum nulla, dolor numquam

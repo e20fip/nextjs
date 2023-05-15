@@ -1,4 +1,3 @@
-import styles from './about.module.css'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
@@ -7,12 +6,12 @@ async function About() {
 
   return (
     <>
-      <div className={styles.about_content}>
+      <div className="about_content">
         {!session?.user.name && <h1>Please Sign In</h1>}
         {session?.user.name && (
           <>
-            <h1 className={styles.headText}>About page</h1>
-            <div className={styles.bodyText}>
+            <h1 className="about_headText">About page</h1>
+            <div className="about_bodyText">
               <p>
                 repellendus, qui adipisci fugit rem perspiciatis quae? Deserunt
                 recusandae sequi quos accusantium suscipit architecto porro

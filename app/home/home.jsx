@@ -1,4 +1,3 @@
-import styles from './home.module.css'
 import Image from 'next/image'
 import datas from '@/lib/datas.json'
 
@@ -7,11 +6,11 @@ export default async function Home() {
 
   return (
     <>
-      <h2 className={styles.head_text}>Blog Posts</h2>
-      <div className={styles.card_container}>
+      <h2 className="home_head_text">Blog Posts</h2>
+      <div className="card_container">
         {resp?.map((data) => (
-          <div className={styles.card} key={data.id}>
-            <div className={styles.image}>
+          <div className="card" key={data.id}>
+            <div className="home_image">
               <Image
                 fill
                 src={`/images/${data.image}`}
@@ -24,8 +23,8 @@ export default async function Home() {
                 (max-width: 1920px) 17vw,"
               />
             </div>
-            <div className={styles.title}>{data.title}</div>
-            <div className={styles.content}>{data.body}</div>
+            <div className="home_title">{data.title}</div>
+            <div className="home_content">{data.body}</div>
           </div>
         ))}
       </div>
