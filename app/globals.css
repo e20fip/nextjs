@@ -89,7 +89,7 @@ footer {
   display: block;
 }
 
-.about_headtext {
+.headtext {
   font-size: clamp(1rem, 2vw + 1rem, 4rem);
   position: absolute;
   color: white;
@@ -102,12 +102,12 @@ footer {
   text-align: center;
 }
 
-.about_headtext span {
+.headtext span {
   font-size: clamp(0.8rem, 2vw, 1.5rem);
   width: 100%;
 }
 
-.about_title {
+.title {
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0;
