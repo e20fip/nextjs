@@ -7,12 +7,14 @@ import Date from '@/lib/date'
 //export const dynamicParams = true
 
 async function getData(id) {
-  try {
-    await connectTodb()
-    const blogs = await Blog.findById(id)
-    return blogs
-  } catch (e) {
-    //
+  if (id) {
+    try {
+      await connectTodb()
+      const blogs = await Blog.findById(id)
+      return blogs
+    } catch (e) {
+      //
+    }
   }
 }
 
