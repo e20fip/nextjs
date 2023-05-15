@@ -1,5 +1,6 @@
+import CustomLoading from '../components/customload'
 function Loading() {
-  return <h1>Loading...</h1>
+  return <CustomLoading />
 }
 
 export default Loading

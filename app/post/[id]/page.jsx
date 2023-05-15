@@ -39,9 +39,7 @@ export default async function Post({ params }) {
           }}
         />
         <button>
-          <Link href="/" prefetch={false}>
-            HOME
-          </Link>
+          <Link href="/">HOME</Link>
         </button>
       </div>
     </>

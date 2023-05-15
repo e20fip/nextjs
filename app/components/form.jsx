@@ -9,11 +9,14 @@ const Form = ({ handlerSubmit }) => {
 
   const submitDatas = async (title, text) => {
     if (title === '' || text === '') return
-    await handlerSubmit(title, text)
-    toast.success('Content Submit', {
-      autoClose: 3000,
-      theme: 'dark'
+
+    await handlerSubmit(title, text).then(resolve)
+
+    toast.success('Submit Content Success', {
+      theme: 'dark',
+      autoClose: 3000
     })
+
     refTitle.current.value = ''
     refText.current.value = ''
   }

@@ -41,6 +41,42 @@ h6 {
   padding: 1em 0 1em;
 }
 
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #a5e01c;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #a5e01c transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .text-bottom {
   padding-right: 0.5em;
 }
@@ -108,9 +144,10 @@ footer {
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   padding: 0;
+  line-height: 1.5;
 }
 
 .pagemessage {
@@ -120,21 +157,21 @@ footer {
   place-content: center;
 }
 
-@media screen and (max-width: 800px) {
+@container (width < 800px) {
   .content {
     padding: 1em 2em;
   }
 
   .content ul {
-    padding: 1em 0;
+    padding: 0.2em 0;
   }
 }
 
 nav {
   margin: 1em;
-  border-bottom: 1px solid var(--light-color);
   display: flex;
   justify-content: space-between;
+  font-size: 0.8rem;
 }
 
 nav li {
@@ -191,13 +228,18 @@ p {
   position: absolute;
   z-index: 1;
   background-color: #fff;
-  padding: 1em;
+  padding: 1.5em 2em;
   width: max-content;
   right: 0.25em;
   top: 5em;
   border: 1px solid #eee;
   border-radius: 15px 0;
   animation: fadeIn 0.5s ease-in;
+}
+
+.profile_block span {
+  display: block;
+  padding-block: 0.4em;
 }
 
 @keyframes fadeIn {
@@ -224,8 +266,7 @@ p {
 
 .post_container {
   display: grid;
-  grid-template-columns: 350px auto;
-  container-type: inline-size;
+  grid-template-columns: 300px auto;
   padding: 2em 3em;
   gap: 3em;
 }
@@ -244,6 +285,11 @@ p {
 }
 
 .post_sidemenu {
+  display: none;
+}
+
+.post_sidemenu_full {
+  display: block;
   padding: 1em 0;
   border-right: 1px solid var(--light-color);
   color: black;
@@ -274,10 +320,23 @@ p {
 
 .post_showhide span {
   display: block;
+  cursor: pointer;
 }
 
 .post_rotate {
   transform: rotate(180deg);
+}
+
+.grid_table {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 2em;
+  padding: 0.5em 1em;
+  margin-block: 0.2em;
+}
+
+.grid_table:nth-child(odd) {
+  background-color: #f9f9f9;
 }
 
 @container (width < 800px) {
@@ -286,12 +345,16 @@ p {
     padding: 0;
   }
   .post_sidemenu {
+    display: block;
     transform: translateX(-350px);
     position: absolute;
     background-color: var(--light-color);
     overflow: scroll;
     height: 80vh;
     padding: 2em;
+  }
+  .post_sidemenu_full {
+    display: none;
   }
   .post_showhide {
     display: block;
@@ -309,7 +372,6 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2em;
   padding: 2em 0 0;
-  container-type: inline-size;
 }
 
 .card {
@@ -354,6 +416,11 @@ p {
   border: 1px solid #eee;
 }
 
+.form input:focus,
+.form textarea:focus {
+  outline: 1px solid #121b9c;
+}
+
 .form textarea {
   height: 250px;
 }
@@ -369,7 +436,6 @@ p {
   width: 100%;
   padding: 4em 5em 2em;
   gap: 3em;
-  container-type: inline-size;
 }
 
 .about p:last-child {

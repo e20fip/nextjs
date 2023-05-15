@@ -13,7 +13,7 @@ async function getData() {
       .sort({ createdAt: -1 })
     return blogs
   } catch (error) {
-    console.log(error)
+    //
   }
 }
 
@@ -25,11 +25,7 @@ export default async function Sidemenu() {
       <ul className="post_listmenu">
         {datas?.map((data) => (
           <li key={data._id.toString()}>
-            <Link
-              href={`post/${data._id.toString()}`}
-              className="post_link"
-              prefetch={false}
-            >
+            <Link href={`post/${data._id.toString()}`} className="post_link">
               {data.title.substring(0, 30)}
             </Link>
             <Date dateString={data.createdAt.toISOString()} />

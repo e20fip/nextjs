@@ -7,6 +7,7 @@ import Image from 'next/image'
 const SignIn = () => {
   const { data: session } = useSession()
   const [isShowProfile, setIsShowProfile] = useState(false)
+
   return (
     <>
       {session?.user ? (
@@ -42,18 +43,23 @@ const SignIn = () => {
 const ProfileBlock = ({ session, setIsShowProfile }) => {
   return (
     <div className="profile_block" onClick={() => setIsShowProfile(false)}>
-      {session?.user.name}
-      <br />
-      {session?.user.email}
-      <br />
+      <span>
+        {session?.user.name}
+        <br />
+        {session?.user.email}
+      </span>
       {session?.user.role === 'admin' ? (
-        <Link href={'/createBlog'} prefetch={false}>
-          Create Blog
-        </Link>
+        <>
+          <span>
+            <Link href={'/blog/edit'}>Edit Blog</Link>
+          </span>
+          <span>
+            <Link href={'/blog/create'}>Create Blog</Link>
+          </span>
+        </>
       ) : (
         ''
       )}
-      <br />
       <button
         className="small_btn"
         onClick={() => (signOut(), setIsShowProfile(false))}

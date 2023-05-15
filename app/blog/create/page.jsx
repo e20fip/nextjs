@@ -1,6 +1,6 @@
 import Form from '@/app/components/form'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth]/route'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
 import { redirect } from 'next/navigation'
@@ -25,7 +25,7 @@ async function CreateBlog() {
         })
         await newBlog.save()
       } catch (error) {
-        console.log(error)
+        //
       }
     }
   }

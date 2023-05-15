@@ -1,5 +1,6 @@
+import CustomLoading from './components/customload'
 function Loading() {
-  return <div className="pagemessage">Loading...</div>
+  return <CustomLoading />
 }
 
 export default Loading

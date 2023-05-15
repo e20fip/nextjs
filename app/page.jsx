@@ -34,9 +34,7 @@ export default async function Page() {
           <ul key={data._id.toString()}>
             <li>
               <div className="title">
-                <Link href={`/post/${data._id}`} prefetch={false}>
-                  {data.title}
-                </Link>
+                <Link href={`/post/${data._id}`}>{data.title}</Link>
               </div>
               <Date dateString={data.createdAt.toISOString()} />
             </li>
