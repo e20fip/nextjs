@@ -4,13 +4,13 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Form = ({ handlerSubmit }) => {
-  const refTitle = useRef()
-  const refText = useRef()
+  const refTitle = useRef(null)
+  const refText = useRef(null)
 
   const submitDatas = async (title, text) => {
     if (title === '' || text === '') return
 
-    await handlerSubmit(title, text).then(resolve)
+    await handlerSubmit(title, text)
 
     toast.success('Submit Content Success', {
       theme: 'dark',

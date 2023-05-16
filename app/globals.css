@@ -1,4 +1,5 @@
 :root {
+  --dark-color: #535353;
   --medium-color: #727272;
   --light-color: #eee;
 }
@@ -19,12 +20,16 @@ html {
 main {
   container-type: inline-size;
   position: relative;
+  height: 100vh;
+  perspective: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 header {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-  padding-inline: 1em;
+  padding: 0.1em 1em;
   position: sticky;
   top: 0;
   z-index: 2;
@@ -102,6 +107,19 @@ footer {
 
 .content {
   padding: 2em 5em;
+  background-color: #fff;
+}
+
+.content_colume {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2em;
+}
+
+@container (width < 1200px) {
+  .content_colume {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .content ul {
@@ -118,11 +136,18 @@ footer {
 }
 
 .headimages {
-  width: 100%;
-  max-height: 800px;
-  aspect-ratio: 16/9;
+  width: 100vw;
+  height: 96%;
   position: relative;
   display: block;
+  transform-style: preserve-3d;
+  z-index: -1;
+}
+
+.hero_img {
+  object-fit: cover;
+  z-index: -1;
+  transform: translateZ(-10px) scale(2);
 }
 
 .headtext {
@@ -136,6 +161,8 @@ footer {
   justify-content: center;
   align-items: center;
   text-align: center;
+  transform: translateZ(-5px) scale(1.5);
+  z-index: -1;
 }
 
 .headtext span {
@@ -157,18 +184,8 @@ footer {
   place-content: center;
 }
 
-@container (width < 800px) {
-  .content {
-    padding: 1em 2em;
-  }
-
-  .content ul {
-    padding: 0.2em 0;
-  }
-}
-
 nav {
-  margin: 1em;
+  margin: 0.5em 1em;
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
@@ -234,7 +251,7 @@ p {
   top: 5em;
   border: 1px solid #eee;
   border-radius: 15px 0;
-  animation: fadeIn 0.5s ease-in;
+  animation: fadeIn 300ms ease-in;
 }
 
 .profile_block span {
@@ -253,15 +270,6 @@ p {
 
 .small_btn {
   margin-block: 1em 0;
-}
-
-@container (width < 800px) {
-  button {
-    margin: 1em 0;
-  }
-  footer {
-    padding: 1em 0;
-  }
 }
 
 .post_container {
@@ -330,41 +338,17 @@ p {
 .grid_table {
   display: grid;
   grid-template-columns: 1fr auto auto;
-  gap: 2em;
+  gap: 1em;
   padding: 0.5em 1em;
   margin-block: 0.2em;
 }
 
-.grid_table:nth-child(odd) {
-  background-color: #f9f9f9;
+.grid_table span {
+  padding-inline: 0.5em;
 }
 
-@container (width < 800px) {
-  .post_container {
-    display: block;
-    padding: 0;
-  }
-  .post_sidemenu {
-    display: block;
-    transform: translateX(-350px);
-    position: absolute;
-    background-color: var(--light-color);
-    overflow: scroll;
-    height: 80vh;
-    padding: 2em;
-  }
-  .post_sidemenu_full {
-    display: none;
-  }
-  .post_showhide {
-    display: block;
-    position: absolute;
-    left: 1em;
-    z-index: 2;
-  }
-  .post_title {
-    padding-top: 2em;
-  }
+.grid_table:nth-child(odd) {
+  background-color: #f9f9f9;
 }
 
 .card_container {
@@ -394,14 +378,8 @@ p {
 .home_title {
   font-size: 1.1rem;
   padding-block: 1em;
-  color: rgb(64, 73, 60);
+  color: var(--medium-color);
   font-weight: bold;
-}
-
-@container (width < 800px) {
-  .card_container {
-    padding-inline: 0;
-  }
 }
 
 .form {
@@ -432,8 +410,6 @@ p {
 .about {
   display: grid;
   grid-template-columns: auto 350px;
-  height: 100%;
-  width: 100%;
   padding: 4em 5em 2em;
   gap: 3em;
 }
@@ -467,7 +443,79 @@ p {
   border-left: 1px solid var(--light-color);
 }
 
+.small-button {
+  padding: 0.8em 1em;
+  margin: 0;
+  background-color: darkred;
+  color: white;
+  animation: fadeIn 300ms ease-in;
+}
+
+.model-box {
+  position: absolute;
+  inset: 0;
+  background-color: #727272;
+  z-index: 2;
+  color: #fff;
+  padding: 2em;
+  margin: 1em;
+  animation: fadeIn 300ms ease-in;
+}
+
+.close-box {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  z-index: 3;
+  cursor: pointer;
+}
+
 @container (width < 800px) {
+  .content {
+    padding: 1em 2em;
+  }
+
+  .content ul {
+    padding: 0.2em 0;
+  }
+
+  .content_colume {
+    display: block;
+  }
+  button {
+    margin: 1em 0;
+  }
+  footer {
+    padding: 1em 0;
+  }
+  .post_container {
+    display: block;
+    padding: 0;
+  }
+  .post_sidemenu {
+    display: block;
+    transform: translateX(-350px);
+    position: absolute;
+    background-color: var(--light-color);
+    overflow: scroll;
+    height: 80vh;
+    padding: 2em;
+  }
+  .post_sidemenu_full {
+    display: none;
+  }
+  .post_showhide {
+    display: block;
+    position: absolute;
+    left: 1em;
+    z-index: 2;
+  }
+  .post_title {
+    padding-top: 2em;
+  }
+  .card_container {
+    padding-inline: 0;
+  }
   .about {
     grid-template-columns: 1fr;
     padding: 0 2em;

@@ -6,7 +6,7 @@ import LimitText from '@/lib/texttrim'
 import Link from 'next/link'
 import Home from './home/home'
 
-/* export const dynamic = 'force-dynmic' */
+//export const dynamic = 'auto'
 //export const revalidate = 3600
 
 async function getData() {
@@ -15,7 +15,7 @@ async function getData() {
     const blogs = await Blog.find({})
       .sort({ createdAt: -1 })
       .select('_id title content createdAt')
-      .limit(2)
+      .limit(4)
 
     return blogs
   } catch (e) {
@@ -30,23 +30,25 @@ export default async function Page() {
     <>
       <HeaderImage />
       <div className="content">
-        {datas?.map((data) => (
-          <ul key={data._id.toString()}>
-            <li>
-              <div className="title">
-                <Link href={`/post/${data._id}`}>{data.title}</Link>
-              </div>
-              <Date dateString={data.createdAt.toISOString()} />
-            </li>
-            <li>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: <LimitText longText={data.content} />
-                }}
-              />
-            </li>
-          </ul>
-        ))}
+        <div className="content_colume">
+          {datas?.map((data) => (
+            <ul key={data._id.toString()}>
+              <li>
+                <div className="title">
+                  <Link href={`/post/${data._id}`}>{data.title}</Link>
+                </div>
+                <Date dateString={data.createdAt.toISOString()} />
+              </li>
+              <li>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: <LimitText longText={data.content} />
+                  }}
+                />
+              </li>
+            </ul>
+          ))}
+        </div>
         <Home />
       </div>
     </>
@@ -61,7 +63,7 @@ function HeaderImage() {
         fill
         src="/images/web-pillow.jpg"
         alt="pillow"
-        style={{ objectFit: 'cover' }}
+        className="hero_img"
       />
       <div className="headtext">
         &quot;Try to be a rainbow in someone&apos;s cloud.&quot;

@@ -1,4 +1,4 @@
-import Form from '@/app/components/form'
+import Form from './form'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { connectTodb } from '@/lib/database'
@@ -20,8 +20,8 @@ async function CreateBlog() {
         await connectTodb()
         const newBlog = new Blog({
           creator: session?.user?.id,
-          title: title,
-          content: text
+          title: title.trim(),
+          content: text.trim()
         })
         await newBlog.save()
       } catch (error) {

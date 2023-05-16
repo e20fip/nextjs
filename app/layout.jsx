@@ -1,4 +1,4 @@
-import { Sarabun } from 'next/font/google'
+import { Prompt } from 'next/font/google'
 import Header from './header'
 import Footer from './footer'
 import './globals.css'
@@ -9,15 +9,15 @@ export const metadata = {
   description: 'Web Development'
 }
 
-const sarabun = Sarabun({
+const CustomFont = Prompt({
   subsets: ['thai'],
-  weight: ['400', '600']
+  weight: ['100', '400']
 })
 
 export default function RootLayout({ children }) {
   return (
     <html lang="th">
-      <body style={sarabun.style}>
+      <body style={CustomFont.style}>
         <main>
           <Provider>
             <Header />

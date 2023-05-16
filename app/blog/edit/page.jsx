@@ -6,12 +6,14 @@ import Button from './button'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+export const dynamic = 'auto'
+
 async function getDatas() {
   'use server'
   try {
     await connectTodb()
     const datas = await Blog.find({})
-      .select('_id, title')
+      .select('_id, title content')
       .sort({ createdAt: -1 })
     return datas
   } catch (error) {
@@ -30,6 +32,22 @@ async function deleteData(id) {
   }
 }
 
+async function submitDatas(id, title, body) {
+  'use server'
+  try {
+    const filter = { _id: id }
+    const update = {
+      title: title,
+      content: body
+    }
+    await connectTodb()
+    await Blog.findOneAndUpdate(filter, update)
+    revalidatePath('blog/edit')
+  } catch (error) {
+    //
+  }
+}
+
 export default async function EditBlog() {
   const session = await getServerSession(authOptions)
 
@@ -41,10 +59,14 @@ export default async function EditBlog() {
   return (
     <div className="content">
       {datas.map((data) => (
-        <div className="grid_table" key={data._id.toString()}>
-          {data.title}
-          <Button deleteData={deleteData} contentId={data._id.toString()} />
-        </div>
+        <Button
+          key={data._id.toString()}
+          deleteData={deleteData}
+          contentId={data._id.toString()}
+          contentTitle={data.title}
+          content={data.content}
+          submitDatas={submitDatas}
+        />
       ))}
     </div>
   )
