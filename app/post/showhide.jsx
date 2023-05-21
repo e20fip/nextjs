@@ -10,28 +10,11 @@ const Showhide = ({ children }) => {
       <div className="post_showhide" onClick={() => setIsShow((prev) => !prev)}>
         <Menu isShow={isShow} />
       </div>
-      <div
-        className="post_sidemenu"
-        style={activeStyle(isShow)}
-        onClick={() => setIsShow((prev) => !prev)}
-      >
+      <div className={`${isShow ? 'post_sidemenu' : 'post_sidemenu mobile'}`}>
         {children}
       </div>
-      <div className="post_sidemenu_full">{children}</div>
     </>
   )
-}
-
-const activeStyle = (isShow) => {
-  return isShow === true
-    ? {
-        transform: 'translateX(0)',
-        transition: 'transform 1s ease-in-out'
-      }
-    : {
-        transform: 'translateX(-350px)',
-        transition: 'transform 1s ease-in-out'
-      }
 }
 
 const Menu = ({ isShow }) => {

@@ -37,8 +37,8 @@ async function submitDatas(id, title, body) {
   try {
     const filter = { _id: id }
     const update = {
-      title: title,
-      content: body
+      title: title.trim(),
+      content: body.trim()
     }
     await connectTodb()
     await Blog.findOneAndUpdate(filter, update)
