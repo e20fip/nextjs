@@ -14,13 +14,12 @@ async function getData() {
     await connectTodb()
     const blogs = await Blog.find({})
       .sort({ createdAt: -1 })
+      .populate({ path: 'category' })
       .select('_id title content createdAt')
-      .populate('category')
       .limit(4)
-
-    return blogs
+    return JSON.parse(JSON.stringify(blogs))
   } catch (e) {
-    //
+    //console.log(e)
   }
 }
 
@@ -32,12 +31,12 @@ export default async function Page() {
       <div className="content">
         <div className="content_colume">
           {datas?.map((data) => (
-            <ul key={data._id.toString()}>
+            <ul key={data._id}>
               <li>
                 <div className="title">
                   <Link href={`/post/${data._id}`}>{data.title}</Link>
                 </div>
-                <Date dateString={data.createdAt.toISOString()} />
+                <Date dateString={data.createdAt} />
               </li>
               <li>
                 <div
