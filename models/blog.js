@@ -6,6 +6,10 @@ const BlogSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category'
+    },
     title: {
       type: String,
       required: [true, 'title required']

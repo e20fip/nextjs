@@ -1,41 +1,37 @@
 'use client'
 import { useState } from 'react'
 
-const Button = ({
-  deleteData,
-  contentId,
-  contentTitle,
-  content,
-  submitDatas
-}) => {
+const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
   const [isComfirm, setIsConfirm] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
 
-  const doDelete = async (contentId) => {
-    await deleteData(contentId)
+  const { _id, title } = datas
+
+  const doDelete = async (_id) => {
+    await deleteData(_id)
   }
 
   return (
     <>
       <div className="grid_table">
-        <span>{contentTitle}</span>
+        <span>{title}</span>
         <span className="link" onClick={() => setIsEdit(true)}>
           Edit
         </span>
         <span className="link" onClick={() => setIsConfirm((prev) => !prev)}>
-          Delete
+          {isComfirm && 'Cancel'}
+          {!isComfirm && 'Delete'}
         </span>
         {isComfirm && (
-          <button onClick={() => doDelete(contentId)} className="small-button">
+          <button onClick={() => doDelete(_id)} className="small-button">
             Confirm Delete
           </button>
         )}
       </div>
       {isEdit && (
         <FormEdit
-          contentId={contentId}
-          contentTitle={contentTitle}
-          content={content}
+          listCategory={listCategory}
+          datas={datas}
           setIsEdit={setIsEdit}
           submitDatas={submitDatas}
         />
@@ -44,28 +40,25 @@ const Button = ({
   )
 }
 
-const FormEdit = ({
-  contentId,
-  contentTitle,
-  content,
-  setIsEdit,
-  submitDatas
-}) => {
-  const [data, setData] = useState({
-    title: contentTitle,
+const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
+  const { _id, category, title, content } = datas
+  const [contentDatas, setContentDatas] = useState({
+    id: _id,
+    categoryId: category._id,
+    title: title,
     body: content
   })
 
   const formHanler = (e) => {
-    setData({
-      ...data,
+    setContentDatas({
+      ...contentDatas,
       [e.target.name]: e.target.value
     })
   }
 
-  const submitForm = async (id, title, body) => {
+  const submitForm = async (id, cat, title, body) => {
     if (title == '' || body == '') return
-    await submitDatas(id, title, body)
+    await submitDatas(id, cat, title, body)
     setIsEdit(false)
   }
 
@@ -83,21 +76,44 @@ const FormEdit = ({
             type="text"
             name="title"
             placeholder="title"
-            value={data.title}
+            value={contentDatas.title}
             onChange={formHanler}
             required
           />
+          <label>
+            <span>Category</span>
+          </label>
+          <select
+            name="categoryId"
+            onChange={formHanler}
+            value={contentDatas.categoryId}
+          >
+            {listCategory?.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.title}
+              </option>
+            ))}
+          </select>
           <label>
             <span>Content</span>
           </label>
           <textarea
             name="body"
             placeholder="body"
-            value={data.body}
+            value={contentDatas.body}
             onChange={formHanler}
             required
           />
-          <button onClick={() => submitForm(contentId, data.title, data.body)}>
+          <button
+            onClick={() =>
+              submitForm(
+                contentDatas.id,
+                contentDatas.categoryId,
+                contentDatas.title,
+                contentDatas.body
+              )
+            }
+          >
             submit
           </button>
         </div>

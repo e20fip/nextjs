@@ -2,7 +2,7 @@ import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
 import Link from 'next/link'
 import Date from '@/lib/date'
-import Showhide from '../showhide'
+import Sidemenu from '../sidemenu'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 3600
@@ -11,19 +11,19 @@ async function getData(id) {
   try {
     await connectTodb()
     const blogs = await Blog.findById(id)
-    return blogs
+    return JSON.parse(JSON.stringify(blogs))
   } catch (e) {
     //
   }
 }
 
-async function getList() {
+async function getList(id) {
   try {
     await connectTodb()
-    const lists = await Blog.find({})
-      .select('_id title createdAt')
+    const lists = await Blog.find({ category: id })
+      .select('_id category title createdAt')
       .sort({ createdAt: -1 })
-    return lists
+    return JSON.parse(JSON.stringify(lists))
   } catch (e) {
     //
   }
@@ -48,39 +48,20 @@ export async function generateStaticParams() {
   }
 }
 
-async function Sidemenu() {
-  const lists = await getList()
-  return (
-    lists && (
-      <ul className="post_listmenu">
-        {lists.map((list) => (
-          <li key={list._id.toString()}>
-            <Link href={`post/${list._id.toString()}`} className="post_link">
-              {list.title.substring(0, 30)}
-            </Link>
-            <Date dateString={list.createdAt.toISOString()} />
-          </li>
-        ))}
-      </ul>
-    )
-  )
-}
-
 export default async function Post({ params }) {
   const { id } = params
   const data = await getData(id)
+  const lists = await getList(data.category)
 
   if (!data) return notFound()
 
   return (
     <>
       <div className="post_container">
-        <Showhide>
-          <Sidemenu />
-        </Showhide>
+        {lists && <Sidemenu lists={lists} />}
         <div className="post_content">
           <h1 className="post_title">{data.title}</h1>
-          <Date dateString={data.createdAt.toISOString()} />
+          <Date dateString={data.createdAt} />
           <div
             className="post_body"
             dangerouslySetInnerHTML={{

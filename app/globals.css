@@ -21,7 +21,6 @@ main {
   container-type: inline-size;
   position: relative;
   height: 100vh;
-  perspective: 10px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -137,17 +136,15 @@ footer {
 
 .headimages {
   width: 100vw;
-  height: 96%;
+  height: 50%;
   position: relative;
   display: block;
-  transform-style: preserve-3d;
   z-index: -1;
 }
 
 .hero_img {
   object-fit: cover;
   z-index: -1;
-  transform: translateZ(-10px) scale(2);
 }
 
 .headtext {
@@ -161,7 +158,6 @@ footer {
   justify-content: center;
   align-items: center;
   text-align: center;
-  transform: translateZ(-5px) scale(1.5);
   z-index: -1;
 }
 
@@ -295,7 +291,6 @@ p {
 .post_sidemenu {
   display: block;
   padding: 1em 0;
-  border-right: 1px solid var(--light-color);
   color: black;
   transition: transform 1s ease-in-out;
 }
@@ -389,14 +384,16 @@ p {
 }
 
 .form input,
-.form textarea {
+.form textarea,
+.form select {
   margin-bottom: 1em;
   padding: 0.5em;
   border: 1px solid #eee;
 }
 
 .form input:focus,
-.form textarea:focus {
+.form textarea:focus,
+.form select:focus {
   outline: 1px solid #121b9c;
 }
 
@@ -406,6 +403,7 @@ p {
 
 .form label {
   font-weight: bold;
+  color: var(--dark-color);
 }
 
 .about {
@@ -450,6 +448,7 @@ p {
   background-color: darkred;
   color: white;
   animation: fadeIn 300ms ease-in;
+  cursor: pointer;
 }
 
 .model-box {
@@ -475,10 +474,13 @@ p {
   transform: translateX(0);
 }
 
+.active {
+  background-color: var(--light-color);
+}
+
 @container (width < 800px) {
   .headimages {
-    top: -116px;
-    height: 450px;
+    height: 350px;
   }
 
   .content {
@@ -507,10 +509,11 @@ p {
   .post_sidemenu {
     display: block;
     position: absolute;
-    background-color: var(--light-color);
+    background-color: #fff;
     overflow: scroll;
     height: 80vh;
     padding: 2em;
+    border: 1px solid var(--light-color);
   }
 
   .post_showhide {

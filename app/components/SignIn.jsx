@@ -51,6 +51,9 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
       {session?.user.role === 'admin' ? (
         <>
           <span>
+            <Link href={'/category/create'}>Category</Link>
+          </span>
+          <span>
             <Link href={'/blog/edit'}>Edit Blog</Link>
           </span>
           <span>

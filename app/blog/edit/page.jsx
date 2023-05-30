@@ -5,17 +5,28 @@ import Blog from '@/models/blog'
 import Button from './button'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import Category from '@/models/category'
 
 export const dynamic = 'auto'
 
 async function getDatas() {
-  'use server'
   try {
     await connectTodb()
     const datas = await Blog.find({})
-      .select('_id, title content')
+      .select('_id title content')
+      .populate('category')
       .sort({ createdAt: -1 })
-    return datas
+    return JSON.parse(JSON.stringify(datas))
+  } catch (error) {
+    //
+  }
+}
+
+async function getCategory() {
+  try {
+    await connectTodb()
+    const category = await Category.find({})
+    return JSON.parse(JSON.stringify(category))
   } catch (error) {
     //
   }
@@ -32,11 +43,12 @@ async function deleteData(id) {
   }
 }
 
-async function submitDatas(id, title, body) {
+async function submitDatas(id, cat, title, body) {
   'use server'
   try {
     const filter = { _id: id }
     const update = {
+      category: cat,
       title: title.trim(),
       content: body.trim()
     }
@@ -55,6 +67,7 @@ export default async function EditBlog() {
     redirect('/')
   }
   const datas = await getDatas()
+  const listCategory = await getCategory()
 
   return (
     <div className="content">
@@ -62,9 +75,8 @@ export default async function EditBlog() {
         <Button
           key={data._id.toString()}
           deleteData={deleteData}
-          contentId={data._id.toString()}
-          contentTitle={data.title}
-          content={data.content}
+          listCategory={listCategory}
+          datas={data}
           submitDatas={submitDatas}
         />
       ))}

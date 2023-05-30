@@ -15,6 +15,7 @@ async function getData() {
     const blogs = await Blog.find({})
       .sort({ createdAt: -1 })
       .select('_id title content createdAt')
+      .populate('category')
       .limit(4)
 
     return blogs
@@ -25,7 +26,6 @@ async function getData() {
 
 export default async function Page() {
   const datas = await getData()
-
   return (
     <>
       <HeaderImage />
@@ -46,6 +46,7 @@ export default async function Page() {
                   }}
                 />
               </li>
+              <li>{data.category.title}</li>
             </ul>
           ))}
         </div>
