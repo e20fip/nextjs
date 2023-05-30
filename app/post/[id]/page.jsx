@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Date from '@/lib/date'
 import Sidemenu from '../sidemenu'
 import { notFound } from 'next/navigation'
+import { remark } from 'remark'
+import html from 'remark-html'
 
 export const revalidate = 3600
 
@@ -53,6 +55,7 @@ export default async function Post({ params }) {
   const data = await getData(id)
   const lists = await getList(data.category)
 
+  const processContent = await remark().use(html).process(data.content)
   if (!data) return notFound()
 
   return (
@@ -64,9 +67,7 @@ export default async function Post({ params }) {
           <Date dateString={data.createdAt} />
           <div
             className="post_body"
-            dangerouslySetInnerHTML={{
-              __html: data.content
-            }}
+            dangerouslySetInnerHTML={{ __html: processContent.value }}
           />
           <button>
             <Link href="/">HOME</Link>
