@@ -1,5 +1,6 @@
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
+import Category from '@/models/category'
 import Image from 'next/image'
 import Date from '@/lib/date'
 import LimitText from '@/lib/texttrim'
@@ -14,7 +15,7 @@ async function getData() {
     await connectTodb()
     const blogs = await Blog.find({})
       .sort({ createdAt: -1 })
-      .populate({ path: 'category' })
+      .populate('category')
       .select('_id title content createdAt')
       .limit(4)
     return JSON.parse(JSON.stringify(blogs))
