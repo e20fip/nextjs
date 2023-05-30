@@ -43,7 +43,8 @@ async function editCategory(id, title) {
   }
 }
 
-async function CreateCategory() {
+export default async function CreateCategory() {
+  'use server'
   const session = await getServerSession(authOptions)
   const listCategories = await getCategories()
   if (session?.user.role !== 'admin') {
@@ -84,5 +85,3 @@ async function CreateCategory() {
     </>
   )
 }
-
-export default CreateCategory

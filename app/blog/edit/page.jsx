@@ -61,6 +61,7 @@ async function submitDatas(id, cat, title, body) {
 }
 
 export default async function EditBlog() {
+  'use server'
   const session = await getServerSession(authOptions)
 
   if (session?.user.role !== 'admin') {

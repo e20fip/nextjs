@@ -16,7 +16,8 @@ async function getCategory() {
   }
 }
 
-async function CreateBlog() {
+export default async function CreateBlog() {
+  'use server'
   const session = await getServerSession(authOptions)
 
   if (session?.user.role !== 'admin') {
@@ -46,5 +47,3 @@ async function CreateBlog() {
 
   return <Form handlerSubmit={handlerSubmit} category={category} />
 }
-
-export default CreateBlog
