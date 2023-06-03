@@ -16,8 +16,25 @@ async function getCategory() {
   }
 }
 
-export default async function CreateBlog() {
+async function handlerSubmit(userId, cat, title, text) {
   'use server'
+  if (title !== '' || text !== '') {
+    try {
+      await connectTodb()
+      const newBlog = new Blog({
+        creator: userId,
+        category: cat,
+        title: title.trim(),
+        content: text.trim()
+      })
+      await newBlog.save()
+    } catch (error) {
+      //
+    }
+  }
+}
+
+export default async function CreateBlog() {
   const session = await getServerSession(authOptions)
 
   if (session?.user.role !== 'admin') {
@@ -25,25 +42,6 @@ export default async function CreateBlog() {
   }
 
   const category = await getCategory()
-
-  async function handlerSubmit(userId, cat, title, text) {
-    'use server'
-
-    if (title !== '' || text !== '') {
-      try {
-        await connectTodb()
-        const newBlog = new Blog({
-          creator: userId,
-          category: cat,
-          title: title.trim(),
-          content: text.trim()
-        })
-        await newBlog.save()
-      } catch (error) {
-        //
-      }
-    }
-  }
 
   return <Form handlerSubmit={handlerSubmit} category={category} />
 }

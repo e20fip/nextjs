@@ -11,7 +11,7 @@ async function getCategories() {
   try {
     await connectTodb()
     const datas = await Category.find({})
-    return datas
+    return JSON.parse(JSON.stringify(datas))
   } catch (error) {
     //
   }
@@ -42,7 +42,22 @@ async function editCategory(id, title) {
     //
   }
 }
+async function handlerSubmit(datas) {
+  'use server'
 
+  if (datas !== '') {
+    try {
+      await connectTodb()
+      const newCategory = new Category({
+        title: datas.trim()
+      })
+      revalidatePath('/category/create')
+      await newCategory.save()
+    } catch (error) {
+      //
+    }
+  }
+}
 export default async function CreateCategory() {
   'use server'
   const session = await getServerSession(authOptions)
@@ -51,22 +66,6 @@ export default async function CreateCategory() {
     redirect('/')
   }
 
-  async function handlerSubmit(datas) {
-    'use server'
-
-    if (datas !== '') {
-      try {
-        await connectTodb()
-        const newCategory = new Category({
-          title: datas.trim()
-        })
-        revalidatePath('/category/create')
-        await newCategory.save()
-      } catch (error) {
-        //
-      }
-    }
-  }
   return (
     <>
       <Form handlerSubmit={handlerSubmit} />
