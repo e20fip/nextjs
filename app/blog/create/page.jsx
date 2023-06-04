@@ -5,6 +5,7 @@ import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
 import Category from '@/models/category'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 async function getCategory() {
   try {
@@ -28,6 +29,7 @@ async function handlerSubmit(userId, cat, title, text) {
         content: text.trim()
       })
       await newBlog.save()
+      revalidatePath('/')
     } catch (error) {
       //
     }

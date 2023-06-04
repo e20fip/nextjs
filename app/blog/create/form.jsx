@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import { useTransition, useRef } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useSession } from 'next-auth/react'
@@ -9,6 +9,7 @@ const Form = ({ handlerSubmit, category }) => {
   const refTitle = useRef(null)
   const refCat = useRef(null)
   const refText = useRef(null)
+  const [isPending, startTransition] = useTransition()
 
   const submitDatas = async (userId, cat, title, text) => {
     if (title === '' || text === '') return
@@ -48,13 +49,16 @@ const Form = ({ handlerSubmit, category }) => {
           <textarea placeholder="body" ref={refText} required />
           <button
             onClick={() =>
-              submitDatas(
-                session.user.id,
-                refCat.current.value,
-                refTitle.current.value,
-                refText.current.value
+              startTransition(() =>
+                submitDatas(
+                  session.user.id,
+                  refCat.current.value,
+                  refTitle.current.value,
+                  refText.current.value
+                )
               )
             }
+            disabled={isPending}
           >
             submit
           </button>

@@ -5,9 +5,7 @@ import Date from '@/lib/date'
 import { notFound } from 'next/navigation'
 import { remark } from 'remark'
 import html from 'remark-html'
-import dynamic from 'next/dynamic'
-
-const Sidemenu = dynamic(() => import('../sidemenu'), { ssr: false })
+import Sidemenu from '../sidemenu'
 
 export const revalidate = 3600
 
@@ -15,6 +13,7 @@ async function getData(id) {
   try {
     await connectTodb()
     const blogs = await Blog.findById(id)
+    if (!blogs) return notFound()
     return JSON.parse(JSON.stringify(blogs))
   } catch (e) {
     //
@@ -27,6 +26,7 @@ async function getList(id) {
     const lists = await Blog.find({ category: id })
       .select('_id category title createdAt')
       .sort({ createdAt: -1 })
+    if (!lists) return notFound()
     return JSON.parse(JSON.stringify(lists))
   } catch (e) {
     //
@@ -58,7 +58,6 @@ export default async function Post({ params }) {
   const lists = await getList(data.category)
 
   const processContent = await remark().use(html).process(data.content)
-  if (!data) return notFound()
 
   return (
     <>

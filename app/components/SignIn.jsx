@@ -24,12 +24,7 @@ const SignIn = () => {
               height={25}
             />
           </div>
-          {isShowProfile && (
-            <ProfileBlock
-              session={session}
-              setIsShowProfile={setIsShowProfile}
-            />
-          )}
+          {isShowProfile && <ProfileBlock session={session} />}
         </>
       ) : (
         <div className="link" onClick={() => signIn()}>
@@ -40,9 +35,9 @@ const SignIn = () => {
   )
 }
 
-const ProfileBlock = ({ session, setIsShowProfile }) => {
+const ProfileBlock = ({ session }) => {
   return (
-    <div className="profile_block" onClick={() => setIsShowProfile(false)}>
+    <div className="profile_block">
       <span>
         {session?.user.name}
         <br />
@@ -63,10 +58,7 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
       ) : (
         ''
       )}
-      <button
-        className="small_btn"
-        onClick={() => (signOut(), setIsShowProfile(false))}
-      >
+      <button className="small_btn" onClick={() => signOut()}>
         Sign out
       </button>
     </div>

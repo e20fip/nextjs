@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useTransition, useState } from 'react'
 
 const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
   const [isComfirm, setIsConfirm] = useState(false)
@@ -48,6 +48,7 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
     title: title,
     body: content
   })
+  const [isPending, startTransition] = useTransition()
 
   const formHanler = (e) => {
     setContentDatas({
@@ -106,13 +107,16 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
           />
           <button
             onClick={() =>
-              submitForm(
-                contentDatas.id,
-                contentDatas.categoryId,
-                contentDatas.title,
-                contentDatas.body
+              startTransition(() =>
+                submitForm(
+                  contentDatas.id,
+                  contentDatas.categoryId,
+                  contentDatas.title,
+                  contentDatas.body
+                )
               )
             }
+            disabled={isPending}
           >
             submit
           </button>
