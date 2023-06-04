@@ -37,7 +37,7 @@ async function handlerSubmit(userId, cat, title, text) {
 export default async function CreateBlog() {
   const session = await getServerSession(authOptions)
 
-  if (session?.user.role !== 'admin') {
+  if (!session && session?.user.role !== 'admin') {
     redirect('/')
   }
 

@@ -64,7 +64,7 @@ export default async function EditBlog() {
   'use server'
   const session = await getServerSession(authOptions)
 
-  if (session?.user.role !== 'admin') {
+  if (!session && session?.user.role !== 'admin') {
     redirect('/')
   }
   const datas = await getDatas()

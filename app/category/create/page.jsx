@@ -62,7 +62,7 @@ export default async function CreateCategory() {
   'use server'
   const session = await getServerSession(authOptions)
   const listCategories = await getCategories()
-  if (session?.user.role !== 'admin') {
+  if (!session && session?.user.role !== 'admin') {
     redirect('/')
   }
 

@@ -2,10 +2,12 @@ import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
 import Link from 'next/link'
 import Date from '@/lib/date'
-import Sidemenu from '../sidemenu'
 import { notFound } from 'next/navigation'
 import { remark } from 'remark'
 import html from 'remark-html'
+import dynamic from 'next/dynamic'
+
+const Sidemenu = dynamic(() => import('../sidemenu'), { ssr: false })
 
 export const revalidate = 3600
 
