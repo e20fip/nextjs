@@ -1,10 +1,7 @@
 import Form from './form'
 import Categories from './categories'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { connectTodb } from '@/lib/database'
 import Category from '@/models/category'
-import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
 async function getCategories() {
@@ -60,11 +57,7 @@ async function handlerSubmit(datas) {
 }
 export default async function CreateCategory() {
   'use server'
-  const session = await getServerSession(authOptions)
   const listCategories = await getCategories()
-  if (!session && session?.user.role !== 'admin') {
-    redirect('/')
-  }
 
   return (
     <>

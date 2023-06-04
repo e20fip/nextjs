@@ -1,10 +1,7 @@
 import Form from './form'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
 import Category from '@/models/category'
-import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
 async function getCategory() {
@@ -37,12 +34,6 @@ async function handlerSubmit(userId, cat, title, text) {
 }
 
 export default async function CreateBlog() {
-  const session = await getServerSession(authOptions)
-
-  if (!session && session?.user.role !== 'admin') {
-    redirect('/')
-  }
-
   const category = await getCategory()
 
   return <Form handlerSubmit={handlerSubmit} category={category} />

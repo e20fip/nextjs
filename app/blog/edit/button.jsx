@@ -1,10 +1,15 @@
 'use client'
+import { useSession } from 'next-auth/react'
 import { useTransition, useState } from 'react'
+import { redirect } from 'next/navigation'
 
 const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
+  const { data: session } = useSession()
+  if (!session && session?.user.role !== 'admin') {
+    redirect('/')
+  }
   const [isComfirm, setIsConfirm] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-
   const { _id, title } = datas
 
   const doDelete = async (_id) => {

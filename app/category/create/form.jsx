@@ -1,9 +1,15 @@
 'use client'
 import { useRef } from 'react'
+import { useSession } from 'next-auth/react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { redirect } from 'next/navigation'
 
 const Form = ({ handlerSubmit }) => {
+  const { data: session } = useSession()
+  if (!session && session?.user.role !== 'admin') {
+    return redirect('/')
+  }
   const inputRef = useRef(null)
 
   const submitDatas = async () => {

@@ -1,10 +1,7 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
 import Button from './button'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 import Category from '@/models/category'
 
 export const dynamic = 'auto'
@@ -62,11 +59,7 @@ async function submitDatas(id, cat, title, body) {
 
 export default async function EditBlog() {
   'use server'
-  const session = await getServerSession(authOptions)
 
-  if (!session && session?.user.role !== 'admin') {
-    redirect('/')
-  }
   const datas = await getDatas()
   const listCategory = await getCategory()
 
