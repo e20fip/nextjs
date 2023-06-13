@@ -1,5 +1,5 @@
 'use client'
-import { useTransition, useRef } from 'react'
+import { useRef } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useSession } from 'next-auth/react'
@@ -9,17 +9,17 @@ const Form = ({ handlerSubmit, category }) => {
   const { data: session } = useSession()
   const refTitle = useRef(null)
   const refCat = useRef(null)
+  const refDesc = useRef(null)
   const refText = useRef(null)
-  const [isPending, startTransition] = useTransition()
 
   if (!session && session?.user.role !== 'admin') {
     return redirect('/')
   }
 
-  const submitDatas = async (userId, cat, title, text) => {
-    if (title === '' || text === '') return
+  const submitDatas = async (userId, cat, title, desc, text) => {
+    if (title === '' || desc === '' || text === '') return
 
-    await handlerSubmit(userId, cat, title, text)
+    await handlerSubmit(userId, cat, title, desc, text)
 
     toast.success('Submit Content Success', {
       theme: 'dark',
@@ -27,6 +27,7 @@ const Form = ({ handlerSubmit, category }) => {
     })
 
     refTitle.current.value = null
+    refDesc.current.value = null
     refText.current.value = null
   }
 
@@ -49,21 +50,23 @@ const Form = ({ handlerSubmit, category }) => {
             ))}
           </select>
           <label>
+            <span>Description</span>
+          </label>
+          <input type="text" placeholder="description" ref={refDesc} required />
+          <label>
             <span>Content</span>
           </label>
           <textarea placeholder="body" ref={refText} required />
           <button
             onClick={() =>
-              startTransition(() =>
-                submitDatas(
-                  session.user.id,
-                  refCat.current.value,
-                  refTitle.current.value,
-                  refText.current.value
-                )
+              submitDatas(
+                session.user.id,
+                refCat.current.value,
+                refTitle.current.value,
+                refDesc.current.value,
+                refText.current.value
               )
             }
-            disabled={isPending}
           >
             submit
           </button>

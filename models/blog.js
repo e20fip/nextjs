@@ -13,6 +13,10 @@ const BlogSchema = new Schema(
       type: String,
       required: [true, 'title required']
     },
+    description: {
+      type: String,
+      required: [true, 'description required']
+    },
     content: {
       type: String,
       required: [true, 'text content required']

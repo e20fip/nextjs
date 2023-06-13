@@ -14,21 +14,23 @@ async function getCategory() {
   }
 }
 
-async function handlerSubmit(userId, cat, title, text) {
+async function handlerSubmit(userId, cat, title, desc, text) {
   'use server'
-  if (title !== '' || text !== '') {
+
+  if (title !== '' || desc !== '' || text !== '') {
     try {
       await connectTodb()
       const newBlog = new Blog({
         creator: userId,
         category: cat,
         title: title.trim(),
+        description: desc.trim().substring(0, 100),
         content: text.trim()
       })
       await newBlog.save()
       revalidatePath('/')
     } catch (error) {
-      //
+      //console.log(error)
     }
   }
 }

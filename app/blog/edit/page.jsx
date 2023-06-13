@@ -10,7 +10,7 @@ async function getDatas() {
   try {
     await connectTodb()
     const datas = await Blog.find({})
-      .select('_id title content')
+      .select('_id title description content')
       .populate('category')
       .sort({ createdAt: -1 })
     return JSON.parse(JSON.stringify(datas))
@@ -40,13 +40,14 @@ async function deleteData(id) {
   }
 }
 
-async function submitDatas(id, cat, title, body) {
+async function submitDatas(id, cat, title, desc, body) {
   'use server'
   try {
     const filter = { _id: id }
     const update = {
       category: cat,
       title: title.trim(),
+      description: desc.trim(),
       content: body.trim()
     }
     await connectTodb()

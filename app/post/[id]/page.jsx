@@ -3,8 +3,7 @@ import Blog from '@/models/blog'
 import Link from 'next/link'
 import Date from '@/lib/date'
 import { notFound } from 'next/navigation'
-import { remark } from 'remark'
-import html from 'remark-html'
+import Showdown from 'showdown'
 import Sidemenu from '../sidemenu'
 
 export const revalidate = 3600
@@ -56,8 +55,8 @@ export default async function Post({ params }) {
   const { id } = params
   const data = await getData(id)
   const lists = await getList(data.category)
-
-  const processContent = await remark().use(html).process(data.content)
+  const converter = new Showdown.Converter()
+  const processContent = converter.makeHtml(data.content)
 
   return (
     <>
@@ -68,7 +67,7 @@ export default async function Post({ params }) {
           <Date dateString={data.createdAt} />
           <div
             className="post_body"
-            dangerouslySetInnerHTML={{ __html: processContent.value }}
+            dangerouslySetInnerHTML={{ __html: processContent }}
           />
           <button>
             <Link href="/">HOME</Link>

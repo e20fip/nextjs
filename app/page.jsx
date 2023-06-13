@@ -1,6 +1,5 @@
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
-import Category from '@/models/category'
 import Image from 'next/image'
 import Date from '@/lib/date'
 import LimitText from '@/lib/texttrim'
@@ -16,7 +15,7 @@ async function getData() {
     const blogs = await Blog.find({})
       .sort({ createdAt: -1 })
       .populate('category')
-      .select('_id title content createdAt')
+      .select('_id title description createdAt')
       .limit(4)
     return JSON.parse(JSON.stringify(blogs))
   } catch (e) {
@@ -40,11 +39,7 @@ export default async function Page() {
                 <Date dateString={data.createdAt} />
               </li>
               <li>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: <LimitText longText={data.content} />
-                  }}
-                />
+                <LimitText longText={data.description} />
               </li>
               <li>{data.category.title}</li>
             </ul>

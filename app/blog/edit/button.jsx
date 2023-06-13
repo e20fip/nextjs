@@ -1,6 +1,6 @@
 'use client'
 import { useSession } from 'next-auth/react'
-import { useTransition, useState } from 'react'
+import { useState } from 'react'
 import { redirect } from 'next/navigation'
 
 const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
@@ -46,14 +46,14 @@ const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
 }
 
 const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
-  const { _id, category, title, content } = datas
+  const { _id, category, title, description, content } = datas
   const [contentDatas, setContentDatas] = useState({
     id: _id,
     categoryId: category._id,
     title: title,
+    desc: description,
     body: content
   })
-  const [isPending, startTransition] = useTransition()
 
   const formHanler = (e) => {
     setContentDatas({
@@ -62,9 +62,9 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
     })
   }
 
-  const submitForm = async (id, cat, title, body) => {
-    if (title == '' || body == '') return
-    await submitDatas(id, cat, title, body)
+  const submitForm = async (id, cat, title, desc, body) => {
+    if (title == '' || desc == '' || body == '') return
+    await submitDatas(id, cat, title, desc, body)
     setIsEdit(false)
   }
 
@@ -101,6 +101,16 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
             ))}
           </select>
           <label>
+            <span>Description</span>
+          </label>
+          <input
+            name="desc"
+            placeholder="description"
+            value={contentDatas.desc}
+            onChange={formHanler}
+            required
+          />
+          <label>
             <span>Content</span>
           </label>
           <textarea
@@ -112,16 +122,14 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
           />
           <button
             onClick={() =>
-              startTransition(() =>
-                submitForm(
-                  contentDatas.id,
-                  contentDatas.categoryId,
-                  contentDatas.title,
-                  contentDatas.body
-                )
+              submitForm(
+                contentDatas.id,
+                contentDatas.categoryId,
+                contentDatas.title,
+                contentDatas.desc,
+                contentDatas.body
               )
             }
-            disabled={isPending}
           >
             submit
           </button>
