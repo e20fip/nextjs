@@ -1,6 +1,6 @@
 import { connectTodb } from '@/lib/database'
 import Blog from '@/models/blog'
-import Image from 'next/image'
+import Category from '@/models/category'
 import Date from '@/lib/date'
 import LimitText from '@/lib/texttrim'
 import Link from 'next/link'
@@ -17,6 +17,7 @@ async function getData() {
       .populate('category')
       .select('_id title description createdAt')
       .limit(4)
+      .lean()
     return JSON.parse(JSON.stringify(blogs))
   } catch (e) {
     //console.log(e)
@@ -27,7 +28,6 @@ export default async function Page() {
   const datas = await getData()
   return (
     <>
-      <HeaderImage />
       <div className="content">
         <div className="content_colume">
           {datas?.map((data) => (
@@ -48,23 +48,5 @@ export default async function Page() {
         <Home />
       </div>
     </>
-  )
-}
-
-function HeaderImage() {
-  return (
-    <div className="headimages">
-      <Image
-        priority
-        fill
-        src="/images/web-pillow.jpg"
-        alt="pillow"
-        className="hero_img"
-      />
-      <div className="headtext">
-        &quot;Try to be a rainbow in someone&apos;s cloud.&quot;
-        <span>Maya Angelou</span>
-      </div>
-    </div>
   )
 }

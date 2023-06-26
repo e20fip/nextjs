@@ -31,6 +31,6 @@ const Header = () => {
 
 const active = (link) => {
   const path = pathName()
-  return link === path ? { backgroundColor: '#efefef' } : {}
+  return link === path ? { backgroundColor: 'var(--active)' } : {}
 }
 export default Header

@@ -1,7 +1,17 @@
 :root {
-  --dark-color: #535353;
-  --medium-color: #727272;
-  --light-color: #eee;
+  --dark-color: #505050;
+  --light-gray: #686868;
+  --medium-color: #ccff68;
+  --light-color: #ffffff;
+  --nav: #363636;
+  --link: #ffbc57;
+  --active: #242424;
+  --bg_gradient: linear-gradient(
+    90deg,
+    rgba(80, 80, 80, 1) 0%,
+    rgba(122, 122, 122, 1) 51%,
+    rgba(80, 80, 80, 1) 100%
+  );
 }
 * {
   padding: 0;
@@ -12,11 +22,13 @@
 html {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
-  background-color: rgb(255, 255, 255);
   line-height: 1.8;
   color: var(--medium-color);
 }
-
+body {
+  background-color: var(--dark-color);
+  color: #fff;
+}
 main {
   container-type: inline-size;
   position: relative;
@@ -26,12 +38,12 @@ main {
 }
 
 header {
-  background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   padding: 0.1em 1em;
   position: sticky;
   top: 0;
   z-index: 2;
+  background: var(--bg_gradient);
 }
 
 h1,
@@ -91,13 +103,11 @@ h6 {
 }
 
 footer {
-  background-color: rgb(255, 255, 255);
   color: var(--medium-color);
-  padding: 1em;
-  margin: 1em 2em;
-  border-top: 1px solid var(--light-color);
+  padding: 1em 2em;
   display: flex;
   justify-content: space-between;
+  background: var(--bg_gradient);
 }
 
 .container {
@@ -106,7 +116,6 @@ footer {
 
 .content {
   padding: 2em 5em;
-  background-color: #fff;
 }
 
 .content_colume {
@@ -133,39 +142,6 @@ footer {
   list-style-type: none;
   padding-bottom: 2em 0;
 }
-
-.headimages {
-  width: 100vw;
-  height: 50%;
-  position: relative;
-  display: block;
-  z-index: -1;
-}
-
-.hero_img {
-  object-fit: cover;
-  z-index: -1;
-}
-
-.headtext {
-  font-size: clamp(1rem, 2vw + 1rem, 4rem);
-  position: absolute;
-  color: white;
-  inset: 0;
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  z-index: -1;
-}
-
-.headtext span {
-  font-size: clamp(0.8rem, 2vw, 1.5rem);
-  width: 100%;
-}
-
 .title {
   font-size: 1.3rem;
   font-weight: bold;
@@ -194,12 +170,12 @@ nav li {
 }
 
 nav li:hover {
-  background-color: #ccd5ae;
+  background-color: var(--active);
 }
 
 a,
 a:visited {
-  color: rgb(2, 81, 150);
+  color: var(--link);
   text-decoration: none;
 }
 
@@ -212,12 +188,14 @@ button {
   margin: 2em 0;
   padding: 0.5em 1.5em;
   border-radius: 50vw;
-  border: 1px;
+  border: 0;
+  background-color: var(--nav);
   transition: background-color 0.5s ease-in;
+  color: var(--light-color);
 }
 
 button:hover {
-  background-color: #ccd5ae;
+  background-color: var(--active);
 }
 
 p {
@@ -240,16 +218,20 @@ p {
 .profile_block {
   position: absolute;
   z-index: 1;
-  background-color: #fff;
+  background-color: var(--active);
   padding: 1.5em 2em;
   width: max-content;
   right: 0.25em;
   top: 5em;
-  border: 1px solid #eee;
+  color: var(--light-color);
   border-radius: 15px 0;
   animation: fadeIn 300ms ease-in;
 }
-
+.profile_block button {
+  background-color: var(--light-color);
+  cursor: pointer;
+  color: var(--nav);
+}
 .profile_block span {
   display: block;
   padding-block: 0.4em;
@@ -281,6 +263,7 @@ p {
 
 .post_title {
   font-weight: bold;
+  color: var(--medium-color);
   padding: 1em 0 0;
 }
 
@@ -303,10 +286,11 @@ p {
   list-style-type: none;
   padding: 1em 2em;
   transition: background-color 0.5s ease-in;
+  color: var(--light-color);
 }
 
 .post_listmenu li:hover {
-  background-color: #fefae0;
+  background-color: var(--dark-color);
 }
 
 .post_link {
@@ -335,16 +319,15 @@ p {
   margin-block: 0.2em;
 }
 
+.grid_table:nth-child(odd) {
+  background-color: var(--light-gray);
+}
 .grid_table:hover {
-  background-color: #f9f9f9;
+  background-color: var(--active);
 }
 
 .grid_table span {
   padding-inline: 0.5em;
-}
-
-.grid_table:nth-child(odd) {
-  background-color: #f9f9f9;
 }
 
 .card_container {
@@ -389,6 +372,8 @@ p {
   margin-bottom: 1em;
   padding: 0.5em;
   border: 1px solid #eee;
+  background-color: var(--dark-color);
+  color: var(--light-color);
 }
 
 .form input:focus,
@@ -436,7 +421,6 @@ p {
 
 .ad {
   display: block;
-  background-color: rgb(255 255 255);
   padding: 2em;
   color: var(--medium-color);
   border-left: 1px solid var(--light-color);
@@ -475,14 +459,12 @@ p {
 }
 
 .active {
-  background-color: var(--light-color);
+  background-color: var(--active);
 }
-
+.active a:visited {
+  color: var(--light-color);
+}
 @container (width < 800px) {
-  .headimages {
-    height: 350px;
-  }
-
   .content {
     padding: 1em 2em;
   }
@@ -509,7 +491,6 @@ p {
   .post_sidemenu {
     display: block;
     position: absolute;
-    background-color: #fff;
     overflow: scroll;
     height: 80vh;
     padding: 2em;

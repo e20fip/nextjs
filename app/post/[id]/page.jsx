@@ -25,6 +25,7 @@ async function getList(id) {
     const lists = await Blog.find({ category: id })
       .select('_id category title createdAt')
       .sort({ createdAt: -1 })
+      .lean()
     if (!lists) return notFound()
     return JSON.parse(JSON.stringify(lists))
   } catch (e) {
