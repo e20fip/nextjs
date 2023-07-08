@@ -3,7 +3,7 @@ import Blog from '@/models/blog'
 import Link from 'next/link'
 import Date from '@/lib/date'
 import { notFound } from 'next/navigation'
-import Showdown from 'showdown'
+import Showdown, { Converter } from 'showdown'
 import Sidemenu from '../sidemenu'
 
 export const revalidate = 3600
@@ -57,6 +57,7 @@ export default async function Post({ params }) {
   const data = await getData(id)
   const lists = await getList(data.category)
   const converter = new Showdown.Converter()
+  converter.setFlavor('github')
   const processContent = converter.makeHtml(data.content)
 
   return (
