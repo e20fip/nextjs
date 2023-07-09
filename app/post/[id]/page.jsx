@@ -3,7 +3,7 @@ import Blog from '@/models/blog'
 import Link from 'next/link'
 import Date from '@/lib/date'
 import { notFound } from 'next/navigation'
-import Showdown, { Converter } from 'showdown'
+import showdown from 'showdown'
 import Sidemenu from '../sidemenu'
 
 export const revalidate = 3600
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
   if (!post) return notFound()
   return {
     title: post.title,
-    description: post.content.substring(0, 80)
+    description: post.description.substring(0, 80)
   }
 }
 
@@ -56,10 +56,10 @@ export default async function Post({ params }) {
   const { id } = params
   const data = await getData(id)
   const lists = await getList(data.category)
-  const converter = new Showdown.Converter()
+  let converter = new showdown.Converter()
   converter.setFlavor('github')
-  const processContent = converter.makeHtml(data.content)
 
+  let processContent = converter.makeHtml(data.content)
   return (
     <>
       <div className="post_container">

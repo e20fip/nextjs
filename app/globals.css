@@ -55,6 +55,7 @@ h6 {
   font-size: 1.5rem;
   font-weight: bold;
   padding: 1em 0 1em;
+  color: var(--medium-color);
 }
 
 .lds-ring {
@@ -123,7 +124,38 @@ footer {
   grid-template-columns: repeat(4, 1fr);
   gap: 2em;
 }
-
+.port_body > ul {
+  padding-block: 2em;
+}
+.post_body li {
+  margin-left: 3em;
+}
+.post_body pre {
+  background-color: var(--light-gray);
+  padding: 1em;
+  overflow: auto;
+}
+.post_body table {
+  border: 1px solid;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  word-break: break-all;
+}
+.post_body thead {
+  background-color: var(--nav);
+}
+.post_body th,
+.post_body td {
+  padding: 1em;
+  border: 1px solid;
+}
+.post_body h2 + p,
+.post_body h3 + p,
+.post_body h4 + p,
+.post_body h5 + p,
+.post_body h6 + p {
+  padding-top: 0em;
+}
 @container (width < 1200px) {
   .content_colume {
     grid-template-columns: repeat(2, 1fr);
@@ -252,7 +284,7 @@ p {
 
 .post_container {
   display: grid;
-  grid-template-columns: 300px auto;
+  grid-template-columns: 20% 80%;
   padding: 2em 3em;
   gap: 3em;
 }
@@ -464,7 +496,7 @@ p {
 .active a:visited {
   color: var(--light-color);
 }
-@container (width < 800px) {
+@container (width < 1300px) {
   .content {
     padding: 1em 2em;
   }
@@ -494,7 +526,8 @@ p {
     overflow: scroll;
     height: 80vh;
     padding: 2em;
-    border: 1px solid var(--light-color);
+    border: 1px solid var(--light-gray);
+    background-color: var(--dark-color);
   }
 
   .post_showhide {
