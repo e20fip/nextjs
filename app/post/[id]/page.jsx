@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Date from '@/lib/date'
 import { notFound } from 'next/navigation'
 import showdown from 'showdown'
+import { rehype } from 'rehype'
+import rehypeHighlight from 'rehype-highlight'
 import Sidemenu from '../sidemenu'
 
 export const revalidate = 3600
@@ -56,10 +58,16 @@ export default async function Post({ params }) {
   const { id } = params
   const data = await getData(id)
   const lists = await getList(data.category)
-  let converter = new showdown.Converter()
+  const converter = new showdown.Converter()
   converter.setFlavor('github')
 
-  let processContent = converter.makeHtml(data.content)
+  const processContent = converter.makeHtml(data.content)
+
+  const hightLight = await rehype()
+    .data('settings', { fragment: true })
+    .use(rehypeHighlight)
+    .process(processContent)
+
   return (
     <>
       <div className="post_container">
@@ -69,7 +77,7 @@ export default async function Post({ params }) {
           <Date dateString={data.createdAt} />
           <div
             className="post_body"
-            dangerouslySetInnerHTML={{ __html: processContent }}
+            dangerouslySetInnerHTML={{ __html: hightLight.value }}
           />
           <button>
             <Link href="/">HOME</Link>
