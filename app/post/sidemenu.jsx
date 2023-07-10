@@ -17,7 +17,11 @@ const Sidemenu = ({ lists }) => {
         <ul className="post_listmenu">
           {lists.map((list) => (
             <li key={list._id} className={active(`/post/${list._id}`)}>
-              <Link href={`post/${list._id}`} className="post_link">
+              <Link
+                prefetch={false}
+                href={`post/${list._id}`}
+                className="post_link"
+              >
                 {list.title.substring(0, 30)}
               </Link>
               <Date dateString={list.createdAt} />

@@ -3,8 +3,11 @@ import Blog from '@/models/blog'
 import Link from 'next/link'
 import Date from '@/lib/date'
 import { notFound } from 'next/navigation'
-import showdown from 'showdown'
-import { rehype } from 'rehype'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkGfm from 'remark-gfm'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
 import rehypeHighlight from 'rehype-highlight'
 import Sidemenu from '../sidemenu'
 
@@ -58,15 +61,13 @@ export default async function Post({ params }) {
   const { id } = params
   const data = await getData(id)
   const lists = await getList(data.category)
-  const converter = new showdown.Converter()
-  converter.setFlavor('github')
-
-  const processContent = converter.makeHtml(data.content)
-
-  const hightLight = await rehype()
-    .data('settings', { fragment: true })
+  const processContent = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype)
     .use(rehypeHighlight)
-    .process(processContent)
+    .use(rehypeStringify)
+    .process(data.content)
 
   return (
     <>
@@ -77,7 +78,7 @@ export default async function Post({ params }) {
           <Date dateString={data.createdAt} />
           <div
             className="post_body"
-            dangerouslySetInnerHTML={{ __html: hightLight.value }}
+            dangerouslySetInnerHTML={{ __html: processContent.value }}
           />
           <button>
             <Link href="/">HOME</Link>
