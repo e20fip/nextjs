@@ -11,11 +11,17 @@ const Form = ({ handlerSubmit }) => {
     return redirect('/')
   }
   const inputRef = useRef(null)
+  const inputRefPhoto = useRef(null)
 
   const submitDatas = async () => {
-    if (inputRef.current.value === '') return false
+    if (inputRef.current.value === '' || inputRefPhoto.current.value === '')
+      return
 
-    await handlerSubmit(inputRef.current.value)
+    const datas = {
+      title: inputRef.current.value,
+      picture: inputRefPhoto.current.value
+    }
+    await handlerSubmit(datas)
 
     toast.success('Submit Category Success', {
       theme: 'dark',
@@ -23,6 +29,7 @@ const Form = ({ handlerSubmit }) => {
     })
 
     inputRef.current.value = null
+    inputRefPhoto.current.value = null
   }
 
   return (
@@ -32,7 +39,11 @@ const Form = ({ handlerSubmit }) => {
           <label>
             <span>Category Title</span>
           </label>
-          <input type="text" ref={inputRef} />
+          <input type="text" ref={inputRef} placeholder="Title" />
+          <label>
+            <span>Category Photo URL</span>
+          </label>
+          <input type="text" ref={inputRefPhoto} placeholder="photo URL" />
           <button onClick={submitDatas}>Submit</button>
         </div>
       </div>

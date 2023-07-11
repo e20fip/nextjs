@@ -1,9 +1,13 @@
 'use client'
 import { useState } from 'react'
 
-const Categories = ({ id, title, deleteCategory, editCategory }) => {
+const Categories = ({ id, title, picture, deleteCategory, editCategory }) => {
   const [isConfirmDelete, setIsConfirmDelete] = useState(false)
-  const [category, setCategory] = useState({ id: id, title: title })
+  const [category, setCategory] = useState({
+    id: id,
+    title: title,
+    picture: picture
+  })
   const [isEditForm, setIsEditForm] = useState(false)
 
   const handlerDelete = async (id) => {
@@ -44,9 +48,9 @@ const Categories = ({ id, title, deleteCategory, editCategory }) => {
 }
 
 const FormEdit = ({ category, setCategory, setIsEditForm, editCategory }) => {
-  const submitForm = async (id, title) => {
-    if (id === '' && title === '') return
-    await editCategory(id, title)
+  const submitForm = async (id, title, picture) => {
+    if (id === '' || title === '' || picture === '') return
+    await editCategory(id, title, picture)
     setIsEditForm(false)
   }
 
@@ -66,7 +70,24 @@ const FormEdit = ({ category, setCategory, setIsEditForm, editCategory }) => {
             }
             required
           />
-          <button onClick={() => submitForm(category.id, category.title)}>
+          <label>Photo URL</label>
+          <input
+            type="text"
+            value={category.picture}
+            onChange={(e) =>
+              setCategory({ ...category, picture: e.target.value })
+            }
+            required
+          />
+          <button
+            onClick={() =>
+              submitForm({
+                id: category.id,
+                title: category.title,
+                picture: category.picture
+              })
+            }
+          >
             submit
           </button>
         </div>

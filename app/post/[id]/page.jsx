@@ -69,6 +69,10 @@ export default async function Post({ params }) {
     .use(rehypeStringify)
     .process(data.content)
 
+  function createMarkUp() {
+    return { __html: processContent.value }
+  }
+
   return (
     <>
       <div className="post_container">
@@ -78,7 +82,8 @@ export default async function Post({ params }) {
           <Date dateString={data.createdAt} />
           <div
             className="post_body"
-            dangerouslySetInnerHTML={{ __html: processContent.value }}
+            dangerouslySetInnerHTML={createMarkUp()}
+            suppressHydrationWarning
           />
           <button>
             <Link href="/">HOME</Link>

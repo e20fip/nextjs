@@ -25,12 +25,14 @@ async function deleteCategory(id) {
   }
 }
 
-async function editCategory(id, title) {
+async function editCategory({ id, title, picture }) {
   'use server'
+  if (id === '' || title === '' || picture === '') return
   try {
     const filter = { _id: id }
     const update = {
-      title: title.trim()
+      title: title.trim(),
+      picture: picture.trim()
     }
     await connectTodb()
     await Category.findOneAndUpdate(filter, update)
@@ -39,20 +41,19 @@ async function editCategory(id, title) {
     //
   }
 }
-async function handlerSubmit(datas) {
+async function handlerSubmit({ title, picture }) {
   'use server'
-
-  if (datas !== '') {
-    try {
-      await connectTodb()
-      const newCategory = new Category({
-        title: datas.trim()
-      })
-      revalidatePath('/category/create')
-      await newCategory.save()
-    } catch (error) {
-      //
-    }
+  if (title === '' || picture === '') return
+  try {
+    await connectTodb()
+    const newCategory = new Category({
+      title: title.trim(),
+      picture: picture.trim()
+    })
+    revalidatePath('/category/create')
+    await newCategory.save()
+  } catch (error) {
+    //
   }
 }
 export default async function CreateCategory() {
@@ -69,6 +70,7 @@ export default async function CreateCategory() {
             key={category._id.toString()}
             id={category._id.toString()}
             title={category.title}
+            picture={category.picture}
             deleteCategory={deleteCategory}
             editCategory={editCategory}
           />

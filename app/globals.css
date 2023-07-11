@@ -52,9 +52,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 1em 0 1em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding-block: 1em 0;
   color: var(--medium-color);
 }
 
@@ -103,6 +103,10 @@ h6 {
   gap: 0.5em;
 }
 
+.small_align_right {
+  font-size: 0.8rem;
+  text-align: right;
+}
 footer {
   color: var(--medium-color);
   padding: 1em 2em;
@@ -124,8 +128,8 @@ footer {
   grid-template-columns: repeat(4, 1fr);
   gap: 2em;
 }
-.port_body > ul {
-  padding-block: 2em;
+.port_body ul {
+  padding-block: 0 2em;
 }
 .post_body li {
   margin-left: 3em;
@@ -133,6 +137,7 @@ footer {
 .post_body pre {
   background-color: #1e1e1e;
   padding: 1em;
+  margin-block: 1em;
   overflow: auto;
 }
 .post_body table {
@@ -154,7 +159,20 @@ footer {
 .post_body h4 + p,
 .post_body h5 + p,
 .post_body h6 + p {
-  padding-top: 0em;
+  padding-top: 0.5em;
+}
+.post_body p + p {
+  padding-top: 0;
+}
+.post_body p + blockquote {
+  margin-top: 0;
+}
+.post_body blockquote {
+  background-color: var(--nav);
+  color: var(--light-color);
+  margin: 1rem 0;
+  padding: 0 1rem;
+  border-left: 5px solid var(--active);
 }
 @container (width < 1200px) {
   .content_colume {
@@ -294,13 +312,15 @@ p {
 }
 
 .post_title {
+  font-size: 1.5rem;
   font-weight: bold;
   color: var(--medium-color);
   padding: 1em 0 0;
 }
 
 .post_body {
-  margin-top: 1em;
+  margin-block: 1em 2em;
+  border-top: 1px dotted;
 }
 
 .post_sidemenu {
@@ -312,6 +332,8 @@ p {
 
 .post_listmenu {
   padding: 0;
+  position: sticky;
+  top: 10%;
 }
 
 .post_listmenu li {
@@ -380,6 +402,7 @@ p {
   aspect-ratio: 16/9;
   position: relative;
   display: block;
+  margin-bottom: 1em;
 }
 
 .home_head_text {
@@ -420,7 +443,7 @@ p {
 
 .form label {
   font-weight: bold;
-  color: var(--dark-color);
+  color: var(--light-color);
 }
 
 .about {
@@ -512,7 +535,7 @@ p {
     margin: 1em 0;
   }
   footer {
-    padding: 1em 0;
+    padding: 1em 2em;
   }
 
   .post_container {
@@ -523,7 +546,7 @@ p {
   .post_sidemenu {
     display: block;
     position: absolute;
-    overflow: scroll;
+    overflow-y: auto;
     height: 80vh;
     padding: 2em;
     border: 1px solid var(--light-gray);
@@ -536,13 +559,17 @@ p {
     z-index: 1;
     left: 1em;
   }
-
+  .post_listmenu {
+    top: 0;
+  }
   .mobile {
     transform: translateX(-500px);
   }
 
   .post_title {
     padding-top: 2em;
+    color: var(--light-color);
+    font-size: 1.5rem;
   }
   .card_container {
     padding-inline: 0;

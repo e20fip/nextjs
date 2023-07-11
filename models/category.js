@@ -4,6 +4,10 @@ const CategorySchema = new Schema({
   title: {
     type: String,
     require: [true, 'title required']
+  },
+  picture: {
+    type: String,
+    require: [true, 'photo required']
   }
 })
 
