@@ -1,10 +1,10 @@
-import { connectTodb } from '@/lib/database'
-import Blog from '@/models/blog'
-import Category from '@/models/category'
-import Date from '@/lib/date'
-import LimitText from '@/lib/texttrim'
-import Link from 'next/link'
-import Image from 'next/image'
+import { connectTodb } from "@/lib/database"
+import Blog from "@/models/blog"
+import Category from "@/models/category"
+import Date from "@/lib/date"
+import LimitText from "@/lib/texttrim"
+import Link from "next/link"
+import Image from "next/image"
 //export const dynamic = 'auto'
 export const revalidate = 3600
 
@@ -13,8 +13,8 @@ async function getData() {
     await connectTodb()
     const blogs = await Blog.find({})
       .sort({ createdAt: -1 })
-      .populate('category')
-      .select('_id title description createdAt')
+      .populate("category")
+      .select("_id title description createdAt")
       .limit(4)
       .lean()
     return JSON.parse(JSON.stringify(blogs))
@@ -37,7 +37,7 @@ export default async function Page() {
                     fill
                     src={`/images/${data.category.picture}`}
                     alt={data.title}
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: "cover" }}
                     sizes="(max-width: 612px) 100vw,
                 (max-width: 952px) 50vw,
                 (max-width: 1238px) 33vw,

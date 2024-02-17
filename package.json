@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "ai": "^2.2.35",
     "date-fns": "^2.29.3",
     "eslint": "8.38.0",
     "eslint-config-next": "^13.5.3",
+    "markdown-it": "^14.0.0",
     "mongoose": "^7.1.0",
     "next": "^13.5.3",
     "next-auth": "^4.22.1",

@@ -1,11 +1,12 @@
-'use client'
-import Link from 'next/link'
-import pathName from '@/lib/getPathname'
-import SignIn from '@/app/components/SignIn'
+"use client"
+import Link from "next/link"
+import pathName from "@/lib/getPathname"
+import SignIn from "@/app/components/SignIn"
 
 const links = [
-  { name: 'HOME', path: '/' },
-  { name: 'ABOUT', path: '/about' }
+  { name: "HOME", path: "/" },
+  { name: "GEMINI", path: "/gemini" },
+  { name: "ABOUT", path: "/about" }
 ]
 
 const Header = () => {
@@ -31,6 +32,6 @@ const Header = () => {
 
 const active = (link) => {
   const path = pathName()
-  return link === path ? { backgroundColor: 'var(--active)' } : {}
+  return link === path ? { backgroundColor: "var(--active)" } : {}
 }
 export default Header
