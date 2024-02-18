@@ -18,10 +18,9 @@
 }
 .output {
   width: 100%;
-  height: 100%;
+  max-height: 67dvh;
   padding: 1em;
   overflow: auto;
-  background-color: rgb(48 48 48 / 64%);
 }
 .output ul,
 .output ol {
@@ -93,5 +92,5 @@
 }
 .buttonContainer {
   display: flex;
-  gap: 1em;
+  gap: 0.5em;
 }

@@ -7,6 +7,7 @@ import Image from "next/image"
 const SignIn = () => {
   const { data: session, status } = useSession()
   const [isShowProfile, setIsShowProfile] = useState(false)
+  console.log(session)
 
   return (
     <>

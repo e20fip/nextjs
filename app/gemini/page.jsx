@@ -6,12 +6,20 @@ import markdownit from "markdown-it"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 
-export default function Completion() {
+function checkSession() {
   const { data: session, status } = useSession()
   if (status !== "loading" && !session && session !== "admin") {
     return redirect("/api/auth/signin")
   }
+}
+
+function convertToHtml(content) {
   const md = markdownit()
+  return md.render(content)
+}
+
+export default function Completion() {
+  checkSession()
   const {
     completion,
     input,
@@ -21,22 +29,18 @@ export default function Completion() {
     handleSubmit
   } = useCompletion()
 
-  const result = md.render(completion)
-
   return (
     <div className={style.main}>
       <div
         className={style.output}
-        dangerouslySetInnerHTML={{ __html: result }}
+        dangerouslySetInnerHTML={{ __html: convertToHtml(completion) }}
       ></div>
-
       <form className={style.inputContainer} onSubmit={handleSubmit}>
         <input
           placeholder="Ask something..."
           value={input}
           onChange={handleInputChange}
         />
-
         <div className={style.buttonContainer}>
           <button type="button" onClick={stop}>
             Stop
