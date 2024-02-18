@@ -1,16 +1,16 @@
 "use client"
 
 import { useCompletion } from "ai/react"
-import { useSession } from "next-auth/react"
 import style from "./gemini.module.css"
 import markdownit from "markdown-it"
+import { useSession } from "next-auth/react"
+import { redirect } from "next/navigation"
 
 export default function Completion() {
-  const { data: session } = useSession()
-  if (!session && session?.user.role !== "admin") {
-    return <div className="content">Access Denied</div>
+  const { data: session, status } = useSession()
+  if (status !== "loading" && !session && session !== "admin") {
+    return redirect("/api/auth/signin")
   }
-
   const md = markdownit()
   const {
     completion,

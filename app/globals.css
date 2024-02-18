@@ -142,6 +142,7 @@ footer {
 
 .content {
   padding: 2em 5em;
+  flex-grow: 1;
 }
 
 .content_colume {
@@ -222,7 +223,6 @@ footer {
 
 .pagemessage {
   width: 100%;
-  height: 80vh;
   display: grid;
   place-content: center;
 }
@@ -275,6 +275,7 @@ p {
 
 .link {
   cursor: pointer;
+  color: var(--light-color);
 }
 
 .profile {

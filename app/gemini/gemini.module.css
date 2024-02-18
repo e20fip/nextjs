@@ -1,7 +1,7 @@
 .main {
   margin-inline: auto;
   width: 100%;
-  height: 80vh;
+  flex-grow: 1;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,7 @@
   border-width: 2px;
   border-style: solid;
   container-type: inline-size;
+  margin-block: 1em;
 }
 .output {
   width: 100%;

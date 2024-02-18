@@ -1,16 +1,16 @@
-'use client'
-import { useSession, signIn, signOut } from 'next-auth/react'
-import { useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+"use client"
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
 
 const SignIn = () => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const [isShowProfile, setIsShowProfile] = useState(false)
 
   return (
     <>
-      {session?.user ? (
+      {status !== "loading" && session?.user ? (
         <>
           <div
             className="profile"
@@ -43,20 +43,20 @@ const ProfileBlock = ({ session }) => {
         <br />
         {session?.user.email}
       </span>
-      {session?.user.role === 'admin' ? (
+      {session?.user.role === "admin" ? (
         <>
           <span>
-            <Link href={'/category/create'}>Category</Link>
+            <Link href={"/category/create"}>Category</Link>
           </span>
           <span>
-            <Link href={'/blog/edit'}>Edit Blog</Link>
+            <Link href={"/blog/edit"}>Edit Blog</Link>
           </span>
           <span>
-            <Link href={'/blog/create'}>Create Blog</Link>
+            <Link href={"/blog/create"}>Create Blog</Link>
           </span>
         </>
       ) : (
-        ''
+        ""
       )}
       <button className="small_btn" onClick={() => signOut()}>
         Sign out

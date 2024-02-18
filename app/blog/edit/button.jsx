@@ -1,12 +1,12 @@
-'use client'
-import { useSession } from 'next-auth/react'
-import { useState } from 'react'
-import { redirect } from 'next/navigation'
+"use client"
+import { useSession } from "next-auth/react"
+import { useState } from "react"
+import { redirect } from "next/navigation"
 
 const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
-  const { data: session } = useSession()
-  if (!session && session?.user.role !== 'admin') {
-    redirect('/')
+  const { data: session, status } = useSession()
+  if (status !== "loading" && !session && session?.user.role !== "admin") {
+    redirect("/")
   }
   const [isComfirm, setIsConfirm] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
@@ -24,8 +24,8 @@ const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
           Edit
         </span>
         <span className="link" onClick={() => setIsConfirm((prev) => !prev)}>
-          {isComfirm && 'Cancel'}
-          {!isComfirm && 'Delete'}
+          {isComfirm && "Cancel"}
+          {!isComfirm && "Delete"}
         </span>
         {isComfirm && (
           <button onClick={() => doDelete(_id)} className="small-button">
@@ -63,7 +63,7 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
   }
 
   const submitForm = async (id, cat, title, desc, body) => {
-    if (title == '' || desc == '' || body == '') return
+    if (title == "" || desc == "" || body == "") return
     await submitDatas(id, cat, title, desc, body)
     setIsEdit(false)
   }

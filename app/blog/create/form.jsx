@@ -1,28 +1,28 @@
-'use client'
-import { useRef } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+"use client"
+import { useRef } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { useSession } from "next-auth/react"
+import { redirect } from "next/navigation"
 
 const Form = ({ handlerSubmit, category }) => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const refTitle = useRef(null)
   const refCat = useRef(null)
   const refDesc = useRef(null)
   const refText = useRef(null)
 
-  if (!session && session?.user.role !== 'admin') {
-    return redirect('/')
+  if (status !== "loading" && !session && session?.user.role !== "admin") {
+    return redirect("/")
   }
 
   const submitDatas = async (userId, cat, title, desc, text) => {
-    if (title === '' || desc === '' || text === '') return
+    if (title === "" || desc === "" || text === "") return
 
     await handlerSubmit(userId, cat, title, desc, text)
 
-    toast.success('Submit Content Success', {
-      theme: 'dark',
+    toast.success("Submit Content Success", {
+      theme: "dark",
       autoClose: 3000
     })
 
