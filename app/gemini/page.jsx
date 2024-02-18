@@ -7,7 +7,7 @@ import { redirect } from "next/navigation"
 
 function checkSession() {
   const { data: session, status } = useSession()
-  if (status !== "loading" && !session && session.role !== "admin") {
+  if (status !== "loading" && !session && session.user.role !== "admin") {
     return redirect("/api/auth/signin")
   }
 }
