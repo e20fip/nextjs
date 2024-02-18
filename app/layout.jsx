@@ -1,29 +1,31 @@
-import { Prompt } from 'next/font/google'
-import Header from './header'
-import Footer from './footer'
-import './globals.css'
-import Provider from '@/app/components/Provider'
+import { Prompt } from "next/font/google"
+import Header from "./header"
+import Footer from "./footer"
+import "./globals.css"
+import { getServerSession } from "next-auth"
+import SessionProvider from "./components/SessionProvider"
 
 export const metadata = {
-  title: 'E20FIP',
-  description: 'Web Development'
+  title: "E20FIP",
+  description: "Web Development"
 }
 
 const CustomFont = Prompt({
-  subsets: ['thai'],
-  weight: ['100', '400']
+  subsets: ["thai"],
+  weight: ["100", "400"]
 })
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession()
   return (
     <html lang="th">
       <body style={CustomFont.style}>
         <main>
-          <Provider>
+          <SessionProvider session={session}>
             <Header />
             {children}
             <Footer />
-          </Provider>
+          </SessionProvider>
         </main>
       </body>
     </html>
