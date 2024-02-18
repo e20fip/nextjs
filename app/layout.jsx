@@ -2,9 +2,7 @@ import { Prompt } from "next/font/google"
 import Header from "./header"
 import Footer from "./footer"
 import "./globals.css"
-import { getServerSession } from "next-auth"
-import SessionProvider from "./components/SessionProvider"
-import { authOptions } from "./api/auth/[...nextauth]/route"
+import Provider from "./components/SessionProvider"
 
 export const metadata = {
   title: "E20FIP",
@@ -17,16 +15,15 @@ const CustomFont = Prompt({
 })
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions)
   return (
     <html lang="th">
       <body style={CustomFont.style}>
         <main>
-          <SessionProvider session={session}>
+          <Provider>
             <Header />
             {children}
             <Footer />
-          </SessionProvider>
+          </Provider>
         </main>
       </body>
     </html>

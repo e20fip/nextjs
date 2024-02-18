@@ -5,16 +5,20 @@ import markdownit from "markdown-it"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 
+function checkSession() {
+  const { data: session, status } = useSession()
+  if (status !== "loading" && !session && session?.user.role !== "admin") {
+    return redirect("/api/auth/signin")
+  }
+}
+
 function convertToHtml(content) {
   const md = markdownit()
   return md.render(content)
 }
 
 export default function Completion() {
-  const { data: session, status } = useSession()
-  if (status !== "loading" && !session && session?.user.role !== "admin") {
-    return redirect("/api/auth/signin")
-  }
+  checkSession()
   const {
     completion,
     input,
