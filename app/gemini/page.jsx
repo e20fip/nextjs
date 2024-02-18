@@ -1,5 +1,4 @@
 "use client"
-
 import { useCompletion } from "ai/react"
 import style from "./gemini.module.css"
 import markdownit from "markdown-it"
@@ -8,7 +7,7 @@ import { redirect } from "next/navigation"
 
 function checkSession() {
   const { data: session, status } = useSession()
-  if (status !== "loading" && !session && session !== "admin") {
+  if (status !== "loading" && !session && session.role !== "admin") {
     return redirect("/api/auth/signin")
   }
 }
