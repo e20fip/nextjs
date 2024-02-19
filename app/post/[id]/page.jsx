@@ -70,7 +70,6 @@ export default async function Post({ params }) {
           <div className="post_body">
             <Markdown
               ehypePlugins={[remarkGfm]}
-              children={data.content}
               components={{
                 code(props) {
                   const { children, className, node, ...rest } = props
@@ -91,7 +90,9 @@ export default async function Post({ params }) {
                   )
                 }
               }}
-            />
+            >
+              {data.content}
+            </Markdown>
           </div>
           <button>
             <Link href="/">HOME</Link>
