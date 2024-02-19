@@ -6,7 +6,6 @@ import { notFound } from "next/navigation"
 import remarkGfm from "remark-gfm"
 import rehypeHighlight from "rehype-highlight"
 import Sidemenu from "../sidemenu"
-
 import Markdown from "react-markdown"
 
 export const revalidate = 3600
