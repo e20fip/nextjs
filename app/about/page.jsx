@@ -2,83 +2,57 @@ async function About() {
   return (
     <>
       <div className="about_content">
-        <>
-          <h1 className="about_headText">About page</h1>
-          <div className="about_bodyText">
-            <p>
-              repellendus, qui adipisci fugit rem perspiciatis quae? Deserunt
-              recusandae sequi quos accusantium suscipit architecto porro velit,
-              unde ducimus veniam ea vero aliquam adipisci provident asperiores
-              dolore magni ipsam vitae sint dolorem laudantium exercitationem
-              earum libero aperiam. Itaque repellendus dolorem provident ea quae
-              blanditiis esse repudiandae voluptates, asperiores omnis quas,
-              nisi ratione fugiat praesentium fugit eos reiciendis minus porro
-              libero beatae! Fuga deserunt accusantium earum rem adipisci facere
-              vitae rerum eaque explicabo dolor minus aspernatur consequatur
-              veritatis laboriosam nisi alias exercitationem aut quis, enim et
-              repellat! Ipsa nihil enim inventore voluptatum numquam doloribus
-              consequuntur eaque eum veniam magni illum, voluptate est, fuga nam
-              temporibus ut dicta
-            </p>
-            <h2>molestiae provident sint ullam consectetur?</h2>
-            <p>
-              Numquam beatae consequatur Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Assumenda dignissimos soluta cupiditate nostrum.
-              Voluptas vel aperiam, adipisci libero earum, iusto corrupti
-              repudiandae culpa voluptatem aliquam ipsa minima nostrum quia fuga
-              iure quod obcaecati eos maiores atque eaque repellendus neque esse
-              doloribus dignissimos. Corrupti saepe repellendus atque molestias
-              facere, quis blanditiis libero perspiciatis iste reiciendis fugiat
-              unde sapiente, magni dolorem perferendis repudiandae vel
-              accusantium ea. Dolorem modi assumenda autem quisquam unde itaque
-              cupiditate accusamus nostrum recusandae molestias et, minus nihil
-              consequuntur voluptates sint, qui quas. Minima aliquam repudiandae
-              itaque, consequuntur facilis officiis culpa magnam ea ipsam
-              eligendi quas. Unde similique beatae explicabo sit inventore
-              architecto sint laborum iste! Recusandae reiciendis voluptatem
-              doloremque tempore alias corrupti pariatur ut modi magnam
-            </p>
-            <h3>aliquid earum nemo impedit,</h3>
-            <p>
-              numquam officia aliquam sed. Ab recusandae quam expedita autem
-              perspiciatis odio. Et quos placeat perspiciatis cupiditate?
-              Placeat assumenda aut, qui error enim dolores illum natus veniam
-              cum. Architecto dolorem harum sequi distinctio magni error magnam?
-              Numquam corrupti dolor saepe sunt pariatur inventore eligendi odio
-              nisi non beatae quibusdam sit perferendis, explicabo impedit
-              itaque laboriosam doloribus aperiam reiciendis. Dolor, illum!
-              Dicta repudiandae architecto accusamus. Accusantium assumenda
-              fugiat magnam cupiditate, sequi veniam repudiandae ipsa numquam
-              non repellendus atque quas deserunt, quam quisquam minus
-              exercitationem impedit nobis qui provident. Itaque, ab adipisci
-              ipsa nostrum sed rerum culpa, natus pariatur eaque facere, eos
-              nulla! Consectetur nesciunt soluta quae numquam aliquid ratione
-              minus odit, commodi placeat, totam eum. Vel a
-            </p>
-            <h4>officia ratione impedit.</h4>
-            <p>
-              Iusto dignissimos voluptatibus inventore minima nihil ratione id
-              eius hic quaerat. Quae vitae animi velit totam aliquam ea
-              temporibus praesentium impedit aut, iste alias sed, voluptates
-              autem numquam deleniti corrupti quam magni consequatur et ducimus
-              deserunt asperiores mollitia expedita. Quisquam suscipit nam
-              corrupti perspiciatis blanditiis esse consectetur ad, enim ab eius
-              possimus, omnis voluptas reiciendis, rem minima veniam error
-              quasi? Veritatis velit libero quis molestiae sunt doloremque.
-              Necessitatibus esse eaque fugiat ut at cupiditate
-            </p>
-            <p>
-              vitae corrupti dicta molestiae ipsum magni neque consequatur,
-              harum nostrum aperiam doloremque omnis vero itaque labore
-              distinctio quaerat fuga porro. A reprehenderit dolor corporis. At
-              repudiandae, eaque voluptatibus velit provident neque tenetur
-              dolores, accusantium esse quidem numquam doloremque, ex totam a
-              facere? Perferendis facilis ipsam, a corrupti cum ea quaerat
-              eveniet consequatur porro. Corrupti vel perspiciatis sint itaque
-              reiciendis.
-            </p>
-          </div>
-        </>
+        <h1 className="about_headText">About page</h1>
+        <div className="about_bodyText">
+          <p>
+            <strong>แหล่งความรู้ครบเครื่องเรื่องเทคโนโลยีการทำเว็บไซต์</strong>
+          </p>
+          <p>
+            ยินดีต้อนรับสู่เว็บไซต์แห่งนี้
+            ศูนย์รวมความรู้ที่ครอบคลุมสำหรับผู้ที่ต้องการสำรวจโลกแห่งการพัฒนาเว็บไซต์
+            ด้วยเนื้อหาที่มีให้เลือกมากมาย คุณจะได้พบกับแนวทางปฏิบัติที่ดีที่สุด
+            เครื่องมือที่มีประสิทธิภาพ
+            และเคล็ดลับจากผู้เชี่ยวชาญที่จะช่วยให้คุณสร้างเว็บไซต์ที่ทั้งมีประสิทธิภาพและน่าดึงดูดใจ
+          </p>
+          <p>
+            <strong>เทคโนโลยีหลักของการทำเว็บไซต์</strong>
+          </p>
+          <p>
+            เว็บไซต์นี้จะพาคุณเจาะลึกเทคโนโลยีหลักของการทำเว็บไซต์ เช่น HTML,
+            CSS, JavaScript, WordPress และระบบการจัดการเนื้อหาอื่นๆ
+            คุณจะได้เรียนรู้วิธีใช้ภาษาการเขียนโปรแกรมเหล่านี้เพื่อสร้างโครงสร้าง
+            การออกแบบ และการโต้ตอบของเว็บไซต์ของคุณ นอกจากนี้
+            เรายังครอบคลุมแนวโน้มล่าสุดในเทคโนโลยีเว็บ เช่น ปัญญาประดิษฐ์ (AI)
+            และการเรียนรู้ของเครื่อง (ML)
+            เพื่อให้คุณสามารถอยู่ในแนวหน้าของนวัตกรรม
+          </p>
+          <p>
+            <strong>เคล็ดลับและเทคนิคจากผู้เชี่ยวชาญ</strong>
+          </p>
+          <p>
+            สำรวจบทความเชิงลึก บทช่วยสอน
+            และวิดีโอคำแนะนำจากผู้เชี่ยวชาญในอุตสาหกรรมการพัฒนาเว็บไซต์
+            พวกเขาจะแบ่งปันเคล็ดลับที่ได้เรียนรู้มาอย่างยากลำบาก
+            เทคนิคการแก้ปัญหา และอัปเดตล่าสุดเกี่ยวกับเทคโนโลยีและแนวทางใหม่ๆ
+            คุณจะได้เรียนรู้จากประสบการณ์ของผู้อื่นและหลีกเลี่ยงข้อผิดพลาดที่พบบ่อยที่สุด
+          </p>
+          <p>
+            <strong>เครื่องมือและทรัพยากรที่มีประโยชน์</strong>
+          </p>
+          <p>
+            เว็บไซต์ของเรายังมีเครื่องมือและทรัพยากรที่หลากหลายเพื่อช่วยให้คุณทำงานได้อย่างมีประสิทธิภาพยิ่งขึ้น
+            คุณจะพบเครื่องมือสร้างโค้ด ฟอนต์ กระดานสนทนา
+            และฟอรัมสนับสนุนที่คุณสามารถเชื่อมต่อกับชุมชนนักพัฒนาเว็บไซต์และรับความช่วยเหลือเมื่อจำเป็น
+            นอกจากนี้
+            เรายังจัดเตรียมรายชื่อธีมและปลั๊กอินที่คัดสรรมาแล้วเพื่อให้คุณสามารถปรับแต่งเว็บไซต์ของคุณได้
+          </p>
+          <p>
+            ไม่ว่าคุณจะเป็นนักพัฒนาเว็บไซต์มือใหม่ที่กำลังมองหาพื้นฐาน
+            หรือเป็นมืออาชีพที่มีประสบการณ์ที่ต้องการพัฒนาทักษะ
+            เว็บไซต์ของเรามีสิ่งที่เหมาะสำหรับคุณ
+            สำรวจเนื้อหาที่มีคุณค่าของเราเพื่อยกระดับความรู้ทางเทคนิคของคุณและสร้างเว็บไซต์ที่โดดเด่นอย่างแท้จริง
+          </p>
+        </div>
       </div>
     </>
   )
