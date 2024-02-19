@@ -4,9 +4,10 @@ import Link from "next/link"
 import Date from "@/lib/date"
 import { notFound } from "next/navigation"
 import remarkGfm from "remark-gfm"
-import rehypeHighlight from "rehype-highlight"
 import Sidemenu from "../sidemenu"
 import Markdown from "react-markdown"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 export const revalidate = 3600
 
@@ -67,9 +68,30 @@ export default async function Post({ params }) {
           <h1 className="post_title">{data.title}</h1>
           <Date dateString={data.createdAt} />
           <div className="post_body">
-            <Markdown rehypePlugins={[rehypeHighlight, remarkGfm]}>
-              {data.content}
-            </Markdown>
+            <Markdown
+              ehypePlugins={[remarkGfm]}
+              children={data.content}
+              components={{
+                code(props) {
+                  const { children, className, node, ...rest } = props
+                  const match = /language-(\w+)/.exec(className || "")
+                  return match ? (
+                    <SyntaxHighlighter
+                      {...rest}
+                      PreTag="div"
+                      children={String(children).replace(/\n$/, "")}
+                      language={match[1]}
+                      style={atomDark}
+                      showLineNumbers={true}
+                    />
+                  ) : (
+                    <code {...rest} className={className}>
+                      {children}
+                    </code>
+                  )
+                }
+              }}
+            />
           </div>
           <button>
             <Link href="/">HOME</Link>

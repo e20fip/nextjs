@@ -157,9 +157,6 @@ footer {
   margin-left: 3em;
 }
 .post_body pre {
-  background-color: #1e1e1e;
-  padding: 1em;
-  margin-block: 1em;
   overflow: auto;
 }
 .post_body table {
