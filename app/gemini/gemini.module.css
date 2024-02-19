@@ -28,7 +28,7 @@
   list-style-position: inside;
 }
 .output pre {
-  background-color: rgb(109, 75, 201);
+  background-color: rgb(30, 30, 30);
   padding: 0.5rem;
   overflow: auto;
   margin-bottom: 1em;

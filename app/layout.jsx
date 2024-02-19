@@ -2,7 +2,6 @@ import { Prompt } from "next/font/google"
 import Header from "./header"
 import Footer from "./footer"
 import "./globals.css"
-//import Provider from "./components/SessionProvider"
 import SessionProvider from "./components/SessionProvider"
 import { getServerSession } from "next-auth"
 import { authOptions } from "./api/auth/[...nextauth]/route"
@@ -23,7 +22,7 @@ export default async function RootLayout({ children }) {
     <html lang="th">
       <body style={CustomFont.style}>
         <main>
-          <SessionProvider session={session}>
+          <SessionProvider session={session} refetchInterval={5 * 60}>
             <Header />
             {children}
             <Footer />

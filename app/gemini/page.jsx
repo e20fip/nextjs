@@ -1,20 +1,16 @@
 "use client"
 import { useCompletion } from "ai/react"
 import style from "./gemini.module.css"
-import markdownit from "markdown-it"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
+import Markdown from "react-markdown"
+import rehypeHighlight from "rehype-highlight"
 
 function checkSession() {
   const { data: session, status } = useSession()
   if (status !== "loading" && !session) {
     return redirect("/api/auth/signin")
   }
-}
-
-function convertToHtml(content) {
-  const md = markdownit()
-  return md.render(content)
 }
 
 export default function Completion() {
@@ -30,10 +26,9 @@ export default function Completion() {
 
   return (
     <div className={style.main}>
-      <div
-        className={style.output}
-        dangerouslySetInnerHTML={{ __html: convertToHtml(completion) }}
-      ></div>
+      <div className={style.output}>
+        <Markdown rehypePlugins={[rehypeHighlight]}>{completion}</Markdown>
+      </div>
       <form className={style.inputContainer} onSubmit={handleSubmit}>
         <input
           placeholder="Ask something..."
