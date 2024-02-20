@@ -1,8 +1,9 @@
-import NextAuth from 'next-auth/next'
-import GoogleProvider from 'next-auth/providers/google'
-import GithubProvider from 'next-auth/providers/github'
-import User from '@/models/user'
-import { connectTodb } from '@/lib/database'
+import NextAuth from "next-auth/next"
+import GoogleProvider from "next-auth/providers/google"
+import GithubProvider from "next-auth/providers/github"
+import User from "@/models/user"
+
+import { connectTodb } from "@/lib/database"
 
 export const authOptions = {
   providers: [
@@ -16,14 +17,15 @@ export const authOptions = {
     })
   ],
   callbacks: {
-    async session({ session }) {
+    /*     async session({ session }) {
       const sessionUser = await User.findOne({
         email: session.user.email
       })
-      session.user.id = sessionUser._id.toString()
+      if (!sessionUser) return false
+      //session.user.id = sessionUser._id.toString()
       session.user.role = sessionUser.role
       return session
-    },
+    }, */
     async signIn({ profile }) {
       try {
         await connectTodb()
@@ -35,7 +37,7 @@ export const authOptions = {
           await User.create({
             email: profile.email,
             username: profile.name.toLowerCase(),
-            role: 'user',
+            role: "user",
             image: profile.picture
           })
         }
