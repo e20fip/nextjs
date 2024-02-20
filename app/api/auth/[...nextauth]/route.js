@@ -17,15 +17,6 @@ export const authOptions = {
     })
   ],
   callbacks: {
-    /*     async session({ session }) {
-      const sessionUser = await User.findOne({
-        email: session.user.email
-      })
-      if (!sessionUser) return false
-      //session.user.id = sessionUser._id.toString()
-      session.user.role = sessionUser.role
-      return session
-    }, */
     async signIn({ profile }) {
       try {
         await connectTodb()
@@ -45,6 +36,14 @@ export const authOptions = {
       } catch (error) {
         return false
       }
+    },
+    async session({ session }) {
+      const sessionUser = await User.findOne({
+        email: session.user.email
+      })
+      session.user.id = sessionUser._id.toString()
+      session.user.role = sessionUser.role
+      return session
     }
   }
 }
