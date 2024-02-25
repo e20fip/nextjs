@@ -5,19 +5,25 @@ import User from "@/models/user"
 
 import { connectTodb } from "@/lib/database"
 
+function checkUser(email) {
+  let role = "user"
+  if (email === process.env.ADMIN_EMAIL) role = "admin"
+  return role
+}
+
 export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
       profile(profile) {
-        let userRole = "user"
-        if (profile?.email === process.env.ADMIN_EMAIL) userRole = "admin"
+        const userRole = checkUser(profile?.email)
         return {
           ...profile,
           provider: "google",
           id: profile.sub,
-          role: userRole
+          role: userRole,
+          image: profile.picture
         }
       }
     }),
@@ -25,13 +31,13 @@ export const authOptions = {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       profile(profile) {
-        let userRole = "user"
-        if (profile?.email === process.env.ADMIN_EMAIL) userRole = "admin"
+        const userRole = checkUser(profile?.email)
         return {
           ...profile,
           provider: "github",
           id: profile.id,
-          role: userRole
+          role: userRole,
+          image: profile.avatar_url
         }
       }
     })
@@ -39,6 +45,7 @@ export const authOptions = {
   callbacks: {
     async signIn({ profile }) {
       try {
+        const userRole = checkUser(profile?.email)
         await connectTodb()
         const userExists = await User.findOne({
           email: profile.email
@@ -46,9 +53,9 @@ export const authOptions = {
         if (!userExists) {
           await User.create({
             email: profile.email,
-            username: profile.name.toLowerCase(),
-            role: profile.role,
-            image: profile.picture
+            username: profile.name,
+            role: userRole,
+            image: profile.picture || profile.avatar_url
           })
         }
         return true
@@ -58,20 +65,13 @@ export const authOptions = {
     },
     async jwt({ token, user }) {
       if (user) {
-        if (user.provider == "google") {
-          token.picture = user.picture
-          token.role = user.role
-        }
-        if (user.provider == "github") {
-          token.picture = user.avatar_url
-          token.role = user.role
-        }
+        token.role = user.role
       }
       return token
     },
     async session({ session, token }) {
-      session.user.role = token.role
       session.user.image = token.picture
+      session.user.role = token.role
       return session
     }
   },
