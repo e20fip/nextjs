@@ -13,9 +13,9 @@ export const authOptions = {
       profile(profile) {
         let userRole = "user"
         if (profile?.email === process.env.ADMIN_EMAIL) userRole = "admin"
-
         return {
           ...profile,
+          provider: "google",
           id: profile.sub,
           role: userRole
         }
@@ -26,8 +26,11 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_SECRET,
       profile(profile) {
         let userRole = "user"
+        if (profile?.email === process.env.ADMIN_EMAIL) userRole = "admin"
         return {
           ...profile,
+          provider: "github",
+          id: profile.id,
           role: userRole
         }
       }
@@ -35,13 +38,11 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ profile }) {
-      //console.log(profile)
       try {
         await connectTodb()
         const userExists = await User.findOne({
           email: profile.email
         })
-
         if (!userExists) {
           await User.create({
             email: profile.email,
@@ -56,7 +57,16 @@ export const authOptions = {
       }
     },
     async jwt({ token, user }) {
-      if (user) (token.picture = user.picture), (token.role = user.role)
+      if (user) {
+        if (user.provider == "google") {
+          token.picture = user.picture
+          token.role = user.role
+        }
+        if (user.provider == "github") {
+          token.picture = user.avatar_url
+          token.role = user.role
+        }
+      }
       return token
     },
     async session({ session, token }) {
