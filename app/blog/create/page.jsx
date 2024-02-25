@@ -26,17 +26,14 @@ async function handlerSubmit(userEmail, cat, title, desc, text) {
         email: userEmail
       })
         .then((user) => {
-          return {
+          const doc = new Blog({
             creator: user._id.toString(),
             category: cat,
             title: title.trim(),
             description: desc.trim().substring(0, 100),
             content: text.trim()
-          }
-        })
-        .then((saveDoc) => {
-          const newBlog = new Blog(saveDoc)
-          newBlog.save()
+          })
+          doc.save()
         })
         .catch((err) => console.log(err))
       revalidatePath("/")

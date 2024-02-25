@@ -20,24 +20,39 @@ const SignIn = () => {
               className="profile_img"
               src={session.user.image}
               alt={session.user.name}
-              width={25}
-              height={25}
+              width={35}
+              height={35}
+              priority
             />
           </div>
-          {isShowProfile && <ProfileBlock session={session} />}
+          {isShowProfile && (
+            <ProfileBlock
+              session={session}
+              setIsShowProfile={setIsShowProfile}
+            />
+          )}
         </>
       ) : (
-        <div className="link" onClick={() => signIn()}>
-          Sign In
+        <div className="profile" onClick={() => signIn()}>
+          <Image
+            src="/images/login.png"
+            alt="login"
+            width={35}
+            height={35}
+            priority
+          />
         </div>
       )}
     </>
   )
 }
 
-const ProfileBlock = ({ session }) => {
+const ProfileBlock = ({ session, setIsShowProfile }) => {
   return (
-    <div className="profile_block">
+    <div
+      className="profile_block"
+      onMouseLeave={() => setIsShowProfile((prev) => !prev)}
+    >
       <span>
         {session?.user.name}
         <br />

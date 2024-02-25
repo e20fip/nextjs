@@ -65,6 +65,8 @@ header {
   top: 0;
   z-index: 2;
   background: var(--bg_gradient);
+  display: flex;
+  align-items: center;
 }
 
 h1,
@@ -122,6 +124,9 @@ h6 {
 .link-bottom {
   display: flex;
   gap: 0.5em;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .small_align_right {
@@ -224,16 +229,24 @@ footer {
   place-content: center;
 }
 
+.logo {
+  width: auto;
+  height: 47px;
+  margin-left: 0.8em;
+}
 nav {
   margin: 0.5em 1em;
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
+  flex: 1;
+  align-items: center;
+  height: 50px;
 }
 
 nav li {
   display: inline-block;
-  padding: 1em;
+  padding: 0.5em 1em;
   transition: background-color 0.5s ease;
 }
 
@@ -269,7 +282,12 @@ button:hover {
 p {
   padding-block: 1em;
 }
-
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  flex: 1;
+}
 .link {
   cursor: pointer;
   color: var(--light-color);
@@ -278,10 +296,18 @@ p {
 .profile {
   display: flex;
   gap: 0.5em;
+  width: 35px;
+  justify-content: right;
+  cursor: pointer;
+}
+
+.profileBox li:hover {
+  background-color: unset;
 }
 
 .profile_img {
   border-radius: 50%;
+  background-color: #6b6b6b;
 }
 
 .profile_block {
