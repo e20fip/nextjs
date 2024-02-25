@@ -13,6 +13,19 @@ function checkSession() {
   }
 }
 
+const LoadStatus = () => {
+  return (
+    <div className={style.input_loading}>
+      <div className={style.lds_ring}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  )
+}
+
 export default function Completion() {
   checkSession()
   const {
@@ -30,11 +43,14 @@ export default function Completion() {
         <Markdown rehypePlugins={[rehypeHighlight]}>{completion}</Markdown>
       </div>
       <form className={style.inputContainer} onSubmit={handleSubmit}>
-        <input
-          placeholder="Ask something..."
-          value={input}
-          onChange={handleInputChange}
-        />
+        <div className={style.inputform}>
+          <input
+            placeholder="Ask something..."
+            value={input}
+            onChange={handleInputChange}
+          />
+          {isLoading && <LoadStatus />}
+        </div>
         <div className={style.buttonContainer}>
           <button type="button" onClick={stop}>
             Stop

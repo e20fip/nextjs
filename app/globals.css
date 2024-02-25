@@ -324,6 +324,7 @@ p {
   grid-template-columns: 20% 80%;
   padding: 2em 3em;
   gap: 3em;
+  flex: 1;
 }
 
 .post_content {

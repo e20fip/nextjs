@@ -2,7 +2,7 @@ async function About() {
   return (
     <>
       <div className="about_content">
-        <h1 className="about_headText">About page</h1>
+        <h1 className="about_headText">About</h1>
         <div className="about_bodyText">
           <p>
             <strong>แหล่งความรู้ครบเครื่องเรื่องเทคโนโลยีการทำเว็บไซต์</strong>

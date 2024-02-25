@@ -1,8 +1,9 @@
-import Form from './form'
-import { connectTodb } from '@/lib/database'
-import Blog from '@/models/blog'
-import Category from '@/models/category'
-import { revalidatePath } from 'next/cache'
+import Form from "./form"
+import { connectTodb } from "@/lib/database"
+import User from "@/models/user"
+import Blog from "@/models/blog"
+import Category from "@/models/category"
+import { revalidatePath } from "next/cache"
 
 async function getCategory() {
   try {
@@ -14,21 +15,31 @@ async function getCategory() {
   }
 }
 
-async function handlerSubmit(userId, cat, title, desc, text) {
-  'use server'
+async function handlerSubmit(userEmail, cat, title, desc, text) {
+  "use server"
 
-  if (title !== '' || desc !== '' || text !== '') {
+  if (title !== "" || desc !== "" || text !== "") {
     try {
       await connectTodb()
-      const newBlog = new Blog({
-        creator: userId,
-        category: cat,
-        title: title.trim(),
-        description: desc.trim().substring(0, 100),
-        content: text.trim()
+
+      User.findOne({
+        email: userEmail
       })
-      await newBlog.save()
-      revalidatePath('/')
+        .then((user) => {
+          return {
+            creator: user._id.toString(),
+            category: cat,
+            title: title.trim(),
+            description: desc.trim().substring(0, 100),
+            content: text.trim()
+          }
+        })
+        .then((saveDoc) => {
+          const newBlog = new Blog(saveDoc)
+          newBlog.save()
+        })
+        .catch((err) => console.log(err))
+      revalidatePath("/")
     } catch (error) {
       //console.log(error)
     }

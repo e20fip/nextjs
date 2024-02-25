@@ -10,9 +10,6 @@
   gap: 1.5em;
   background-color: rgb(44 44 44 / 46%);
   padding: 1.5em;
-  border-image: linear-gradient(45deg, #ffc107, #cf1818, #b4ff00) 30;
-  border-width: 2px;
-  border-style: solid;
   container-type: inline-size;
   margin-block: 1em;
 }
@@ -44,7 +41,6 @@
 .output pre {
   padding-block: 0.2rem;
 }
-
 .inputContainer {
   display: flex;
   gap: 1em;
@@ -61,7 +57,11 @@
     gap: 1rem;
   }
 }
-.inputContainer input {
+.inputform {
+  width: 100%;
+  position: relative;
+}
+.inputform input {
   height: 1.5em;
   width: 100%;
   max-width: 80ch;
@@ -70,9 +70,15 @@
   background-color: rgb(73 73 73);
   color: white;
 }
-.inputContainer input:focus {
+.inputform input:focus {
   outline: 1.5px solid #b4ff00;
   outline-offset: 4px;
+}
+.input_loading {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  bottom: 0;
 }
 .inputContainer button {
   border: none;
@@ -83,14 +89,49 @@
   cursor: pointer;
 }
 .inputContainer button:disabled {
-  background-color: blueviolet;
+  background-color: rgb(24, 23, 26);
 }
 .inputContainer button:hover,
 .inputContainer button:focus {
-  background-color: aquamarine;
-  color: #000;
+  background-color: rgb(41, 118, 182);
+  color: #f5f4f4;
 }
 .buttonContainer {
   display: flex;
   gap: 0.5em;
+}
+.lds_ring {
+  display: inline-block;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+}
+.lds_ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  margin: 3px;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  animation: lds_ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #f8f8f8 transparent transparent transparent;
+}
+.lds_ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds_ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds_ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds_ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

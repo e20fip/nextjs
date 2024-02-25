@@ -16,10 +16,10 @@ const Form = ({ handlerSubmit, category }) => {
     return redirect("/")
   }
 
-  const submitDatas = async (userId, cat, title, desc, text) => {
+  const submitDatas = async (userEmail, cat, title, desc, text) => {
     if (title === "" || desc === "" || text === "") return
 
-    await handlerSubmit(userId, cat, title, desc, text)
+    await handlerSubmit(userEmail, cat, title, desc, text)
 
     toast.success("Submit Content Success", {
       theme: "dark",
@@ -60,7 +60,7 @@ const Form = ({ handlerSubmit, category }) => {
           <button
             onClick={() =>
               submitDatas(
-                session.user.id,
+                session.user.email,
                 refCat.current.value,
                 refTitle.current.value,
                 refDesc.current.value,

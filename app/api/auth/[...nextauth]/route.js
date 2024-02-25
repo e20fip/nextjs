@@ -9,15 +9,33 @@ export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET
+      clientSecret: process.env.GOOGLE_SECRET,
+      profile(profile) {
+        let userRole = "user"
+        if (profile?.email === process.env.ADMIN_EMAIL) userRole = "admin"
+
+        return {
+          ...profile,
+          id: profile.sub,
+          role: userRole
+        }
+      }
     }),
     GithubProvider({
       clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET
+      clientSecret: process.env.GITHUB_SECRET,
+      profile(profile) {
+        let userRole = "user"
+        return {
+          ...profile,
+          role: userRole
+        }
+      }
     })
   ],
   callbacks: {
     async signIn({ profile }) {
+      //console.log(profile)
       try {
         await connectTodb()
         const userExists = await User.findOne({
@@ -28,7 +46,7 @@ export const authOptions = {
           await User.create({
             email: profile.email,
             username: profile.name.toLowerCase(),
-            role: "user",
+            role: profile.role,
             image: profile.picture
           })
         }
@@ -37,14 +55,19 @@ export const authOptions = {
         return false
       }
     },
-    async session({ session }) {
-      const sessionUser = await User.findOne({
-        email: session.user.email
-      })
-      session.user.id = sessionUser._id.toString()
-      session.user.role = sessionUser.role
+    async jwt({ token, user }) {
+      if (user) (token.picture = user.picture), (token.role = user.role)
+      return token
+    },
+    async session({ session, token }) {
+      session.user.role = token.role
+      session.user.image = token.picture
       return session
     }
+  },
+  theme: {
+    colorScheme: "dark",
+    logo: `${process.env.NEXTAUTH_URL}/images/logo.png`
   }
 }
 
