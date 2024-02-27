@@ -151,11 +151,12 @@ footer {
   grid-template-columns: repeat(4, 1fr);
   gap: 2em;
 }
-.port_body ul {
+.port_body ul,
+.post_body ol {
   padding-block: 0 2em;
 }
 .post_body li {
-  margin-left: 3em;
+  margin-left: 1.5em;
 }
 .post_body pre {
   overflow: auto;
@@ -194,19 +195,21 @@ footer {
   padding: 0 1rem;
   border-left: 5px solid var(--active);
 }
+.content ul {
+  padding: 0;
+}
 
 @container (width < 1200px) {
   .content_colume {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-.content ul {
-  padding: 1em 0;
+  .content ul {
+    padding: 1.5em;
+  }
 }
 
 .content ul li {
-  margin: 1em 0;
+  margin: 0;
 }
 
 .content li {
@@ -579,7 +582,7 @@ p {
   }
 
   .content ul {
-    padding: 0.2em 0;
+    padding: 1.5em 0;
   }
 
   .content_colume {
@@ -603,8 +606,6 @@ p {
     overflow-y: auto;
     height: 80vh;
     padding: 2em;
-    border: 1px solid var(--light-gray);
-    background-color: var(--dark-color);
   }
 
   .post_showhide {
@@ -692,6 +693,11 @@ p {
  * Visual Studio 2015 dark style
  * Author: Nicolas LLOBERA <nllobera@gmail.com>
  */
+li > code,
+p > code {
+  background-color: var(--light-gray);
+  padding: 0.02rem 0.25rem;
+}
 
 .hljs {
   background: #1e1e1e;

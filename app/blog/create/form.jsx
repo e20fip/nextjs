@@ -5,6 +5,49 @@ import "react-toastify/dist/ReactToastify.css"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 
+import { useCompletion } from "ai/react"
+
+const LoadStatus = () => {
+  return (
+    <div className={style.input_loading}>
+      <div className={style.lds_ring}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  )
+}
+
+const FormAi = ({
+  handleSubmit,
+  handleInputChange,
+  isLoading,
+  stop,
+  input
+}) => {
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input
+          placeholder="Ask something..."
+          value={input}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <button type="button" onClick={stop}>
+          Stop
+        </button>
+        <button disabled={isLoading} type="submit">
+          Send
+        </button>
+      </div>
+    </form>
+  )
+}
+
 const Form = ({ handlerSubmit, category }) => {
   const { data: session, status } = useSession()
   const refTitle = useRef(null)
@@ -31,6 +74,15 @@ const Form = ({ handlerSubmit, category }) => {
     refText.current.value = null
   }
 
+  const {
+    completion,
+    input,
+    stop,
+    isLoading,
+    handleInputChange,
+    handleSubmit
+  } = useCompletion()
+
   return (
     <>
       <div className="content">
@@ -56,7 +108,13 @@ const Form = ({ handlerSubmit, category }) => {
           <label>
             <span>Content</span>
           </label>
-          <textarea placeholder="body" ref={refText} required />
+          <textarea
+            placeholder="body"
+            ref={refText}
+            required
+            defaultValue={completion}
+          />
+          {/* {isLoading && <LoadStatus />} */}
           <button
             onClick={() =>
               submitDatas(
@@ -71,7 +129,15 @@ const Form = ({ handlerSubmit, category }) => {
             submit
           </button>
         </div>
+        <FormAi
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+          stop={stop}
+          isLoading={isLoading}
+          input={input}
+        />
       </div>
+
       <ToastContainer />
     </>
   )

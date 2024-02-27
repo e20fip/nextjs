@@ -35,11 +35,11 @@
   display: contents;
 }
 .output li {
-  padding-block: 0.2rem;
+  padding-block: 0.5rem;
 }
 .output p,
 .output pre {
-  padding-block: 0.2rem;
+  padding-block: 0.8rem;
 }
 .inputContainer {
   display: flex;

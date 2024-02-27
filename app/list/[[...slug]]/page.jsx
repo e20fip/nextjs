@@ -22,8 +22,8 @@ async function getData(query) {
         const catId = cat._id.toString()
         const catPicture = cat.picture
         const catTitle = cat.title
-        const count = await Blog.countDocuments({ catagoryId: catId })
-        const blogs = await Blog.find({ catagoryId: catId })
+        const count = await Blog.countDocuments({ category: catId })
+        const blogs = await Blog.find({ category: catId })
           .sort({ createdAt: -1 })
           .skip(skip)
           .limit(limit)
@@ -80,12 +80,14 @@ export default async function List({ params }) {
                 <div className="title">
                   <Link href={`/post/${data._id}`}>{data.title}</Link>
                 </div>
-                <Date dateString={data.createdAt} />
+                <div className="info">
+                  <span>{data.title}</span>
+                  <Date dateString={data.createdAt} />
+                </div>
               </li>
               <li>
-                <LimitText longText={data.description} />
+                <LimitText longText={data.description} limit="150" />
               </li>
-              <li className="small_align_right">{catTitle}</li>
             </ul>
           ))}
         </div>
