@@ -14,7 +14,7 @@ export const revalidate = 3600
 async function getData(id) {
   try {
     await connectTodb()
-    const blogs = await Blog.findById(id)
+    const blogs = await Blog.findById(id).populate("category").lean()
     if (!blogs) return notFound()
     return JSON.parse(JSON.stringify(blogs))
   } catch (e) {
@@ -26,8 +26,9 @@ async function getList(id) {
   try {
     await connectTodb()
     const lists = await Blog.find({ category: id })
-      .select("_id category title createdAt")
+      .select("_id category title description createdAt")
       .sort({ createdAt: -1 })
+      .limit(10)
       .lean()
     if (!lists) return notFound()
     return JSON.parse(JSON.stringify(lists))
@@ -66,7 +67,10 @@ export default async function Post({ params }) {
         {lists && <Sidemenu lists={lists} />}
         <div className="post_content">
           <h1 className="post_title">{data.title}</h1>
-          <Date dateString={data.createdAt} />
+          <div className="info">
+            <span>{data.category.title}</span>
+            <Date dateString={data.createdAt} />
+          </div>
           <div className="post_body">
             <Markdown
               ehypePlugins={[remarkGfm]}

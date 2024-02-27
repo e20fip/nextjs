@@ -1,18 +1,19 @@
-import { connectTodb } from '@/lib/database'
-import Blog from '@/models/blog'
-import Button from './button'
-import { revalidatePath } from 'next/cache'
-import Category from '@/models/category'
+import { connectTodb } from "@/lib/database"
+import Blog from "@/models/blog"
+import Button from "./button"
+import { revalidatePath } from "next/cache"
+import Category from "@/models/category"
 
-export const dynamic = 'auto'
+export const dynamic = "auto"
 
 async function getDatas() {
   try {
     await connectTodb()
     const datas = await Blog.find({})
-      .select('_id title description content')
-      .populate('category')
+      .select("_id title description content")
+      .populate("category")
       .sort({ createdAt: -1 })
+      .lean()
     return JSON.parse(JSON.stringify(datas))
   } catch (error) {
     //
@@ -22,7 +23,7 @@ async function getDatas() {
 async function getCategory() {
   try {
     await connectTodb()
-    const category = await Category.find({})
+    const category = await Category.find({}).lean()
     return JSON.parse(JSON.stringify(category))
   } catch (error) {
     //
@@ -30,18 +31,18 @@ async function getCategory() {
 }
 
 async function deleteData(id) {
-  'use server'
+  "use server"
   try {
     await connectTodb()
     await Blog.findByIdAndDelete(id)
-    revalidatePath('/blog/edit')
+    revalidatePath("/blog/edit")
   } catch (error) {
     //
   }
 }
 
 async function submitDatas(id, cat, title, desc, body) {
-  'use server'
+  "use server"
   try {
     const filter = { _id: id }
     const update = {
@@ -52,14 +53,14 @@ async function submitDatas(id, cat, title, desc, body) {
     }
     await connectTodb()
     await Blog.findOneAndUpdate(filter, update)
-    revalidatePath('blog/edit')
+    revalidatePath("blog/edit")
   } catch (error) {
     //
   }
 }
 
 export default async function EditBlog() {
-  'use server'
+  "use server"
 
   const datas = await getDatas()
   const listCategory = await getCategory()

@@ -1,13 +1,13 @@
-import Form from './form'
-import Categories from './categories'
-import { connectTodb } from '@/lib/database'
-import Category from '@/models/category'
-import { revalidatePath } from 'next/cache'
+import Form from "./form"
+import Categories from "./categories"
+import { connectTodb } from "@/lib/database"
+import Category from "@/models/category"
+import { revalidatePath } from "next/cache"
 
 async function getCategories() {
   try {
     await connectTodb()
-    const datas = await Category.find({})
+    const datas = await Category.find({}).lean()
     return JSON.parse(JSON.stringify(datas))
   } catch (error) {
     //
@@ -15,19 +15,19 @@ async function getCategories() {
 }
 
 async function deleteCategory(id) {
-  'use server'
+  "use server"
   try {
     await connectTodb()
     await Category.findByIdAndDelete(id)
-    revalidatePath('/category/create')
+    revalidatePath("/category/create")
   } catch (error) {
     //
   }
 }
 
 async function editCategory({ id, title, picture }) {
-  'use server'
-  if (id === '' || title === '' || picture === '') return
+  "use server"
+  if (id === "" || title === "" || picture === "") return
   try {
     const filter = { _id: id }
     const update = {
@@ -36,28 +36,28 @@ async function editCategory({ id, title, picture }) {
     }
     await connectTodb()
     await Category.findOneAndUpdate(filter, update)
-    revalidatePath('/category/create')
+    revalidatePath("/category/create")
   } catch (error) {
     //
   }
 }
 async function handlerSubmit({ title, picture }) {
-  'use server'
-  if (title === '' || picture === '') return
+  "use server"
+  if (title === "" || picture === "") return
   try {
     await connectTodb()
     const newCategory = new Category({
       title: title.trim(),
       picture: picture.trim()
     })
-    revalidatePath('/category/create')
+    revalidatePath("/category/create")
     await newCategory.save()
   } catch (error) {
     //
   }
 }
 export default async function CreateCategory() {
-  'use server'
+  "use server"
   const listCategories = await getCategories()
 
   return (

@@ -15,7 +15,7 @@ async function getData() {
       .sort({ createdAt: -1 })
       .populate("category")
       .select("_id title description createdAt")
-      .limit(4)
+      .limit(10)
       .lean()
     return JSON.parse(JSON.stringify(blogs))
   } catch (e) {
@@ -48,12 +48,14 @@ export default async function Page() {
                 <div className="title">
                   <Link href={`/post/${data._id}`}>{data.title}</Link>
                 </div>
-                <Date dateString={data.createdAt} />
+                <div className="info">
+                  <span>{data.category.title}</span>
+                  <Date dateString={data.createdAt} />
+                </div>
               </li>
               <li>
-                <LimitText longText={data.description} />
+                <LimitText longText={data.description} limit="100" />
               </li>
-              <li className="small_align_right">{data.category.title}</li>
             </ul>
           ))}
         </div>

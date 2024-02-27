@@ -129,10 +129,6 @@ h6 {
   justify-content: space-between;
 }
 
-.small_align_right {
-  font-size: 0.8rem;
-  text-align: right;
-}
 footer {
   color: var(--medium-color);
   padding: 1em 2em;
@@ -198,6 +194,7 @@ footer {
   padding: 0 1rem;
   border-left: 5px solid var(--active);
 }
+
 @container (width < 1200px) {
   .content_colume {
     grid-template-columns: repeat(2, 1fr);
@@ -260,15 +257,27 @@ a:visited {
   text-decoration: none;
 }
 
-time {
+.info {
+  display: flex;
+}
+.info span {
+  padding: 0.2em 1em;
+  background-color: #bd0000;
+  font-size: 0.6rem;
+}
+.small_info {
   font-size: 0.8rem;
-  display: block;
+}
+time {
+  font-size: 0.6rem;
+  padding: 0.2em 1em;
+  background-color: #2f2f2f;
 }
 
 button {
   margin: 2em 0;
   padding: 0.5em 1.5em;
-  border-radius: 50vw;
+  border-radius: 5px;
   border: 0;
   background-color: var(--nav);
   transition: background-color 0.5s ease-in;
@@ -366,7 +375,7 @@ p {
 
 .post_body {
   margin-block: 1em 2em;
-  border-top: 1px dotted;
+  border-top: var(--light-gray) 1px dotted;
 }
 
 .post_sidemenu {
@@ -380,6 +389,7 @@ p {
   padding: 0;
   position: sticky;
   top: 10%;
+  background-color: #5f5f5f;
 }
 
 .post_listmenu li {
@@ -562,9 +572,7 @@ p {
 .active {
   background-color: var(--active);
 }
-.active a:visited {
-  color: var(--light-color);
-}
+
 @container (width < 1300px) {
   .content {
     padding: 1em 2em;
@@ -638,6 +646,48 @@ p {
     padding-top: 2em;
   }
 }
+
+.pagination {
+  margin: 2em auto;
+  display: flex;
+  gap: 1em;
+}
+.pagination_container {
+  display: flex;
+  width: 350px;
+  overflow: clip;
+}
+
+.pagination_num_container {
+  display: flex;
+  gap: 10px;
+  transition: transform ease 2s;
+}
+.pagination_num {
+  padding: 0.3em 1em;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-gray);
+}
+
+.left_pagi,
+.right_pagi {
+  background-color: black;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1.2em;
+  cursor: pointer;
+  z-index: 1;
+}
+.right_pagi {
+  right: 0;
+}
+
 /*
  * Visual Studio 2015 dark style
  * Author: Nicolas LLOBERA <nllobera@gmail.com>

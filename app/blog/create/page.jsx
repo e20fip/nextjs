@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache"
 async function getCategory() {
   try {
     await connectTodb()
-    const listCategory = await Category.find({})
+    const listCategory = await Category.find({}).lean()
     return JSON.parse(JSON.stringify(listCategory))
   } catch (error) {
     //

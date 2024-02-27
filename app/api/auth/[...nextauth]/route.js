@@ -49,7 +49,7 @@ export const authOptions = {
         await connectTodb()
         const userExists = await User.findOne({
           email: profile.email
-        })
+        }).lean()
         if (!userExists) {
           await User.create({
             email: profile.email,
