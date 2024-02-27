@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
-
+import style from "./ai.module.css"
 import { useCompletion } from "ai/react"
 
 const LoadStatus = () => {
@@ -28,23 +28,27 @@ const FormAi = ({
   input
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input
-          placeholder="Ask something..."
-          value={input}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <button type="button" onClick={stop}>
-          Stop
-        </button>
-        <button disabled={isLoading} type="submit">
-          Send
-        </button>
-      </div>
-    </form>
+    <>
+      <h1>Gemini AI</h1>
+      <form className={style.inputContainer} onSubmit={handleSubmit}>
+        <div className={style.inputform}>
+          <input
+            placeholder="Ask something..."
+            value={input}
+            onChange={handleInputChange}
+          />
+          {isLoading && <LoadStatus />}
+        </div>
+        <div className={style.buttonContainer}>
+          <button type="button" onClick={stop}>
+            Stop
+          </button>
+          <button disabled={isLoading} type="submit">
+            Send
+          </button>
+        </div>
+      </form>
+    </>
   )
 }
 
@@ -114,7 +118,7 @@ const Form = ({ handlerSubmit, category }) => {
             required
             defaultValue={completion}
           />
-          {/* {isLoading && <LoadStatus />} */}
+
           <button
             onClick={() =>
               submitDatas(
