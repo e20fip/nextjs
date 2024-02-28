@@ -22,7 +22,8 @@
 html {
   font-family: "Courier New", Courier, monospace;
   font-size: 1rem;
-  line-height: 1.8;
+  line-height: 1.6;
+  font-weight: 200;
   color: var(--medium-color);
 }
 ::-webkit-scrollbar {
@@ -76,11 +77,13 @@ h4,
 h5,
 h6 {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 500;
   padding-block: 1em 0;
   color: var(--medium-color);
 }
-
+strong {
+  font-weight: 500;
+}
 .lds-ring {
   display: inline-block;
   position: relative;
@@ -148,8 +151,8 @@ footer {
 
 .content_colume {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2em;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1em;
 }
 .port_body ul,
 .post_body ol {
@@ -199,12 +202,10 @@ footer {
   padding: 0;
 }
 
-@container (width < 1200px) {
+@container (width < 1500px) {
   .content_colume {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .content ul {
-    padding: 1.5em;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
   }
 }
 
@@ -218,7 +219,7 @@ footer {
 }
 .title {
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 500;
   padding: 0;
   line-height: 1.5;
 }
@@ -270,6 +271,7 @@ a:visited {
 }
 .small_info {
   font-size: 0.8rem;
+  font-weight: 300;
 }
 time {
   font-size: 0.6rem;
@@ -299,6 +301,7 @@ p {
   justify-content: center;
   gap: 0.5em;
   flex: 1;
+  font-weight: 500;
 }
 .link {
   cursor: pointer;
@@ -355,6 +358,7 @@ p {
 
 .small_btn {
   margin-block: 1em 0;
+  font-weight: 300;
 }
 
 .post_container {
@@ -371,7 +375,7 @@ p {
 
 .post_title {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 500;
   color: var(--medium-color);
   padding: 1em 0 0;
 }
@@ -408,6 +412,7 @@ p {
 
 .post_link {
   display: block;
+  font-weight: 500;
 }
 
 .post_showhide {
@@ -472,7 +477,7 @@ p {
   font-size: 1.1rem;
   padding-block: 1em;
   color: var(--medium-color);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .form {
@@ -501,7 +506,7 @@ p {
 }
 
 .form label {
-  font-weight: bold;
+  font-weight: 500;
   color: var(--light-color);
 }
 
@@ -521,7 +526,7 @@ p {
 }
 
 .about_headText {
-  font-weight: bold;
+  font-weight: 600;
   padding-block: 0;
 }
 
@@ -547,6 +552,7 @@ p {
   color: white;
   animation: fadeIn 300ms ease-in;
   cursor: pointer;
+  font-weight: 300;
 }
 
 .model-box {
@@ -575,18 +581,20 @@ p {
 .active {
   background-color: var(--active);
 }
-
+.content li + li {
+  margin: 0.5em 0;
+}
 @container (width < 1300px) {
   .content {
     padding: 1em 2em;
   }
 
   .content ul {
-    padding: 1.5em 0;
+    padding: 1em 0;
   }
 
   .content_colume {
-    display: block;
+    grid-template-columns: repeat(3, 1fr);
   }
   button {
     margin: 1em 0;
@@ -643,8 +651,18 @@ p {
     border-top: 1px solid var(--light-color);
   }
   .about_headText {
-    font-weight: bold;
+    font-weight: 500;
     padding-top: 2em;
+  }
+}
+@container (width < 900px) {
+  .content_colume {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@container (width < 600px) {
+  .content_colume {
+    display: block;
   }
 }
 

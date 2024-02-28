@@ -1,4 +1,4 @@
-import { Prompt } from "next/font/google"
+import { Kanit } from "next/font/google"
 import Header from "./header"
 import Footer from "./footer"
 import "./globals.css"
@@ -9,9 +9,9 @@ export const metadata = {
   description: "Web Development"
 }
 
-const CustomFont = Prompt({
+const CustomFont = Kanit({
   subsets: ["thai"],
-  weight: ["100", "400"]
+  weight: ["200", "300", "500"]
 })
 
 export default async function RootLayout({ children }) {
