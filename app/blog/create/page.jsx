@@ -1,4 +1,4 @@
-import Form from "./Form"
+import Form from "./form"
 import { connectTodb } from "@/lib/database"
 import Category from "@/models/category"
 

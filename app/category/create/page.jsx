@@ -1,5 +1,5 @@
-import Form from "./Form"
-import Categories from "./Categories"
+import Form from "./form"
+import Categories from "./categories"
 import { connectTodb } from "@/lib/database"
 import Category from "@/models/category"
 
