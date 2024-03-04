@@ -64,6 +64,7 @@ export default async function Post({ params }) {
   return (
     <>
       <div className="post_container">
+        <div className="post_container_textbg">{data.category.title}</div>
         {lists && <Sidemenu lists={lists} />}
         <div className="post_content">
           <h1 className="post_title">{data.title}</h1>

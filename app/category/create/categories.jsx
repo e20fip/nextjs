@@ -1,11 +1,19 @@
-"use client"
-import { useState } from "react"
-import FormEdit from "@/app/category/edit/FormEdit"
-import { deleteCategory } from "./serverAction"
+'use client'
+import { useState } from 'react'
 
-const Categories = ({ id, title, picture }) => {
+const Categories = ({ id, title, picture, deleteCategory, editCategory }) => {
   const [isConfirmDelete, setIsConfirmDelete] = useState(false)
+  const [category, setCategory] = useState({
+    id: id,
+    title: title,
+    picture: picture
+  })
   const [isEditForm, setIsEditForm] = useState(false)
+
+  const handlerDelete = async (id) => {
+    if (!id) return
+    await deleteCategory(id)
+  }
 
   return (
     <>
@@ -18,29 +26,73 @@ const Categories = ({ id, title, picture }) => {
           className="link"
           onClick={() => setIsConfirmDelete((prev) => !prev)}
         >
-          {isConfirmDelete && "Cancel"}
-          {!isConfirmDelete && "Delete"}
+          {isConfirmDelete && 'Cancel'}
+          {!isConfirmDelete && 'Delete'}
         </span>
-        {isConfirmDelete && <FormDelete id={id} />}
+        {isConfirmDelete && (
+          <button onClick={() => handlerDelete(id)} className="small-button">
+            confirm
+          </button>
+        )}
       </div>
       {isEditForm && (
         <FormEdit
-          id={id}
-          title={title}
-          picture={picture}
+          category={category}
+          setCategory={setCategory}
           setIsEditForm={setIsEditForm}
+          editCategory={editCategory}
         />
       )}
     </>
   )
 }
 
-const FormDelete = ({ id }) => {
+const FormEdit = ({ category, setCategory, setIsEditForm, editCategory }) => {
+  const submitForm = async (id, title, picture) => {
+    if (id === '' || title === '' || picture === '') return
+    await editCategory(id, title, picture)
+    setIsEditForm(false)
+  }
+
   return (
-    <form className="form" action={deleteCategory}>
-      <input type="hidden" name="id" value={id} />
-      <button type="submit">confirm</button>
-    </form>
+    <div className="model-box">
+      <span className="close-box" onClick={() => setIsEditForm(false)}>
+        &#x2715;
+      </span>
+      <div className="content">
+        <div className="form">
+          <label>Title</label>
+          <input
+            type="text"
+            value={category.title}
+            onChange={(e) =>
+              setCategory({ ...category, title: e.target.value })
+            }
+            required
+          />
+          <label>Photo URL</label>
+          <input
+            type="text"
+            value={category.picture}
+            onChange={(e) =>
+              setCategory({ ...category, picture: e.target.value })
+            }
+            required
+          />
+          <button
+            onClick={() =>
+              submitForm({
+                id: category.id,
+                title: category.title,
+                picture: category.picture
+              })
+            }
+          >
+            submit
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 

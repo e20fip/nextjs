@@ -49,10 +49,7 @@ const SignIn = () => {
 
 const ProfileBlock = ({ session, setIsShowProfile }) => {
   return (
-    <div
-      className="profile_block"
-      onMouseLeave={() => setIsShowProfile((prev) => !prev)}
-    >
+    <div className="profile_block">
       <span>
         {session?.user.name}
         <br />
@@ -61,13 +58,28 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
       {session?.user.role === "admin" ? (
         <>
           <span>
-            <Link href={"/category/create"}>Category</Link>
+            <Link
+              href={"/category/create"}
+              onClick={() => setIsShowProfile((prev) => !prev)}
+            >
+              Category
+            </Link>
           </span>
           <span>
-            <Link href={"/blog/edit"}>Edit Blog</Link>
+            <Link
+              href={"/blog/edit"}
+              onClick={() => setIsShowProfile((prev) => !prev)}
+            >
+              Edit Blog
+            </Link>
           </span>
           <span>
-            <Link href={"/blog/create"}>Create Blog</Link>
+            <Link
+              href={"/blog/create"}
+              onClick={() => setIsShowProfile((prev) => !prev)}
+            >
+              Create Blog
+            </Link>
           </span>
         </>
       ) : (

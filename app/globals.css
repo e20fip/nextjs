@@ -3,6 +3,7 @@
   --light-gray: #686868;
   --medium-color: #ccff68;
   --light-color: #ffffff;
+  --important-color: #2db4c3;
   --nav: #363636;
   --link: #ffbc57;
   --active: #242424;
@@ -68,6 +69,7 @@ header {
   background: var(--bg_gradient);
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 h1,
@@ -210,6 +212,7 @@ footer {
 }
 
 .content ul li {
+  content-visibility: auto;
   margin: 0;
 }
 
@@ -231,18 +234,22 @@ footer {
 }
 
 .logo {
-  width: auto;
-  height: 47px;
-  margin-left: 0.8em;
+  height: auto;
+  width: 85px;
 }
 nav {
-  margin: 0.5em 1em;
   display: flex;
+  padding: 0.5em;
   justify-content: space-between;
   font-size: 0.8rem;
-  flex: 1;
+  flex: 1 1;
   align-items: center;
-  height: 50px;
+  position: absolute;
+  background-color: var(--light-gray);
+  top: 55px;
+  left: 0;
+  right: 0;
+  animation: fadeIn 0.5s ease;
 }
 
 nav li {
@@ -280,7 +287,6 @@ time {
 }
 
 button {
-  cursor: pointer;
   margin: 2em 0;
   padding: 0.5em 1.5em;
   border-radius: 5px;
@@ -297,6 +303,14 @@ button:hover {
 p {
   padding-block: 1em;
 }
+.menuToggle {
+  cursor: pointer;
+  color: var(--link);
+  font-weight: 500;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
 .menu {
   display: flex;
   justify-content: center;
@@ -312,7 +326,7 @@ p {
 .profile {
   display: flex;
   gap: 0.5em;
-  width: 35px;
+  width: 85px;
   justify-content: right;
   cursor: pointer;
 }
@@ -366,8 +380,18 @@ p {
   display: grid;
   grid-template-columns: 20% 80%;
   padding: 2em 3em;
-  gap: 3em;
+  gap: 1.5em;
   flex: 1;
+  position: relative;
+}
+
+.post_container_textbg {
+  font-size: 800%;
+  position: absolute;
+  right: 0.4em;
+  top: -0.3em;
+  z-index: -1;
+  color: #ffffff0a;
 }
 
 .post_content {
@@ -377,7 +401,7 @@ p {
 .post_title {
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--medium-color);
+  color: var(--important-color);
   padding: 1em 0 0;
 }
 
@@ -467,7 +491,7 @@ p {
   aspect-ratio: 16/9;
   position: relative;
   display: block;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 .home_head_text {
@@ -601,6 +625,7 @@ p {
     margin: 1em 0;
   }
   footer {
+    content-visibility: auto;
     padding: 1em 2em;
   }
 
@@ -676,13 +701,6 @@ p {
   display: flex;
   width: 350px;
   overflow: clip;
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    white 10%,
-    white 90%,
-    transparent
-  );
 }
 
 .pagination_num_container {
