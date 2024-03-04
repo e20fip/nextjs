@@ -61,7 +61,6 @@ async function submitDatas(id, cat, title, desc, body) {
 
 export default async function EditBlog() {
   "use server"
-
   const datas = await getDatas()
   const listCategory = await getCategory()
 

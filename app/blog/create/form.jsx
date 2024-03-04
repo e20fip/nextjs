@@ -1,11 +1,12 @@
 "use client"
-import { useRef } from "react"
-import { ToastContainer, toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
+
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import style from "./ai.module.css"
 import { useCompletion } from "ai/react"
+import submitDatas from "./submitDatas"
+import { useFormStatus } from "react-dom"
+import { useRef } from "react"
 
 const LoadStatus = () => {
   return (
@@ -17,6 +18,71 @@ const LoadStatus = () => {
         <div></div>
       </div>
     </div>
+  )
+}
+
+const Form = ({ category }) => {
+  const { data: session, status } = useSession()
+
+  const formRef = useRef()
+  if (status !== "loading" && !session && session?.user.role !== "admin") {
+    return redirect("/")
+  }
+
+  const {
+    completion,
+    input,
+    stop,
+    isLoading,
+    handleInputChange,
+    handleSubmit
+  } = useCompletion()
+
+  const userEmail = session?.user?.email
+
+  return (
+    <>
+      <div className="content">
+        <form className="form" ref={formRef} action={submitDatas}>
+          <input type="hidden" name="email" defaultValue={userEmail} />
+          <label htmlFor="title">
+            <span>Title</span>
+          </label>
+          <input name="title" type="text" placeholder="title" required />
+          <label htmlFor="category">
+            <span>Category</span>
+          </label>
+          <select name="cat">
+            {category?.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.title}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="description">
+            <span>Description</span>
+          </label>
+          <input name="desc" type="text" placeholder="description" required />
+          <label htmlFor="content">
+            <span>Content</span>
+          </label>
+          <textarea
+            name="text"
+            placeholder="body"
+            required
+            defaultValue={completion}
+          />
+          <SubmitBtn formRef={formRef} />
+        </form>
+        <FormAi
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+          stop={stop}
+          isLoading={isLoading}
+          input={input}
+        />
+      </div>
+    </>
   )
 }
 
@@ -44,7 +110,7 @@ const FormAi = ({
             Stop
           </button>
           <button disabled={isLoading} type="submit">
-            Send
+            {isLoading ? "Wait" : "Send"}
           </button>
         </div>
       </form>
@@ -52,98 +118,15 @@ const FormAi = ({
   )
 }
 
-const Form = ({ handlerSubmit, category }) => {
-  const { data: session, status } = useSession()
-  const refTitle = useRef(null)
-  const refCat = useRef(null)
-  const refDesc = useRef(null)
-  const refText = useRef(null)
-
-  if (status !== "loading" && !session && session?.user.role !== "admin") {
-    return redirect("/")
+const SubmitBtn = ({ formRef }) => {
+  const { pending } = useFormStatus()
+  {
+    pending ? "" : formRef.current?.reset()
   }
-
-  const submitDatas = async (userEmail, cat, title, desc, text) => {
-    if (title === "" || desc === "" || text === "") return
-
-    await handlerSubmit(userEmail, cat, title, desc, text)
-
-    toast.success("Submit Content Success", {
-      theme: "dark",
-      autoClose: 3000
-    })
-
-    refTitle.current.value = null
-    refDesc.current.value = null
-    refText.current.value = null
-  }
-
-  const {
-    completion,
-    input,
-    stop,
-    isLoading,
-    handleInputChange,
-    handleSubmit
-  } = useCompletion()
-
   return (
-    <>
-      <div className="content">
-        <div className="form">
-          <label>
-            <span>Title</span>
-          </label>
-          <input type="text" placeholder="title" ref={refTitle} required />
-          <label>
-            <span>Category</span>
-          </label>
-          <select ref={refCat}>
-            {category?.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.title}
-              </option>
-            ))}
-          </select>
-          <label>
-            <span>Description</span>
-          </label>
-          <input type="text" placeholder="description" ref={refDesc} required />
-          <label>
-            <span>Content</span>
-          </label>
-          <textarea
-            placeholder="body"
-            ref={refText}
-            required
-            defaultValue={completion}
-          />
-
-          <button
-            onClick={() =>
-              submitDatas(
-                session.user.email,
-                refCat.current.value,
-                refTitle.current.value,
-                refDesc.current.value,
-                refText.current.value
-              )
-            }
-          >
-            submit
-          </button>
-        </div>
-        <FormAi
-          handleSubmit={handleSubmit}
-          handleInputChange={handleInputChange}
-          stop={stop}
-          isLoading={isLoading}
-          input={input}
-        />
-      </div>
-
-      <ToastContainer />
-    </>
+    <button type="submit" aria-disabled={pending}>
+      {pending ? "Success" : "Submit"}
+    </button>
   )
 }
 

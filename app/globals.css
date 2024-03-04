@@ -701,6 +701,13 @@ p {
   display: flex;
   width: 350px;
   overflow: clip;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    white 10%,
+    white 90%,
+    transparent
+  );
 }
 
 .pagination_num_container {
