@@ -16,10 +16,10 @@ export async function editCategory(formData) {
     }
     await connectTodb()
     await Category.findOneAndUpdate(filter, update)
+    revalidatePath("/category/create")
   } catch (error) {
     //
   }
-  revalidatePath("/category/create")
 }
 
 export async function handlerSubmit(formData) {
@@ -33,10 +33,10 @@ export async function handlerSubmit(formData) {
       picture: picture
     })
     await newCategory.save()
+    revalidatePath("/category/create")
   } catch (error) {
     //
   }
-  revalidatePath("/category/create")
 }
 
 export async function deleteCategory(formData) {
@@ -44,8 +44,8 @@ export async function deleteCategory(formData) {
   try {
     await connectTodb()
     await Category.findByIdAndDelete(id)
+    revalidatePath("/category/create")
   } catch (error) {
     //
   }
-  revalidatePath("/category/create")
 }

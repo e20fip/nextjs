@@ -25,8 +25,8 @@ export default async function submitDatas(formData) {
         doc.save()
       })
       .catch((err) => console.log(err))
+    revalidatePath("/")
   } catch (error) {
     //console.log(error)
   }
-  revalidatePath("/")
 }
