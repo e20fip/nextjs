@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import FormEdit from "../edit/formEdit"
+import FormEdit from "@/app/category/edit/FormEdit"
 import { deleteCategory } from "./serverAction"
 
 const Categories = ({ id, title, picture }) => {
