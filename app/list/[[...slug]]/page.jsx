@@ -6,17 +6,13 @@ import LimitText from "@/lib/texttrim"
 import Link from "next/link"
 import Image from "next/image"
 import Pagination from "@/app/components/pagination"
-import { notFound } from "next/navigation"
 
 export const revalidate = 3600
 
 async function getData(query) {
   //console.log(query)
   const limit = 20
-  let skip = 0
-  if (query.pageNum !== null && !isNaN(query.pageNum)) {
-    skip = query.pageNum * limit - limit
-  }
+  const skip = query.pageNum * limit - limit
 
   try {
     await connectTodb()
@@ -47,16 +43,19 @@ async function getData(query) {
     return datas
   } catch (e) {
     //console.log(e)
-    return false
   }
 }
 
+function PageNotFound() {
+  return <div className="pagemessage">Error 404 not found!!</div>
+}
+
 export default async function List({ params }) {
-  const category = params.slug[0].toLowerCase()
-  const pageNum = params.slug[1] || null
+  const category = params.slug[0]
+  const pageNum = params.slug[1]
 
   const result = await getData({ category: category, pageNum: pageNum })
-  if (!result) return notFound()
+  if (!result) return <PageNotFound />
   const { datas, catPicture, catTitle, count } = result
   return (
     <>
