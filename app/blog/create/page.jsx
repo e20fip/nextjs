@@ -36,10 +36,10 @@ async function handlerSubmit(userEmail, cat, title, desc, text) {
           doc.save()
         })
         .catch((err) => console.log(err))
-      revalidatePath("/")
     } catch (error) {
       //console.log(error)
     }
+    revalidatePath("/")
   }
 }
 

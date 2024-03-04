@@ -1,5 +1,5 @@
-'use client'
-import { useState } from 'react'
+"use client"
+import { useState } from "react"
 
 const Categories = ({ id, title, picture, deleteCategory, editCategory }) => {
   const [isConfirmDelete, setIsConfirmDelete] = useState(false)
@@ -26,8 +26,8 @@ const Categories = ({ id, title, picture, deleteCategory, editCategory }) => {
           className="link"
           onClick={() => setIsConfirmDelete((prev) => !prev)}
         >
-          {isConfirmDelete && 'Cancel'}
-          {!isConfirmDelete && 'Delete'}
+          {isConfirmDelete && "Cancel"}
+          {!isConfirmDelete && "Delete"}
         </span>
         {isConfirmDelete && (
           <button onClick={() => handlerDelete(id)} className="small-button">
@@ -49,7 +49,7 @@ const Categories = ({ id, title, picture, deleteCategory, editCategory }) => {
 
 const FormEdit = ({ category, setCategory, setIsEditForm, editCategory }) => {
   const submitForm = async (id, title, picture) => {
-    if (id === '' || title === '' || picture === '') return
+    if (id === "" || title === "" || picture === "") return
     await editCategory(id, title, picture)
     setIsEditForm(false)
   }

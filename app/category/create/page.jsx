@@ -19,10 +19,10 @@ async function deleteCategory(id) {
   try {
     await connectTodb()
     await Category.findByIdAndDelete(id)
-    revalidatePath("/category/create")
   } catch (error) {
     //
   }
+  revalidatePath("/category")
 }
 
 async function editCategory({ id, title, picture }) {
@@ -36,10 +36,10 @@ async function editCategory({ id, title, picture }) {
     }
     await connectTodb()
     await Category.findOneAndUpdate(filter, update)
-    revalidatePath("/category/create")
   } catch (error) {
     //
   }
+  revalidatePath("/category")
 }
 async function handlerSubmit({ title, picture }) {
   "use server"
@@ -50,11 +50,11 @@ async function handlerSubmit({ title, picture }) {
       title: title.trim(),
       picture: picture.trim()
     })
-    revalidatePath("/category/create")
     await newCategory.save()
   } catch (error) {
     //
   }
+  revalidatePath("/category")
 }
 export default async function CreateCategory() {
   "use server"

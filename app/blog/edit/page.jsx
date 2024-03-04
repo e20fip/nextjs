@@ -4,8 +4,7 @@ import Button from "./button"
 import { revalidatePath } from "next/cache"
 import Category from "@/models/category"
 
-export const dynamic = "auto"
-
+export const dynamic = "force-dynamic"
 async function getDatas() {
   try {
     await connectTodb()
