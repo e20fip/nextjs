@@ -76,7 +76,7 @@ export default async function Post({ params }) {
           <h1 className="post_title">{data?.title}</h1>
           <div className="info">
             <span>{data?.category?.title}</span>
-            <Date dateString={data?.createdAt} />
+            {data?.createdAt && <Date dateString={data.createdAt} />}
           </div>
           <div className="post_body">
             <Markdown

@@ -6,8 +6,7 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import style from "./ai.module.css"
 import { useCompletion } from "ai/react"
-
-export const dynamic = "force-dynamic"
+import { useRouter } from "next/navigation"
 
 const LoadStatus = () => {
   return (
@@ -64,7 +63,7 @@ const Form = ({ handlerSubmit, category }) => {
   if (status !== "loading" && !session && session?.user.role !== "admin") {
     return redirect("/")
   }
-
+  const router = useRouter()
   const submitDatas = async (userEmail, cat, title, desc, text) => {
     if (title === "" || desc === "" || text === "") return
 
@@ -134,6 +133,7 @@ const Form = ({ handlerSubmit, category }) => {
           >
             submit
           </button>
+          <button onClick={() => router.refresh()}>Refresh</button>
         </div>
         <FormAi
           handleSubmit={handleSubmit}

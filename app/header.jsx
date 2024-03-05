@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import pathName from "@/lib/getPathname"
-import SignIn from "@/app/components/SignIn"
+import SignIn from "@/app/components/signIn"
 import Image from "next/image"
 import { useState } from "react"
 
