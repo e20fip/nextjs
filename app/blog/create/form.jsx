@@ -7,6 +7,8 @@ import { redirect } from "next/navigation"
 import style from "./ai.module.css"
 import { useCompletion } from "ai/react"
 
+export const dynamic = "force-dynamic"
+
 const LoadStatus = () => {
   return (
     <div className={style.input_loading}>
