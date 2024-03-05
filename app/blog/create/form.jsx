@@ -132,7 +132,6 @@ const Form = ({ handlerSubmit, category }) => {
           >
             submit
           </button>
-          <button onClick={() => router.refresh()}>Refresh</button>
         </div>
         <FormAi
           handleSubmit={handleSubmit}
@@ -141,6 +140,7 @@ const Form = ({ handlerSubmit, category }) => {
           isLoading={isLoading}
           input={input}
         />
+        <button onClick={() => router.refresh()}>Refresh</button>
       </div>
       <ToastContainer />
     </>
