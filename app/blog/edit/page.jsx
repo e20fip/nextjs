@@ -35,7 +35,7 @@ async function deleteData(id) {
   try {
     await connectTodb()
     await Blog.findByIdAndDelete(id)
-    revalidatePath("/blog/edit")
+    revalidatePath("/")
   } catch (error) {
     //
   }
@@ -53,7 +53,7 @@ async function submitDatas(id, cat, title, desc, body) {
     }
     await connectTodb()
     await Blog.findOneAndUpdate(filter, update)
-    revalidatePath("blog/edit")
+    revalidatePath("/")
   } catch (error) {
     //
   }

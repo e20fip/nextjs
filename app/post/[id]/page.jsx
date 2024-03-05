@@ -39,28 +39,25 @@ async function getList(id) {
 
 export async function generateMetadata({ params }) {
   const post = await getData(params.id)
-  if (!post) return notFound()
   return {
     title: post?.title,
     description: post?.description.substring(0, 80)
   }
 }
 
-export async function generateStaticParams() {
+/* export async function generateStaticParams() {
   try {
     await connectTodb()
     const posts = await Blog.find({})
       .select("_id")
       .sort({ createdAt: -1 })
       .lean()
-    const id = posts?.map((post) => {
-      return { id: post._id.toString() }
-    })
+    const id = posts?.map((post) => ({ id: post._id.toString() }))
     return id
   } catch (e) {
-    //
+    console.log({ error: e })
   }
-}
+} */
 
 export default async function Post({ params }) {
   const { id } = params

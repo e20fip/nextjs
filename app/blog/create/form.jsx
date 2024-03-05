@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import style from "./ai.module.css"
 import { useCompletion } from "ai/react"
-import { useRouter } from "next/navigation"
 
 const LoadStatus = () => {
   return (
@@ -63,7 +62,7 @@ const Form = ({ handlerSubmit, category }) => {
   if (status !== "loading" && !session && session?.user.role !== "admin") {
     return redirect("/")
   }
-  const router = useRouter()
+
   const submitDatas = async (userEmail, cat, title, desc, text) => {
     if (title === "" || desc === "" || text === "") return
 
@@ -140,9 +139,6 @@ const Form = ({ handlerSubmit, category }) => {
           isLoading={isLoading}
           input={input}
         />
-        <button type="button" onClick={() => router.refresh()}>
-          Refresh
-        </button>
       </div>
       <ToastContainer />
     </>

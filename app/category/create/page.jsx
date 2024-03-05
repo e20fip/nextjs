@@ -4,8 +4,6 @@ import { connectTodb } from "@/lib/database"
 import Category from "@/models/category"
 import { revalidatePath } from "next/cache"
 
-export const dynamic = "force-dynamic"
-
 async function getCategories() {
   try {
     await connectTodb()
