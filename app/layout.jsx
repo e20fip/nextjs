@@ -2,7 +2,7 @@ import { Kanit } from "next/font/google"
 import Header from "./header"
 import Footer from "./footer"
 import "./globals.css"
-import Provider from "./components/SessionProvider"
+import Provider from "./components/sessionProvider"
 
 export const metadata = {
   title: "E20FIP",
