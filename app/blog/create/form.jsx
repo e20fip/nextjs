@@ -119,7 +119,6 @@ const Form = ({ handlerSubmit, category }) => {
             required
             defaultValue={completion}
           />
-
           <button
             onClick={() =>
               submitDatas(
@@ -143,7 +142,6 @@ const Form = ({ handlerSubmit, category }) => {
           input={input}
         />
       </div>
-
       <ToastContainer />
     </>
   )
