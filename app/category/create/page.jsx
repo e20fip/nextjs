@@ -4,6 +4,8 @@ import { connectTodb } from "@/lib/database"
 import Category from "@/models/category"
 import { revalidatePath } from "next/cache"
 
+export const dynamic = "force-dynamic"
+
 async function getCategories() {
   try {
     await connectTodb()
@@ -22,7 +24,7 @@ async function deleteCategory(id) {
   } catch (error) {
     //
   }
-  revalidatePath("/category")
+  revalidatePath("/category/create")
 }
 
 async function editCategory({ id, title, picture }) {
@@ -39,7 +41,7 @@ async function editCategory({ id, title, picture }) {
   } catch (error) {
     //
   }
-  revalidatePath("/category")
+  revalidatePath("/category/create")
 }
 async function handlerSubmit({ title, picture }) {
   "use server"
@@ -54,7 +56,7 @@ async function handlerSubmit({ title, picture }) {
   } catch (error) {
     //
   }
-  revalidatePath("/category")
+  revalidatePath("/category/create")
 }
 export default async function CreateCategory() {
   "use server"

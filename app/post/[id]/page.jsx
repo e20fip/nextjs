@@ -49,8 +49,14 @@ export async function generateMetadata({ params }) {
 export async function generateStaticParams() {
   try {
     await connectTodb()
-    const posts = await Blog.find({}).select("_id").sort({ createdAt: -1 })
-    return posts.map((post) => ({ id: post.id.toString() }))
+    const posts = await Blog.find({})
+      .select("_id")
+      .sort({ createdAt: -1 })
+      .lean()
+    const id = posts.map((post) => {
+      return { id: post._id.toString() }
+    })
+    return id
   } catch (e) {
     //
   }
