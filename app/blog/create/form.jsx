@@ -140,7 +140,9 @@ const Form = ({ handlerSubmit, category }) => {
           isLoading={isLoading}
           input={input}
         />
-        <button onClick={() => router.refresh()}>Refresh</button>
+        <button type="button" onClick={() => router.refresh()}>
+          Refresh
+        </button>
       </div>
       <ToastContainer />
     </>
