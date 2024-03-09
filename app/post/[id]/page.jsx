@@ -10,6 +10,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 export const revalidate = 3600
+//export const dynamicParams = true
 
 async function getData(id) {
   try {
@@ -39,6 +40,7 @@ async function getList(id) {
 
 export async function generateMetadata({ params }) {
   const post = await getData(params.id)
+  if (!post) notFound()
   return {
     title: post?.title,
     description: post?.description.substring(0, 80)
@@ -53,17 +55,18 @@ export async function generateMetadata({ params }) {
       .sort({ createdAt: -1 })
       .lean()
     const id = posts?.map((post) => ({ id: post._id.toString() }))
+    if (!id) return notFound()
     return id
   } catch (e) {
     console.log({ error: e })
   }
-} */
-
+}
+ */
 export default async function Post({ params }) {
   const { id } = params
   const data = await getData(id)
   const lists = await getList(data?.category)
-
+  if (!data) notFound()
   return (
     <>
       <div className="post_container">
