@@ -66,7 +66,6 @@ export default async function Post({ params }) {
   const { id } = params
   const data = await getData(id)
   const lists = await getList(data?.category)
-  if (!data) notFound()
   return (
     <>
       <div className="post_container">

@@ -10,8 +10,8 @@ import { notFound } from "next/navigation"
 
 export const revalidate = 3600
 
-let limit = 20
-export async function generateStaticParams() {
+const limit = 20
+/* export async function generateStaticParams() {
   try {
     let countCat = []
     await connectTodb()
@@ -33,7 +33,7 @@ export async function generateStaticParams() {
     console.log({ error: e })
   }
 }
-
+ */
 export async function generateMetadata({ params }) {
   const title = params.slug[0]
   return {
