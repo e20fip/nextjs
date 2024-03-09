@@ -10,9 +10,39 @@ import { notFound } from "next/navigation"
 
 export const revalidate = 3600
 
+const limit = 20
+export async function generateStaticParams() {
+  try {
+    let countCat = []
+    await connectTodb()
+    const blogCount = await Blog.find({}).select("_id category").lean()
+    const category = await Category.find({}).select("_id title").lean()
+    category.map((c) => {
+      const resultPage = blogCount.filter((cat) => {
+        return cat.category == c._id.toString()
+      })
+      const catTitle = c.title
+      const perPage = Math.ceil(resultPage.length / limit)
+      for (let i = 1; i < perPage + 1; i++) {
+        const pageNum = i == 1 ? "" : i
+        countCat = [...countCat, { slug: [catTitle, pageNum.toString()] }]
+      }
+    })
+    return countCat
+  } catch (e) {
+    console.log({ error: e })
+  }
+}
+
+export async function generateMetadata({ params }) {
+  const title = params.slug[0]
+  return {
+    title: `${title} | E20FIP`
+  }
+}
+
 async function getData(query) {
   //console.log(query)
-  const limit = 20
   let skip = 0
   if (query.pageNum !== null && !isNaN(query.pageNum)) {
     skip = query.pageNum * limit - limit
