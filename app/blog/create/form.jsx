@@ -6,20 +6,7 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import style from "./ai.module.css"
 import { useCompletion } from "ai/react"
-
-const LoadStatus = () => {
-  return (
-    <div className={style.input_loading}>
-      <div className={style.lds_ring}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-  )
-}
-
+import { SpinLoading } from "@/app/components/spinLoading"
 const FormAi = ({
   handleSubmit,
   handleInputChange,
@@ -37,7 +24,7 @@ const FormAi = ({
             value={input}
             onChange={handleInputChange}
           />
-          {isLoading && <LoadStatus />}
+          {isLoading && <SpinLoading className="miniLoading" />}
         </div>
         <div className={style.buttonContainer}>
           <button type="button" onClick={stop}>

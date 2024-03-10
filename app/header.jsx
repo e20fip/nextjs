@@ -4,6 +4,7 @@ import pathName from "@/lib/getPathname"
 import SignIn from "@/app/components/signIn"
 import Image from "next/image"
 import { useState } from "react"
+import { TablerBaselineDensityMedium } from "./components/spinLoading"
 
 const links = [
   { name: "Home", path: "/" },
@@ -17,21 +18,19 @@ const Header = () => {
   const [isShowMenu, setIsShowMenu] = useState(false)
   return (
     <header>
-      <Link href="/">
-        <Image
-          src="/images/logo.png"
-          width={203}
-          height={114}
-          className="logo"
-          alt="logo"
-          priority
-        />
-      </Link>
+      <Image
+        src="/images/logo.png"
+        width={203}
+        height={114}
+        className="logo"
+        alt="logo"
+        priority
+      />
       <div
         className="menuToggle"
         onClick={() => setIsShowMenu((prev) => !prev)}
       >
-        Menu
+        <TablerBaselineDensityMedium />
       </div>
       {
         <nav style={{ display: isShowMenu ? "flex" : "none" }}>

@@ -17,33 +17,22 @@ async function getData(id) {
     await connectTodb()
     const blogs = await Blog.findById(id).populate("category").lean()
     if (!blogs) return notFound()
-    return JSON.parse(JSON.stringify(blogs))
-  } catch (e) {
-    //
-  }
-}
-
-async function getList(id) {
-  try {
-    await connectTodb()
-    const lists = await Blog.find({ category: id })
+    const lists = await Blog.find({ category: blogs.category })
       .select("_id category title description createdAt")
       .sort({ createdAt: -1 })
       .limit(10)
       .lean()
-    if (!lists) return notFound()
-    return JSON.parse(JSON.stringify(lists))
+    return JSON.parse(JSON.stringify({ blogs, lists }))
   } catch (e) {
     //
   }
 }
 
 export async function generateMetadata({ params }) {
-  const post = await getData(params.id)
-  if (!post) notFound()
+  const { blogs } = await getData(params.id)
   return {
-    title: post?.title,
-    description: post?.description.substring(0, 80)
+    title: blogs?.title,
+    description: blogs?.description.substring(0, 80)
   }
 }
 
@@ -64,18 +53,18 @@ export async function generateMetadata({ params }) {
  */
 export default async function Post({ params }) {
   const { id } = params
-  const data = await getData(id)
-  const lists = await getList(data?.category)
+  const { blogs, lists } = await getData(id)
+
   return (
     <>
       <div className="post_container">
-        <div className="post_container_textbg">{data?.category?.title}</div>
+        <div className="post_container_textbg">{blogs?.category?.title}</div>
         {lists && <Sidemenu lists={lists} />}
         <div className="post_content">
-          <h1 className="post_title">{data?.title}</h1>
+          <h1 className="post_title">{blogs?.title}</h1>
           <div className="info">
-            <span>{data?.category?.title}</span>
-            {data?.createdAt && <Date dateString={data.createdAt} />}
+            <span>{blogs?.category?.title}</span>
+            {blogs?.createdAt && <Date dateString={blogs.createdAt} />}
           </div>
           <div className="post_body">
             <Markdown
@@ -102,7 +91,7 @@ export default async function Post({ params }) {
                 }
               }}
             >
-              {data?.content}
+              {blogs?.content}
             </Markdown>
           </div>
           <button>

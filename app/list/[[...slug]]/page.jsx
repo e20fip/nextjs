@@ -53,21 +53,19 @@ async function getData(query) {
     const datas = Category.findOne({ title: query.category })
       .then(async (cat) => {
         //if (!cat) return
-        const catId = cat._id.toString()
-        const catPicture = cat.picture
-        const catTitle = cat.title
-        const count = await Blog.countDocuments({ category: catId })
-        const blogs = await Blog.find({ category: catId })
+        const count = await Blog.countDocuments({
+          category: cat._id
+        })
+        const blogs = await Blog.find({ category: cat._id })
           .sort({ createdAt: -1 })
           .skip(skip)
           .limit(limit)
           .select("_id title description createdAt")
           .lean()
-          .exec()
         return {
           datas: JSON.parse(JSON.stringify(blogs)),
-          catPicture: catPicture,
-          catTitle: catTitle,
+          catPicture: cat.picture,
+          catTitle: cat.title,
           count: Math.ceil(count / limit)
         }
       })
@@ -92,7 +90,7 @@ export default async function List({ params }) {
     <>
       <div className="content">
         <div className="content_colume">
-          {datas?.map((data) => (
+          {datas?.map((data, index) => (
             <ul key={data._id}>
               <li>
                 <div className="home_image">
@@ -106,6 +104,7 @@ export default async function List({ params }) {
                 (max-width: 1238px) 33vw,
                 (max-width: 1522px) 25vw,
                 (max-width: 1920px) 17vw,"
+                    priority={index == 0 ? true : false}
                   />
                 </div>
                 <div className="title">

@@ -5,25 +5,13 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import Markdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight"
+import { SpinLoading } from "../components/spinLoading"
 
 function checkSession() {
   const { data: session, status } = useSession()
   if (status !== "loading" && !session) {
     return redirect("/api/auth/signin")
   }
-}
-
-const LoadStatus = () => {
-  return (
-    <div className={style.input_loading}>
-      <div className={style.lds_ring}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-  )
 }
 
 export default function Completion() {
@@ -49,7 +37,7 @@ export default function Completion() {
             value={input}
             onChange={handleInputChange}
           />
-          {isLoading && <LoadStatus />}
+          {isLoading && <SpinLoading className="miniLoading" />}
         </div>
         <div className={style.buttonContainer}>
           <button type="button" onClick={stop}>

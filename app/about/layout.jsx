@@ -1,4 +1,4 @@
-import Ad from './sidebar/ad'
+import Ad from "./sidebar/ad"
 
 export default function AboutLayout({ children }) {
   return (

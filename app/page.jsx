@@ -29,7 +29,7 @@ export default async function Page() {
     <>
       <div className="content">
         <div className="content_colume">
-          {datas?.map((data) => (
+          {datas?.map((data, index) => (
             <ul key={data._id}>
               <li>
                 <div className="home_image">
@@ -43,6 +43,7 @@ export default async function Page() {
                 (max-width: 1238px) 33vw,
                 (max-width: 1522px) 25vw,
                 (max-width: 1920px) 17vw,"
+                    priority={index == 0 ? true : false}
                   />
                 </div>
                 <div className="title">
