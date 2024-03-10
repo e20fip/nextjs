@@ -111,7 +111,7 @@ export default async function List({ params }) {
                   <Link href={`/post/${data._id}`}>{data.title}</Link>
                 </div>
                 <div className="info">
-                  <span>{data.title}</span>
+                  <span>{catTitle}</span>
                   <Date dateString={data.createdAt} />
                 </div>
               </li>
