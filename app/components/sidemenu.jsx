@@ -7,7 +7,6 @@ import LimitText from "@/lib/texttrim"
 
 const Sidemenu = ({ lists }) => {
   const [isShow, setIsShow] = useState(false)
-
   return (
     <>
       <div className="post_showhide" onClick={() => setIsShow((prev) => !prev)}>
@@ -34,8 +33,8 @@ const Sidemenu = ({ lists }) => {
 const Menu = ({ isShow }) => {
   return (
     <>
-      {!isShow && <span>&#10140;</span>}
-      {isShow && <span className="post_rotate">&#10140;</span>}
+      {!isShow && <span>&#10148;</span>}
+      {isShow && <span className="post_rotate">&#10148;</span>}
     </>
   )
 }

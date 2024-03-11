@@ -59,7 +59,7 @@ export default async function Post({ params }) {
     <>
       <div className="post_container">
         <div className="post_container_textbg">{blogs?.category?.title}</div>
-        {lists && <Sidemenu lists={lists} />}
+        <Sidemenu lists={lists} />
         <div className="post_content">
           <h1 className="post_title">{blogs?.title}</h1>
           <div className="info">

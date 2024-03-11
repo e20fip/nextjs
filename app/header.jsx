@@ -41,7 +41,7 @@ const Header = () => {
                   href={link.path}
                   onClick={() => setIsShowMenu((prev) => !prev)}
                 >
-                  {link.name}
+                  &#10070; {link.name}
                 </Link>
               </li>
             ))}

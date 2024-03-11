@@ -62,7 +62,7 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
               href={"/category/create"}
               onClick={() => setIsShowProfile((prev) => !prev)}
             >
-              Category
+              &#10056; Category
             </Link>
           </span>
           <span>
@@ -70,7 +70,7 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
               href={"/blog/edit"}
               onClick={() => setIsShowProfile((prev) => !prev)}
             >
-              Edit Blog
+              &#10056; Edit Blog
             </Link>
           </span>
           <span>
@@ -78,7 +78,7 @@ const ProfileBlock = ({ session, setIsShowProfile }) => {
               href={"/blog/create"}
               onClick={() => setIsShowProfile((prev) => !prev)}
             >
-              Create Blog
+              &#10056; Create Blog
             </Link>
           </span>
         </>
