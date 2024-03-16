@@ -13,7 +13,8 @@ const Form = ({ handlerSubmit }) => {
   const inputRef = useRef(null)
   const inputRefPhoto = useRef(null)
 
-  const submitDatas = async () => {
+  const submitDatas = async (e) => {
+    e.preventDefault()
     if (inputRef.current.value === "" || inputRefPhoto.current.value === "")
       return
 
@@ -34,19 +35,22 @@ const Form = ({ handlerSubmit }) => {
 
   return (
     <>
-      <div className="content">
-        <div className="form">
-          <label>
-            <span>Category Title</span>
-          </label>
-          <input type="text" ref={inputRef} placeholder="Title" />
-          <label>
-            <span>Category Photo URL</span>
-          </label>
-          <input type="text" ref={inputRefPhoto} placeholder="photo URL" />
-          <button onClick={submitDatas}>Submit</button>
-        </div>
-      </div>
+      <form onSubmit={submitDatas} className="form">
+        <label htmlFor="category title">
+          <span>Category Title</span>
+        </label>
+        <input type="text" ref={inputRef} placeholder="Title" required />
+        <label htmlFor="category photo">
+          <span>Category Photo URL</span>
+        </label>
+        <input
+          type="text"
+          ref={inputRefPhoto}
+          placeholder="photo URL"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
       <ToastContainer />
     </>
   )
