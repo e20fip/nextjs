@@ -1,5 +1,6 @@
 import { connectTodb } from "@/lib/database"
 import Blog from "@/models/blog"
+import Category from "@/models/category"
 import Link from "next/link"
 import Date from "@/lib/date"
 import { notFound } from "next/navigation"
@@ -9,8 +10,8 @@ import Markdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
-export const revalidate = 3600
-//export const dynamicParams = true
+//export const revalidate = 3600
+export const dynamicParams = true
 
 async function getData(id) {
   try {
@@ -36,12 +37,13 @@ export async function generateMetadata({ params }) {
   }
 }
 
-/* export async function generateStaticParams() {
+export async function generateStaticParams() {
   try {
     await connectTodb()
     const posts = await Blog.find({})
       .select("_id")
       .sort({ createdAt: -1 })
+      .limit(5)
       .lean()
     const id = posts?.map((post) => ({ id: post._id.toString() }))
     if (!id) return notFound()
@@ -50,7 +52,7 @@ export async function generateMetadata({ params }) {
     console.log({ error: e })
   }
 }
- */
+
 export default async function Post({ params }) {
   const { id } = params
   const { blogs, lists } = await getData(id)
