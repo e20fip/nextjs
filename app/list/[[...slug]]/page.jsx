@@ -42,7 +42,6 @@ export async function generateMetadata({ params }) {
 }
 
 async function getData(query) {
-  //console.log(query)
   let skip = 0
   if (query.pageNum !== null && !isNaN(query.pageNum)) {
     skip = query.pageNum * limit - limit
@@ -74,7 +73,7 @@ async function getData(query) {
       })
     return datas
   } catch (e) {
-    //console.log(e)
+    console.log({ error: e })
     return false
   }
 }

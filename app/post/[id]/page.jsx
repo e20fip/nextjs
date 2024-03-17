@@ -19,7 +19,7 @@ async function getData(id) {
     const blogs = await Blog.findById(id).populate("category").lean()
     if (!blogs) return notFound()
     const lists = await Blog.find({ category: blogs.category })
-      .select("_id category title description createdAt")
+      .select("_id title description")
       .sort({ createdAt: -1 })
       .limit(10)
       .lean()

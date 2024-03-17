@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 import { redirect } from "next/navigation"
+import FormAi from "@/app/blog/component/formAi"
 
 const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
   const { data: session, status } = useSession()
@@ -62,9 +63,31 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
     })
   }
 
-  const submitForm = async (id, cat, title, desc, body) => {
-    if (title == "" || desc == "" || body == "") return
-    await submitDatas(id, cat, title, desc, body)
+  async function pasteToTextBox() {
+    const text = await navigator.clipboard.readText()
+    if (!text) return
+    return setContentDatas({
+      ...contentDatas,
+      body: (contentDatas.body += text)
+    })
+  }
+
+  function clearText() {
+    return setContentDatas({
+      id: "",
+      categoryId: "",
+      title: "",
+      desc: "",
+      body: ""
+    })
+  }
+
+  const submitForm = async () => {
+    const { id, categoryId, title, desc, body } = contentDatas
+    if (id == "" || categoryId == "" || title == "" || desc == "" || body == "")
+      return
+    console.log("finish")
+    await submitDatas(id, categoryId, title, desc, body)
     setIsEdit(false)
   }
 
@@ -94,6 +117,11 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
             onChange={formHanler}
             value={contentDatas.categoryId}
           >
+            {!contentDatas.categoryId && (
+              <option value="" disabled>
+                select category
+              </option>
+            )}
             {listCategory?.map((cat) => (
               <option key={cat._id} value={cat._id}>
                 {cat.title}
@@ -120,20 +148,19 @@ const FormEdit = ({ listCategory, datas, setIsEdit, submitDatas }) => {
             onChange={formHanler}
             required
           />
-          <button
-            onClick={() =>
-              submitForm(
-                contentDatas.id,
-                contentDatas.categoryId,
-                contentDatas.title,
-                contentDatas.desc,
-                contentDatas.body
-              )
-            }
-          >
-            submit
-          </button>
+          <div className="button-container">
+            <button type="submit" onClick={() => submitForm()}>
+              submit
+            </button>
+            <button type="button" onClick={() => pasteToTextBox()}>
+              Paste
+            </button>
+            <button type="button" onClick={() => clearText()}>
+              Clear
+            </button>
+          </div>
         </div>
+        <FormAi />
       </div>
     </div>
   )

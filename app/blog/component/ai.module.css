@@ -6,9 +6,13 @@
   align-items: center;
   justify-content: center;
   container-type: inline-size;
-  outline: 1px #ed4646 solid;
   margin-top: 1.5em;
-  padding: 0.5em 1em;
+}
+.inputContainer textarea {
+  height: 250px;
+  color: #fff;
+  padding: 0.5em;
+  background-color: unset;
 }
 @container (width < 500px) {
   .inputContainer {
@@ -33,6 +37,7 @@
   outline: 1.5px solid #b4ff00;
   outline-offset: 4px;
 }
+
 .input_loading {
   position: absolute;
   top: 0;

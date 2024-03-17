@@ -197,14 +197,15 @@ footer {
   width: 85px;
 }
 nav {
-  display: flex;
   padding: 0.5em;
   justify-content: space-between;
   font-size: 0.8rem;
   flex: 1 1;
   align-items: center;
   position: absolute;
-  background-color: var(--light-gray);
+  backdrop-filter: blur(10px);
+  flex-wrap: wrap;
+  background-color: #686868bd;
   top: 55px;
   left: 0;
   right: 0;
@@ -252,7 +253,7 @@ time {
 button {
   cursor: pointer;
   margin: 2em 0;
-  padding: 0.5em 1.5em;
+  padding: 7px 20px;
   border-radius: 5px;
   border: 0;
   background-color: var(--nav);
@@ -474,18 +475,22 @@ p {
   font-weight: 500;
 }
 
-.form {
+.form,
+fieldset {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
-
+fieldset {
+  padding: 1.5em;
+}
 .form input,
 .form textarea,
 .form select {
   margin-bottom: 1em;
   padding: 0.5em;
-  border: 1px solid #eee;
-  background-color: var(--dark-color);
+  border: none;
+  background-color: rgb(73 73 73);
   color: var(--light-color);
 }
 
@@ -548,7 +553,10 @@ p {
   cursor: pointer;
   font-weight: 300;
 }
-
+.button-container {
+  display: flex;
+  gap: 0.5em;
+}
 .model-box {
   position: absolute;
   inset: 0;
@@ -558,6 +566,7 @@ p {
   padding: 2em;
   margin: 1em;
   animation: fadeIn 300ms ease-in;
+  overflow: auto;
 }
 
 .close-box {

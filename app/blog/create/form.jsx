@@ -4,41 +4,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
-import style from "./ai.module.css"
-import { useCompletion } from "ai/react"
-import { SpinLoading } from "@/app/components/spinLoading"
-
-const FormAi = ({
-  input,
-  stop,
-  isLoading,
-  handleInputChange,
-  handleSubmit
-}) => {
-  return (
-    <>
-      <h1>Gemini AI</h1>
-      <form className={style.inputContainer} onSubmit={handleSubmit}>
-        <div className={style.inputform}>
-          <input
-            placeholder="Ask something..."
-            value={input}
-            onChange={handleInputChange}
-          />
-          {isLoading && <SpinLoading className="miniLoading" />}
-        </div>
-        <div className={style.buttonContainer}>
-          <button type="button" onClick={stop}>
-            Stop
-          </button>
-          <button disabled={isLoading} type="submit">
-            Send
-          </button>
-        </div>
-      </form>
-    </>
-  )
-}
+import FormAi from "@/app/blog/component/formAi"
 
 const initValue = {
   title: "",
@@ -52,14 +18,6 @@ const Form = ({ handlerSubmit, category }) => {
   if (status !== "loading" && !session && session?.user.role !== "admin") {
     return redirect("/")
   }
-  const {
-    completion,
-    input,
-    stop,
-    isLoading,
-    handleInputChange,
-    handleSubmit
-  } = useCompletion()
 
   const [submit, setSubmit] = useState(initValue)
 
@@ -89,6 +47,16 @@ const Form = ({ handlerSubmit, category }) => {
     })
   }
 
+  async function pasteToTextBox() {
+    const text = await navigator.clipboard.readText()
+    if (!text) return
+    return setSubmit({ ...submit, text: (submit.text += text) })
+  }
+
+  function clearText() {
+    return setSubmit(initValue)
+  }
+
   return (
     <>
       <div className="content">
@@ -96,62 +64,72 @@ const Form = ({ handlerSubmit, category }) => {
           className="form"
           onSubmit={(e) => submitDatas(e, session.user.email)}
         >
-          <label htmlFor="title">
-            <span>Title</span>
-          </label>
-          <input
-            type="text"
-            name="title"
-            placeholder="title"
-            value={submit.title}
-            onChange={submitValue}
-            required
-          />
-          <label htmlFor="category">
-            <span>Category</span>
-          </label>
-          <select name="cat" value={submit.cat} onChange={submitValue} required>
-            {!submit.cat && (
-              <option value="" disabled>
-                select category
-              </option>
-            )}
-            {category?.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.title}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="description">
-            <span>Description</span>
-          </label>
-          <input
-            type="text"
-            name="desc"
-            placeholder="description"
-            value={submit.desc}
-            onChange={submitValue}
-            required
-          />
-          <label htmlFor="content">
-            <span>Content</span>
-          </label>
-          <textarea
-            placeholder="body"
-            name="text"
-            value={submit.text || completion}
-            required
-            onChange={submitValue}
-          />
-          <button type="submit">submit</button>
+          <fieldset>
+            <legend>Create</legend>
+            <label htmlFor="title">
+              <span>Title</span>
+            </label>
+            <input
+              type="text"
+              name="title"
+              placeholder="title"
+              value={submit.title}
+              onChange={submitValue}
+              required
+            />
+            <label htmlFor="category">
+              <span>Category</span>
+            </label>
+            <select
+              name="cat"
+              value={submit.cat}
+              onChange={submitValue}
+              required
+            >
+              {!submit.cat && (
+                <option value="" disabled>
+                  select category
+                </option>
+              )}
+              {category?.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="description">
+              <span>Description</span>
+            </label>
+            <input
+              type="text"
+              name="desc"
+              placeholder="description"
+              value={submit.desc}
+              onChange={submitValue}
+              required
+            />
+            <label htmlFor="content">
+              <span>Content</span>
+            </label>
+            <textarea
+              placeholder="content"
+              name="text"
+              value={submit.text}
+              required
+              onChange={submitValue}
+            />
+            <div className="button-container">
+              <button type="submit">Submit</button>
+              <button type="button" onClick={() => pasteToTextBox()}>
+                Paste
+              </button>
+              <button type="button" onClick={() => clearText()}>
+                Clear
+              </button>
+            </div>
+          </fieldset>
         </form>
-        <FormAi
-          input={input}
-          stop={stop}
-          isLoading={isLoading}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-        />
+        <FormAi />
       </div>
       <ToastContainer />
     </>

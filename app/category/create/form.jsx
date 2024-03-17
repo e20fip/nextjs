@@ -36,20 +36,23 @@ const Form = ({ handlerSubmit }) => {
   return (
     <>
       <form onSubmit={submitDatas} className="form">
-        <label htmlFor="category title">
-          <span>Category Title</span>
-        </label>
-        <input type="text" ref={inputRef} placeholder="Title" required />
-        <label htmlFor="category photo">
-          <span>Category Photo URL</span>
-        </label>
-        <input
-          type="text"
-          ref={inputRefPhoto}
-          placeholder="photo URL"
-          required
-        />
-        <button type="submit">Submit</button>
+        <fieldset>
+          <legend>Category</legend>
+          <label htmlFor="category title">
+            <span>Category Title</span>
+          </label>
+          <input type="text" ref={inputRef} placeholder="Title" required />
+          <label htmlFor="category photo">
+            <span>Category Photo URL</span>
+          </label>
+          <input
+            type="text"
+            ref={inputRefPhoto}
+            placeholder="photo URL"
+            required
+          />
+          <button type="submit">Submit</button>
+        </fieldset>
       </form>
       <ToastContainer />
     </>
