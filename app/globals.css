@@ -587,6 +587,10 @@ p {
     padding: 1em 0;
   }
 
+  .post_container_textbg {
+    right: 0.2em;
+  }
+
   .content_colume {
     grid-template-columns: repeat(3, 1fr);
   }
