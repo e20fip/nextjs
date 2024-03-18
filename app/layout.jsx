@@ -5,8 +5,15 @@ import "./globals.css"
 import Provider from "./components/sessionProvider"
 
 export const metadata = {
-  title: "E20FIP",
-  description: "Web Development"
+  title: "HOME | E20FIP",
+  description: "Web Development",
+  /*   openGraph: {
+    title: "E20FIP",
+    description: "Web Development"
+  }, */
+  alternates: {
+    canonical: `${process.env.NEXTAUTH_URL}`
+  }
 }
 
 const CustomFont = Kanit({

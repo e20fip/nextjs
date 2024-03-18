@@ -37,7 +37,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const title = params.slug[0]
   return {
-    title: `${title} | E20FIP`
+    title: `${title} | E20FIP`,
+    description: `${title}`,
+    alternates: {
+      canonical: `${process.env.NEXTAUTH_URL}/list/${title}`
+    }
   }
 }
 

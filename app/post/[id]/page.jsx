@@ -30,10 +30,19 @@ async function getData(id) {
 }
 
 export async function generateMetadata({ params }) {
+  const baseUrl = process.env.NEXTAUTH_URL
   const { blogs } = await getData(params.id)
   return {
+    metadataBase: new URL(baseUrl),
     title: blogs?.title,
-    description: blogs?.description.substring(0, 80)
+    description: blogs?.description.substring(0, 80),
+    alternates: {
+      canonical: `${baseUrl}/post/${params.id}`
+    },
+    openGraph: {
+      title: blogs?.title,
+      description: blogs?.description.substring(0, 80)
+    }
   }
 }
 
