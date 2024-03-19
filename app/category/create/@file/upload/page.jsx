@@ -1,39 +1,25 @@
-import { SubmitButton } from "./upload-button"
-import { writeFile } from "fs/promises"
-import path from "path"
+"use client"
+import { useState } from "react"
 
-async function submitPicture(formData) {
-  "use server"
-
-  const file = formData.get("file")
-  if (!file) {
-    throw new Error("no file upload")
-  }
-  const byte = await file.arrayBuffer()
-  const buffer = Buffer.from(byte)
-  const filename = file.name.replaceAll(" ", "_")
-  //console.log(filename)
-  try {
-    await writeFile(
-      path.join(process.cwd(), "public/images/" + filename),
-      buffer
-    )
-    return { Message: "Success", status: 201 }
-  } catch (error) {
-    console.log("Error occurred ", error)
-    return { Message: "Failed", status: 500 }
-  }
+async function submitPicture(e) {
+  e.preventDefault()
 }
 
 export default function UploadPage() {
+  const [file, setFile] = useState()
   return (
-    <form action={submitPicture}>
+    <form onSubmit={(e) => submitPicture(e)}>
       <fieldset>
         <legend>Upload Picture</legend>
         <label htmlFor="file">Picture</label>
-        <input type="file" name="file" required />
+        <input
+          type="file"
+          name="file"
+          onChange={(e) => setFile(e.target.files[0])}
+          required
+        />
         <div className="button-container">
-          <SubmitButton />
+          <button type="submit">Upload</button>
           <button type="reset">Clear</button>
         </div>
       </fieldset>
