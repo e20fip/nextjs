@@ -23,3 +23,8 @@
   background-color: rgba(77, 77, 77, 0.815);
   font-size: 0.8rem;
 }
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

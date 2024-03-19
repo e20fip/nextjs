@@ -1,28 +1,38 @@
 "use client"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useRef } from "react"
 
-async function submitPicture(e) {
-  e.preventDefault()
-}
-
-export default function UploadPage() {
-  const [file, setFile] = useState()
+export default function AvatarUploadPage() {
+  const inputFileRef = useRef(null)
+  const route = useRouter()
   return (
-    <form onSubmit={(e) => submitPicture(e)}>
-      <fieldset>
-        <legend>Upload Picture</legend>
-        <label htmlFor="file">Picture</label>
-        <input
-          type="file"
-          name="file"
-          onChange={(e) => setFile(e.target.files[0])}
-          required
-        />
-        <div className="button-container">
-          <button type="submit">Upload</button>
-          <button type="reset">Clear</button>
-        </div>
-      </fieldset>
-    </form>
+    <>
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault()
+
+          const file = inputFileRef.current.files[0]
+
+          const response = await fetch(`/api/upload?filename=${file.name}`, {
+            method: "POST",
+            body: file
+          })
+
+          const newBlob = await response.json()
+          if (newBlob) {
+            route.push("/category/create/listFile")
+          }
+        }}
+      >
+        <fieldset>
+          <legend>Upload files</legend>
+          <input name="file" ref={inputFileRef} type="file" required />
+          <div className="button-container">
+            <button type="submit">Upload</button>
+            <button type="reset">Clear</button>
+          </div>
+        </fieldset>
+      </form>
+    </>
   )
 }

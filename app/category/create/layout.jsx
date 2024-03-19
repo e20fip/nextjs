@@ -12,8 +12,9 @@ export default async function CategoryLayout({ children, file, category }) {
       <div className="content">{children}</div>
       <div className="content">
         <div className="button-container">
+          <Link href="/category/create">Default</Link>
           <Link href="/category/create/upload">Upload</Link>
-          <Link href="/category/create">List</Link>
+          <Link href="/category/create/listFile">List</Link>
         </div>
         {file}
       </div>
