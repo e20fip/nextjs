@@ -1,15 +1,9 @@
 "use client"
 import { useRef } from "react"
-import { useSession } from "next-auth/react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { redirect } from "next/navigation"
 
 const Form = ({ handlerSubmit }) => {
-  const { data: session, status } = useSession()
-  if (status !== "loading" && !session && session?.user.role !== "admin") {
-    return redirect("/")
-  }
   const inputRef = useRef(null)
   const inputRefPhoto = useRef(null)
 

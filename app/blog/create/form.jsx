@@ -15,7 +15,7 @@ const initValue = {
 
 const Form = ({ handlerSubmit, category }) => {
   const { data: session, status } = useSession()
-  if (status !== "loading" && !session && session?.user.role !== "admin") {
+  if ((status !== "loading" && !session) || session?.user.role !== "admin") {
     return redirect("/")
   }
 

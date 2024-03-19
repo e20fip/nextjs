@@ -6,7 +6,7 @@ import FormAi from "@/app/blog/component/formAi"
 
 const Button = ({ deleteData, listCategory, datas, submitDatas }) => {
   const { data: session, status } = useSession()
-  if (status !== "loading" && !session && session?.user.role !== "admin") {
+  if ((status !== "loading" && !session) || session?.user.role !== "admin") {
     redirect("/")
   }
   const [isComfirm, setIsConfirm] = useState(false)

@@ -1,0 +1,25 @@
+.imageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 1em;
+  background-color: rgb(128, 128, 128);
+}
+.innerImage {
+  width: 150px;
+  height: 80px;
+  position: relative;
+  overflow: clip;
+}
+.innerImage img {
+  object-fit: scale-down;
+}
+.imageTitle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  background-color: rgba(77, 77, 77, 0.815);
+  font-size: 0.8rem;
+}

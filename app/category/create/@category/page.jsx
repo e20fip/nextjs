@@ -45,7 +45,7 @@ export default async function CategoryPage() {
   const listCategories = await getCategories()
 
   return (
-    <div className="content">
+    <>
       <div className="title">Categories</div>
       {listCategories?.map((category) => (
         <Categories
@@ -57,6 +57,6 @@ export default async function CategoryPage() {
           editCategory={editCategory}
         />
       ))}
-    </div>
+    </>
   )
 }

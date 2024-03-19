@@ -21,9 +21,5 @@ async function handlerSubmit({ title, picture }) {
 export default async function CreateCategory() {
   "use server"
 
-  return (
-    <div className="content">
-      <Form handlerSubmit={handlerSubmit} />
-    </div>
-  )
+  return <Form handlerSubmit={handlerSubmit} />
 }
