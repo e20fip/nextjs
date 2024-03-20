@@ -21,7 +21,8 @@ const nextConfig = {
         hostname: "lh3.googleusercontent.com",
         port: "",
         pathname: "/a/*"
-      }
+      },
+      { hostname: "*.public.blob.vercel-storage.com" }
     ]
   }
 }

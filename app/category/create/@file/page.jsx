@@ -1,33 +1,42 @@
-import path from "path"
-import fs from "fs"
-import Image from "next/image"
-import style from "./category.module.css"
+"use client"
+import { useRouter } from "next/navigation"
+import { useRef } from "react"
+import Link from "next/link"
 
-function ListFile({ filenames }) {
-  return (
-    <div className={style.imageContainer}>
-      {filenames?.map((name, index) => (
-        <div className={style.innerImage} key={index}>
-          <Image
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            src={`/images/${name}`}
-            alt={name}
-            priority={false}
-          />
-          <span className={style.imageTitle}>{name}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-export default function ListfilePage() {
-  const dir = path.join(process.cwd(), "./public/images")
-  const filenames = fs.readdirSync(dir)
+export default function AvatarUploadPage() {
+  const inputFileRef = useRef(null)
+  const route = useRouter()
   return (
     <>
-      <ListFile filenames={filenames} />
+      <div className="button-container">
+        <Link href="/category/create/listFile">List</Link>
+      </div>
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault()
+
+          const file = inputFileRef.current.files[0]
+
+          const response = await fetch(`/api/upload?filename=${file.name}`, {
+            method: "POST",
+            body: file
+          })
+
+          const newBlob = await response.json()
+          if (newBlob) {
+            route.push("/category/create/listFile")
+          }
+        }}
+      >
+        <fieldset>
+          <legend>Upload files</legend>
+          <input name="file" ref={inputFileRef} type="file" required />
+          <div className="button-container">
+            <button type="submit">Upload</button>
+            <button type="reset">Clear</button>
+          </div>
+        </fieldset>
+      </form>
     </>
   )
 }

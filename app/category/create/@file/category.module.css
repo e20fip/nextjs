@@ -4,12 +4,15 @@
   gap: 1em;
   padding: 1em;
   background-color: rgb(128, 128, 128);
+  border-radius: 10px;
 }
 .innerImage {
   width: 150px;
   height: 80px;
   position: relative;
   overflow: clip;
+  background-color: dimgray;
+  border-radius: 10px;
 }
 .innerImage img {
   object-fit: scale-down;
@@ -27,4 +30,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cardImage {
+  display: flex;
+  flex-direction: column;
 }

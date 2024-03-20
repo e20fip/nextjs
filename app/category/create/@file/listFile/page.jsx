@@ -1,6 +1,7 @@
 import { list } from "@vercel/blob"
 import style from "../category.module.css"
 import DeleteButton from "./deleteButton"
+import Link from "next/link"
 import Image from "next/image"
 
 export default async function AllFilesPage() {
@@ -8,18 +9,22 @@ export default async function AllFilesPage() {
 
   return (
     <>
+      <div className="button-container">
+        <Link href="/category/create">Upload</Link>
+      </div>
       <div className={style.imageContainer}>
         {blobs &&
-          blobs.map((blob, index) => (
-            <div key={index} className={style.innerImage}>
-              {blob.url}
-              {/* <Image
-                src={blob.url}
-                alt={blob.pathname}
-                fill
-                sizes="(max-width: 768px) 33vw"
-              /> */}
-              <div className={style.imageTitle}>{blob.pathname}</div>
+          blobs.map((blob) => (
+            <div className={style.cardImage} key={blob.url}>
+              <div className={style.innerImage}>
+                <Image
+                  src={blob.url}
+                  alt={blob.pathname}
+                  width={150}
+                  height={80}
+                />
+                <div className={style.imageTitle}>{blob.pathname}</div>
+              </div>
               <DeleteButton url={blob.url} />
             </div>
           ))}
