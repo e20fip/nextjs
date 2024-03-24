@@ -1,6 +1,7 @@
 import { list } from "@vercel/blob"
 import style from "../category.module.css"
 import DeleteButton from "./deleteButton"
+import CopyFileUrl from "./copyFileUrl"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -25,6 +26,7 @@ export default async function AllFilesPage() {
                 />
                 <div className={style.imageTitle}>{blob.pathname}</div>
               </div>
+              <CopyFileUrl url={blob.url} />
               <DeleteButton url={blob.url} />
             </div>
           ))}

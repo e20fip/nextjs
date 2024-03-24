@@ -34,4 +34,29 @@
 .cardImage {
   display: flex;
   flex-direction: column;
+  gap: 0.3em;
+}
+
+.uploadComponent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: dotted 1px #eee;
+  height: 150px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.inputUpload {
+  display: none;
+}
+
+.miniLink {
+  cursor: pointer;
+  text-align: center;
+  background-color: rgb(41, 41, 41);
+  font-size: 0.8rem;
+  padding: 5px;
+  border-radius: 5px;
 }
