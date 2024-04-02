@@ -9,7 +9,7 @@ export default async function AllFilesPage() {
   const { blobs } = await list()
 
   return (
-    <>
+    <div className="content">
       <div className="button-container">
         <Link href="/category/create">Upload</Link>
       </div>
@@ -32,6 +32,6 @@ export default async function AllFilesPage() {
           ))}
         {blobs == "" && <div>No data</div>}
       </div>
-    </>
+    </div>
   )
 }

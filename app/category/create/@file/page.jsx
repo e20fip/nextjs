@@ -92,7 +92,7 @@ export default function UploadPage() {
   }
 
   return (
-    <>
+    <div className="content">
       <div className="button-container">
         <Link href="/category/create/listFile">List</Link>
       </div>
@@ -140,6 +140,6 @@ export default function UploadPage() {
           </div>
         </fieldset>
       </form>
-    </>
+    </div>
   )
 }

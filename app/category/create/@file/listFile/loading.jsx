@@ -1,3 +1,7 @@
 export default function ListLoading() {
-  return <div className="message">Loading...</div>
+  return (
+    <div className="content">
+      <div className="message">Loading...</div>
+    </div>
+  )
 }
