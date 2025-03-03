@@ -11,7 +11,7 @@ export async function POST(req) {
 
   // Ask Google Generative AI for a streaming completion given the prompt
   const response = await genAI
-    .getGenerativeModel({ model: "gemini-1.0-pro" })
+    .getGenerativeModel({ model: "gemini-1.5-pro" })
     .generateContentStream({
       contents: [{ role: "user", parts: [{ text: prompt }] }]
     })
